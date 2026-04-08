@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://c8lptoffmwxb6"]
+
+[ext_resource type="Script" uid="uid://crmb0qluyel1q" path="res://projectiles/rocket.gd" id="1_f4elh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v8qja"]
+radius = 2.0
+
+[sub_resource type="Curve" id="Curve_f4elh"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_etms7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.4770007, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_iyl8n"]
+offsets = PackedFloat32Array(0, 0.7322835, 1)
+colors = PackedColorArray(0.6789437, 0.6789437, 0.6789437, 1, 1, 1, 1, 0.69553804, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_5ffeg"]
+offsets = PackedFloat32Array(0, 0.8136483, 0.95800525, 1)
+colors = PackedColorArray(0.32544088, 0.3254409, 0.32544088, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_f4elh"]
+
+[node name="Rocket" type="Area2D" unique_id=1278969362]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_f4elh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1205289816]
+shape = SubResource("CircleShape2D_v8qja")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=500435929]
+position = Vector2(-2, 0)
+amount = 24
+lifetime = 0.5
+lifetime_randomness = 0.1
+direction = Vector2(-1, 0)
+gravity = Vector2(0, -20)
+initial_velocity_min = 20.0
+initial_velocity_max = 100.0
+damping_min = 0.4
+damping_max = 0.4
+damping_curve = SubResource("Curve_f4elh")
+scale_amount_min = 0.5
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_etms7")
+color_ramp = SubResource("Gradient_iyl8n")
+color_initial_ramp = SubResource("Gradient_5ffeg")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=487655511]
+self_modulate = Color(0.30113852, 0, 0.00076490594, 1)
+position = Vector2(-8.940697e-08, 2.9802322e-08)
+scale = Vector2(4, 2)
+texture = SubResource("CanvasTexture_f4elh")

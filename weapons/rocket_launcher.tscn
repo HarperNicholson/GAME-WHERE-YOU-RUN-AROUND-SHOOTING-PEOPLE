@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://blggr3awog7no"]
+
+[ext_resource type="Script" uid="uid://ysit76fwbh2j" path="res://weapons/projectile_weapon.gd" id="1_a5eyy"]
+[ext_resource type="PackedScene" uid="uid://c8lptoffmwxb6" path="res://projectiles/rocket.tscn" id="2_a5eyy"]
+
+[node name="RocketLauncher" type="Node2D" unique_id=430989293]
+script = ExtResource("1_a5eyy")
+burst_count = 3
+recoil = 0.5
+projectile_scene = ExtResource("2_a5eyy")
+fire_rate = 2.0
+spread_degrees = 1.0

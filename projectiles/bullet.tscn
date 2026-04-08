@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cgth80mjckiks"]
 
-[ext_resource type="Script" uid="uid://dvrf1sy6h14t3" path="res://bullet.gd" id="1_v7oki"]
+[ext_resource type="Script" uid="uid://dvrf1sy6h14t3" path="res://projectiles/bullet.gd" id="1_v7oki"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_v7oki"]
 

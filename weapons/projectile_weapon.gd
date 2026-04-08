@@ -38,6 +38,7 @@ func fire():
 			bullet.global_position = global_position
 			bullet.direction = dir
 			bullet.rotation = dir.angle()
+			bullet.shooter = get_parent()
 		
 		apply_recoil()
 		EffectManager.play_sound_effect(SFX, global_position)

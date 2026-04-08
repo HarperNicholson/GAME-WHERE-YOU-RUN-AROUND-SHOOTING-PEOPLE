@@ -1,16 +1,20 @@
 class_name Civilian
 extends CharacterBody2D
 
-@onready var gun = $Gun
 
+@export var responsiveness : float = 10.0
+@export var always_sprinting : bool = false
 @export var is_player : bool = false
 var is_alive : bool = true
 
+@export var weapon : Node
 @export var controller : Node
 @export var playercam : Node
 
-const MOVESPEED : float = 100.0
+const MOVESPEED : float = 50.0
+const SPRINT_MOD : float = 2.0
 var hp : int = 3
+
 
 func hit():
 	#EffectManager.play_sound_effect("hit")
@@ -19,7 +23,7 @@ func hit():
 	flash_color()
 	
 	hp -= 1
-	if hp <= 0:
+	if hp <= 0 and is_alive:
 		kill()
 
 func kill():
@@ -32,9 +36,9 @@ func kill():
 func attacks():
 	var aim_dir = controller.get_aim_direction()
 	if aim_dir != Vector2.ZERO:
-		$Gun.rotation = aim_dir.angle()
+		weapon.rotation = aim_dir.angle()
 	if controller.is_shooting():
-		gun.try_fire()
+		weapon.try_fire()
 
 func _physics_process(delta: float) -> void:
 	if !is_alive:
@@ -46,21 +50,17 @@ func _physics_process(delta: float) -> void:
 	movement(delta)
 	collisions()
 	
+	calculate_shadow()
+	
 	move_and_slide()
 
 func movement(delta):
 	var input_dir = controller.get_movement_direction_as_vector()
-	var target_velocity = input_dir * MOVESPEED
-	velocity = velocity.move_toward(target_velocity, MOVESPEED * 10.0 * delta)
+	var target_velocity = input_dir * MOVESPEED * (SPRINT_MOD if (controller.is_sprinting() or always_sprinting) else 1.0)
+	var responsiveness : float = 10.0
+	velocity = velocity.move_toward(target_velocity, MOVESPEED * responsiveness * delta)
 	
 	$CivilianBody.animate(delta, velocity)
-	
-	var hop_factor : float = clampf(-$CivilianBody.position.y / $CivilianBody.hop_height, 0.0, 1.0)
-	var default_shadow_scale : Vector2 = Vector2(6.0,3.0)
-	var default_shadow_alpha : float = 0.4
-	
-	$EntityShadow.scale = lerp(default_shadow_scale, default_shadow_scale * 0.7, hop_factor)
-	$EntityShadow.self_modulate.a = lerp(default_shadow_alpha, default_shadow_alpha * 0.7, hop_factor)
 
 func collisions():
 	var push : Vector2 = Vector2.ZERO
@@ -98,6 +98,14 @@ func collisions():
 
 func add_impulse(force: Vector2):
 	velocity += force
+
+func calculate_shadow():
+	var hop_factor : float = clampf(-$CivilianBody.position.y / $CivilianBody.max_hop_anim_height, 0.0, 1.0)
+	var default_shadow_scale : Vector2 = Vector2(6.0,3.0)
+	var default_shadow_alpha : float = 0.4
+	
+	$EntityShadow.scale = lerp(default_shadow_scale, default_shadow_scale * 0.7, hop_factor)
+	$EntityShadow.self_modulate.a = lerp(default_shadow_alpha, default_shadow_alpha * 0.7, hop_factor)
 
 func flash_color(color_to_flash_to : Color = Color.RED):
 	var tween = get_tree().create_tween()

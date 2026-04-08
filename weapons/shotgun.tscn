@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://y5ta1gv2f8pe"]
+
+[ext_resource type="Script" uid="uid://ysit76fwbh2j" path="res://weapons/projectile_weapon.gd" id="1_64lnt"]
+[ext_resource type="PackedScene" uid="uid://cgth80mjckiks" path="res://projectiles/bullet.tscn" id="2_byptj"]
+
+[node name="Shotgun" type="Node2D" unique_id=430989293]
+script = ExtResource("1_64lnt")
+recoil = 0.8
+projectile_scene = ExtResource("2_byptj")
+fire_rate = 1.0
+spread_degrees = 11.0
+amount_of_projectiles = 5
