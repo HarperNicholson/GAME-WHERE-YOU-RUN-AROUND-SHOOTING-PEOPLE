@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://coiy78d6ix35h"]
+
+[ext_resource type="Script" uid="uid://cx8hrv34rb561" path="res://civilian_class.gd" id="1_hqtel"]
+[ext_resource type="Script" uid="uid://cjyw2lu5daoyt" path="res://player_camera.gd" id="2_2hs0m"]
+[ext_resource type="PackedScene" uid="uid://ctnxymgw58y7u" path="res://civilian_body.tscn" id="2_sweqy"]
+[ext_resource type="Script" uid="uid://diwjwmjc66ghv" path="res://player_controller.gd" id="4_1jxqw"]
+[ext_resource type="PackedScene" uid="uid://djnb5nyt76vje" path="res://gun.tscn" id="5_sweqy"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_q2tsy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q2tsy"]
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ru8d"]
+radius = 4.0
+
+[node name="Player1" type="CharacterBody2D" unique_id=745263233 node_paths=PackedStringArray("controller", "playercam")]
+z_index = 1
+collision_layer = 2
+motion_mode = 1
+floor_stop_on_slope = false
+script = ExtResource("1_hqtel")
+is_player = true
+controller = NodePath("PlayerController")
+playercam = NodePath("Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1961278319]
+zoom = Vector2(4, 4)
+script = ExtResource("2_2hs0m")
+
+[node name="EntityShadow" type="Sprite2D" parent="." unique_id=145087866]
+self_modulate = Color(0, 0, 0, 0.4)
+position = Vector2(-1.1920929e-07, 7.5)
+scale = Vector2(6, 3)
+texture = SubResource("CanvasTexture_q2tsy")
+
+[node name="CivilianBody" parent="." unique_id=1593687168 instance=ExtResource("2_sweqy")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=81884564]
+shape = SubResource("CircleShape2D_q2tsy")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=951490163]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1636962079]
+shape = SubResource("CircleShape2D_6ru8d")
+
+[node name="PlayerController" type="Node2D" parent="." unique_id=1165073739]
+script = ExtResource("4_1jxqw")
+
+[node name="Gun" parent="." unique_id=430989293 instance=ExtResource("5_sweqy")]
+position = Vector2(9, 0)

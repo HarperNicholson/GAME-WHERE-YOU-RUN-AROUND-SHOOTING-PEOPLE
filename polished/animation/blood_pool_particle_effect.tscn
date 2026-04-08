@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://efsarkg7f8l3"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_oq2m8"]
+
+[sub_resource type="Curve" id="Curve_oq2m8"]
+_data = [Vector2(0, 0), 0.0, 6.481109, 0, 0, Vector2(0.02209945, 0.25195527), 1.8063956, 1.8063956, 0, 0, Vector2(0.96172255, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_6xtbw"]
+_data = [Vector2(0, 0), 0.0, 6.481109, 0, 0, Vector2(0.01933702, 0.12162161), 1.8063956, 1.8063956, 0, 0, Vector2(0.9779005, 0.45891887), 0.056528058, 0.056528058, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_xlaia"]
+offsets = PackedFloat32Array(0.92261904, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.29803923, 0.29803923, 0.29803923, 1)
+
+[sub_resource type="Gradient" id="Gradient_yyorw"]
+colors = PackedColorArray(0.41376296, 0.41376293, 0.41376293, 1, 1, 1, 1, 1)
+
+[node name="BloodPoolParticleEffect" type="CPUParticles2D" unique_id=2013842467]
+z_index = -1
+emitting = false
+amount = 1
+texture = SubResource("CanvasTexture_oq2m8")
+lifetime = 30.0
+one_shot = true
+randomness = 0.1
+lifetime_randomness = 0.1
+particle_flag_align_y = true
+direction = Vector2(0, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+scale_amount_min = 4.0
+scale_amount_max = 7.0
+split_scale = true
+scale_curve_x = SubResource("Curve_oq2m8")
+scale_curve_y = SubResource("Curve_6xtbw")
+color = Color(1, 0, 0, 1)
+color_ramp = SubResource("Gradient_xlaia")
+color_initial_ramp = SubResource("Gradient_yyorw")
