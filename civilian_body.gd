@@ -30,6 +30,7 @@ var was_moving : bool = false
 @export var max_hop_anim_height : float = 5.0
 @export var max_running_tilt_as_radians : float = 0.25
 
+var zombie : bool = false
 
 var prev_velocity_x : float = 0.0
 func _ready() -> void:
@@ -38,6 +39,11 @@ func _ready() -> void:
 		CIVILIAN_TYPE.NONE: make_regular_civilian()
 		CIVILIAN_TYPE.POLICE: make_police_officer()
 		CIVILIAN_TYPE.GREEN_ALIEN: make_green_alien()
+	if zombie: zombify()
+
+func zombify():
+	#somehow indicate zombie arms animation
+	modulate = Color.FOREST_GREEN
 
 func animate(delta, velocity):
 	anim_time += delta

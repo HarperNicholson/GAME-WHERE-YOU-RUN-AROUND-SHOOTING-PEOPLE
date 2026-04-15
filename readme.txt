@@ -1,16 +1,21 @@
 hands move with gun
+zombie arms
 
 spinning sawblade
 spiky ball
 
 varied sizes to civilians - size based on HP?
 
-grid background
 
-gpuparticles swapover
 
-blood map texture?
-limbs need to die die / bake
+
+joystick aim
+
+restore shadows
+shadows kinda funky, maybe could they be limb shape * 1.1
+just realized better way to do shadows. subviewport + skew
+...maybe
+
 guts, bones...
 
-particle amount variable 
+limb dismembering

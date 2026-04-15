@@ -15,6 +15,7 @@ const MOVESPEED : float = 50.0
 const SPRINT_MOD : float = 2.0
 var hp : int = 3
 
+var elite : bool = false #triple HP, double size, half speed or something
 
 func hit():
 	#EffectManager.play_sound_effect("hit")

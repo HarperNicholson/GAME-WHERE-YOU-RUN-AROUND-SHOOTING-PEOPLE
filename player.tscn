@@ -4,7 +4,9 @@
 [ext_resource type="Script" uid="uid://cjyw2lu5daoyt" path="res://player_camera.gd" id="2_2hs0m"]
 [ext_resource type="PackedScene" uid="uid://ctnxymgw58y7u" path="res://civilian_body.tscn" id="2_sweqy"]
 [ext_resource type="Script" uid="uid://diwjwmjc66ghv" path="res://player_controller.gd" id="4_1jxqw"]
-[ext_resource type="PackedScene" uid="uid://y5ta1gv2f8pe" path="res://weapons/shotgun.tscn" id="5_sweqy"]
+[ext_resource type="PackedScene" uid="uid://y5ta1gv2f8pe" path="res://weapons/shotgun.tscn" id="5_1jxqw"]
+[ext_resource type="PackedScene" uid="uid://blggr3awog7no" path="res://weapons/rocket_launcher.tscn" id="5_sweqy"]
+[ext_resource type="PackedScene" uid="uid://djnb5nyt76vje" path="res://weapons/gun.tscn" id="7_dw050"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_q2tsy"]
 
@@ -21,7 +23,7 @@ motion_mode = 1
 floor_stop_on_slope = false
 script = ExtResource("1_hqtel")
 is_player = true
-weapon = NodePath("Shotgun")
+weapon = NodePath("Gun")
 controller = NodePath("PlayerController")
 playercam = NodePath("Camera2D")
 
@@ -50,4 +52,13 @@ shape = SubResource("CircleShape2D_6ru8d")
 [node name="PlayerController" type="Node2D" parent="." unique_id=1165073739]
 script = ExtResource("4_1jxqw")
 
-[node name="Shotgun" parent="." unique_id=430989293 instance=ExtResource("5_sweqy")]
+[node name="Shotgun" parent="." unique_id=430989293 instance=ExtResource("5_1jxqw")]
+
+[node name="RocketLauncher" parent="." unique_id=1487109886 instance=ExtResource("5_sweqy")]
+
+[node name="Gun" parent="." unique_id=1918060664 instance=ExtResource("7_dw050")]
+burst_delay = 0.1
+recoil = 0.0
+fire_rate = 0.01
+spread_degrees = 1.0
+amount_of_projectiles = 10

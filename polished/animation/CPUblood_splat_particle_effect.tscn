@@ -14,13 +14,12 @@ colors = PackedColorArray(1, 1, 1, 1, 0.52150047, 0.5215001, 0.5215003, 0.548463
 [sub_resource type="Gradient" id="Gradient_yyorw"]
 colors = PackedColorArray(0.41376296, 0.41376293, 0.41376293, 1, 1, 1, 1, 1)
 
-[node name="BloodSplatParticleEffect" type="CPUParticles2D" unique_id=2013842467]
+[node name="CPUBloodSplatParticleEffect" type="CPUParticles2D" unique_id=2013842467]
 z_index = -1
 emitting = false
 amount = 24
 texture = SubResource("CanvasTexture_bpuxh")
 lifetime = 10.0
-one_shot = true
 explosiveness = 1.0
 randomness = 0.1
 spread = 180.0

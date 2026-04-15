@@ -12,7 +12,7 @@ extends Node2D
 	##gate this so it doesn't overreach the borders of screen
 	#value_popup_instance.position = Vector2i(32,32) + coordinate * 64 
 	#
-	#EffectsNode.add_child(value_popup_instance)
+	#TempEffectsNode.add_child(value_popup_instance)
 
 #func spawn_animated_effect(coordinate: Vector2i, behaviour: Bombs.Behaviour) -> void:
 	#var animated_effect_instance = animated_effect_scene.instantiate()
@@ -21,7 +21,7 @@ extends Node2D
 	#animated_effect_instance.animation = "%s" % Bombs.Behaviour.find_key(behaviour)
 	#animated_effect_instance.global_position = Vector2i(32,32) + coordinate * 64
 	#
-	#EffectsNode.add_child(animated_effect_instance)
+	#TempEffectsNode.add_child(animated_effect_instance)
 #
 #func spawn_particle_effect(cell_coordinate: Vector2i):
 	## ooooh.... but what if they had shadows...... they need it.
@@ -41,17 +41,23 @@ extends Node2D
 	#explosion_particle_effect_instance.global_position = Vector2i(32,32) + cell_coordinate * 64
 	#
 	#
-	#EffectsNode.add_child(explosion_particle_effect_instance)
+	#TempEffectsNode.add_child(explosion_particle_effect_instance)
 
-var EffectsNode : Node2D
+var TempEffectsNode : Node2D
+
+var PersistentSolidsNode : Node2D
+var PersistentShadowsNode : Node2D
+var PersistentFlatEffectsNode : Node2D
+
+
 var MapNode : Node2D
 
 
 #var animated_effect_scene : PackedScene = preload("res://polished/animation/animated_effect.tscn")
 #var value_popup_scene : PackedScene = preload("res://polished/animation/value_popup.tscn")
 #var explosion_particle_effect_scene : PackedScene = preload("res://polished/animation/explosion_particle_effect.tscn")
-var blood_splat_particle_effect_scene : PackedScene = preload("res://polished/animation/blood_splat_particle_effect.tscn")
-var blood_pool_particle_effect_scene : PackedScene = preload("res://polished/animation/blood_pool_particle_effect.tscn")
+var blood_splat_particle_effect_scene : PackedScene = preload("res://polished/animation/CPUblood_splat_particle_effect.tscn")
+var blood_pool_particle_effect_scene : PackedScene = preload("res://polished/animation/SPEEDblood_pool.tscn")
 var limb_scene : PackedScene = preload("res://polished/animation/limb.tscn")
 
 enum SFX { GUN, HIT }
@@ -72,7 +78,7 @@ func _ready():
 	await get_tree().process_frame
 	for i in pool_size:
 		var p = AudioStreamPlayer2D.new()
-		EffectsNode.add_child(p)
+		TempEffectsNode.add_child(p)
 		pool.append(p)
 
 
@@ -87,23 +93,34 @@ func play_sound_effect(effect : SFX, effect_global_position : Vector2):
 
 
 
-func spawn_blood_splat_particle_effect(_position : Vector2, amount : int = 12):
-	var blood_splat_particle_effect_instance = blood_splat_particle_effect_scene.instantiate()
+func spawn_blood_splat_particle_effect(_global_position : Vector2, amount : int = 12):
+	var instance = blood_splat_particle_effect_scene.instantiate()
+	var instance_seed = randi()
+	instance.emitting = true
+	instance.seed = instance_seed
+	instance.global_position = _global_position
+	instance.amount = amount# * particle_amount_mult
 	
-	blood_splat_particle_effect_instance.emitting = true
-	blood_splat_particle_effect_instance.global_position = _position
-	blood_splat_particle_effect_instance.amount = amount# * particle_amount_mult
+	TempEffectsNode.add_child(instance)
 	
-	EffectsNode.add_child(blood_splat_particle_effect_instance)
+	await get_tree().create_timer(1.0).timeout
+	var newinst = instance.duplicate()
+	instance.queue_free()
+	newinst.seed = instance_seed
+	newinst.preprocess = 1.0
+	PersistentSolidsNode.add_child(newinst)
+	await get_tree().process_frame
+	newinst.queue_free()
 
-func spawn_blood_pool_particle_effect(_position : Vector2):
+func spawn_blood_pool_particle_effect(_global_position : Vector2):
 	
-	var blood_pool_particle_effect_instance = blood_pool_particle_effect_scene.instantiate()
+	var instance = blood_pool_particle_effect_scene.instantiate()
 	
-	blood_pool_particle_effect_instance.emitting = true
-	blood_pool_particle_effect_instance.global_position = _position
+	instance.emitting = true
+	instance.global_position = _global_position
+	instance.finished.connect(instance.queue_free)
 	
-	EffectsNode.add_child(blood_pool_particle_effect_instance)
+	PersistentFlatEffectsNode.add_child(instance)
 
 func set_limb_physics(limb):
 	limb.vel = Vector2(randf_range(-50,50), randf_range(-80,80))
@@ -121,7 +138,7 @@ func spawn_limb(from: Sprite2D):
 	
 	set_limb_physics(limb)
 	
-	EffectsNode.add_child(limb)
+	TempEffectsNode.add_child(limb)
 
 func spawn_head(head: Sprite2D, hair: Sprite2D, hat: Sprite2D):
 	var limb = limb_scene.instantiate()
@@ -156,4 +173,4 @@ func spawn_head(head: Sprite2D, hair: Sprite2D, hat: Sprite2D):
 	# physics
 	set_limb_physics(limb)
 	
-	EffectsNode.add_child(limb)
+	TempEffectsNode.add_child(limb)
