@@ -42,8 +42,11 @@ extends Node2D
 	#
 	#
 	#TempEffectsNode.add_child(explosion_particle_effect_instance)
+var AudioPool : Node2D
 
-var TempEffectsNode : Node2D
+var TempAirEffectsNode : Node2D
+var TempFlatEffectsNode : Node2D
+var TempSolidEffectsNode : Node2D
 
 var PersistentSolidsNode : Node2D
 var PersistentShadowsNode : Node2D
@@ -55,16 +58,26 @@ var MapNode : Node2D
 
 #var animated_effect_scene : PackedScene = preload("res://polished/animation/animated_effect.tscn")
 #var value_popup_scene : PackedScene = preload("res://polished/animation/value_popup.tscn")
-#var explosion_particle_effect_scene : PackedScene = preload("res://polished/animation/explosion_particle_effect.tscn")
-var blood_splat_particle_effect_scene : PackedScene = preload("res://polished/animation/CPUblood_splat_particle_effect.tscn")
-var blood_pool_particle_effect_scene : PackedScene = preload("res://polished/animation/SPEEDblood_pool.tscn")
+var explosion_particle_effect_scene : PackedScene = preload("res://polished/animation/explosion_particle_effect.tscn")
+var blood_splat_particle_effect_scene : PackedScene = preload("res://polished/animation/blood_splat_particle_effect.tscn")
+var blood_pool_particle_effect_scene : PackedScene = preload("res://polished/animation/blood_pool.tscn")
 var limb_scene : PackedScene = preload("res://polished/animation/limb.tscn")
+var xp_sparkle_particle_effect : PackedScene = preload("res://polished/animation/xp_sparkle_particle_effect.tscn")
 
-enum SFX { GUN, HIT }
+enum SFX { GUN, HIT, EXPLOSION, SHOTGUN, ROCKET, LASER, LEVELUP, BRAIN, XPORB, CLICK }
 
 var sounds := {
 	SFX.GUN: preload("res://audio/gunShoot.wav"),
 	SFX.HIT: preload("res://audio/playerHurt.wav"),
+	SFX.EXPLOSION: preload("res://audio/explosion.wav"),
+	SFX.SHOTGUN: preload("res://audio/playerHurt.wav"),
+	SFX.ROCKET: preload("res://audio/rocketShoot.wav"),
+	SFX.LASER: preload("res://audio/laserShoot.wav"),
+	SFX.LEVELUP: preload("res://audio/levelUp.wav"),
+	SFX.BRAIN: preload("res://audio/brain2.wav"),
+	SFX.XPORB: preload("res://audio/xpOrb.wav"),
+	SFX.CLICK: preload("res://audio/click.wav"),
+	
 }
 
 var particle_amount_mult : int = 1
@@ -78,20 +91,47 @@ func _ready():
 	await get_tree().process_frame
 	for i in pool_size:
 		var p = AudioStreamPlayer2D.new()
-		TempEffectsNode.add_child(p)
+		AudioPool.add_child(p)
 		pool.append(p)
 
 
 func play_sound_effect(effect : SFX, effect_global_position : Vector2):
 	var player = pool[pool_index]
 	pool_index = (pool_index + 1) % pool_size
-
+	
 	player.stream = sounds.get(effect)
 	player.pitch_scale = randf_range(0.9, 1.1)
 	player.global_position = effect_global_position
 	player.play()
 
 
+func spawn_xp_sparkle(_global_position : Vector2, _rotation : float, amount : int = 8, color = Color.WHITE):
+	var instance = xp_sparkle_particle_effect.instantiate()
+	var instance_seed = randi()
+	instance.emitting = true
+	instance.seed = instance_seed
+	instance.global_position = _global_position
+	instance.amount = amount# * particle_amount_mult
+	instance.modulate= color
+	instance.rotation = _rotation
+	
+	TempAirEffectsNode.add_child(instance)
+	
+	await instance.finished
+	instance.queue_free()
+
+func spawn_explosion_particle_effect(_global_position : Vector2):
+	var instance = explosion_particle_effect_scene.instantiate()
+	var instance_seed = randi()
+	instance.emitting = true
+	instance.seed = instance_seed
+	instance.global_position = _global_position
+	#instance.amount = amount# * particle_amount_mult
+	
+	TempAirEffectsNode.add_child(instance)
+	
+	await instance.finished
+	instance.queue_free()
 
 func spawn_blood_splat_particle_effect(_global_position : Vector2, amount : int = 12):
 	var instance = blood_splat_particle_effect_scene.instantiate()
@@ -101,13 +141,13 @@ func spawn_blood_splat_particle_effect(_global_position : Vector2, amount : int 
 	instance.global_position = _global_position
 	instance.amount = amount# * particle_amount_mult
 	
-	TempEffectsNode.add_child(instance)
+	TempFlatEffectsNode.add_child(instance)
 	
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.33).timeout
 	var newinst = instance.duplicate()
 	instance.queue_free()
 	newinst.seed = instance_seed
-	newinst.preprocess = 1.0
+	newinst.preprocess = 0.33
 	PersistentSolidsNode.add_child(newinst)
 	await get_tree().process_frame
 	newinst.queue_free()
@@ -127,7 +167,7 @@ func set_limb_physics(limb):
 	limb.vz = randf_range(180,260)
 	limb.rot_v = randf_range(-50,50)
 
-func spawn_limb(from: Sprite2D):
+func spawn_limb(from: Sprite2D, limb_children : Array = []):
 	var limb = limb_scene.instantiate()
 	
 	limb.texture = from.texture
@@ -138,39 +178,57 @@ func spawn_limb(from: Sprite2D):
 	
 	set_limb_physics(limb)
 	
-	TempEffectsNode.add_child(limb)
+	TempSolidEffectsNode.add_child(limb)
+	
+	for child in limb_children:
+		limb.add_child(child.duplicate())
 
-func spawn_head(head: Sprite2D, hair: Sprite2D, hat: Sprite2D):
-	var limb = limb_scene.instantiate()
-	limb.global_position = head.global_position
-	limb.scale = Vector2(4.0,4.0)
-	
-	# new head sprite
-	var new_head = Sprite2D.new()
-	new_head.texture = head.texture
-	new_head.self_modulate = head.self_modulate
-	new_head.scale = head.scale
-	
-	# new hair
-	var new_hair = Sprite2D.new()
-	new_hair.texture = hair.texture
-	new_hair.self_modulate = hair.self_modulate
-	new_hair.position = hair.position
-	new_hair.visible = hair.visible
-	
-	# new hat
-	var new_hat = Sprite2D.new()
-	new_hat.texture = hat.texture
-	new_hat.self_modulate = hat.self_modulate
-	new_hat.position = hat.position
-	new_hat.visible = hat.visible
-	
-	# build hierarchy
-	limb.add_child(new_head)
-	new_head.add_child(new_hair)
-	new_head.add_child(new_hat)
-	
-	# physics
-	set_limb_physics(limb)
-	
-	TempEffectsNode.add_child(limb)
+#func spawn_head(head: Sprite2D, hair: Sprite2D, hat: Sprite2D, eyes: Sprite2D, sunglasses: Sprite2D):
+	#var limb = limb_scene.instantiate()
+	#limb.global_position = head.global_position
+	#limb.scale = Vector2(4.0,4.0)
+	#
+	## new head sprite
+	#var new_head = Sprite2D.new()
+	#new_head.texture = head.texture
+	#new_head.self_modulate = head.self_modulate
+	#new_head.scale = head.scale
+	#
+	## new hair
+	#var new_hair = Sprite2D.new()
+	#new_hair.texture = hair.texture
+	#new_hair.self_modulate = hair.self_modulate
+	#new_hair.position = hair.position
+	#new_hair.visible = hair.visible
+	#
+	## new hat
+	#var new_hat = Sprite2D.new()
+	#new_hat.texture = hat.texture
+	#new_hat.self_modulate = hat.self_modulate
+	#new_hat.position = hat.position
+	#new_hat.visible = hat.visible
+	#
+	##var new_eyes = Sprite2D.new()
+	##new_eyes.texture = eyes.texture
+	##new_eyes.self_modulate = eyes.self_modulate
+	##new_eyes.position = eyes.position
+	##new_eyes.visible = eyes.visible
+	##
+	##
+	##var new_sunglasses = Sprite2D.new()
+	##new_sunglasses.texture = sunglasses.texture
+	##new_sunglasses.self_modulate = sunglasses.self_modulate
+	##new_sunglasses.position = sunglasses.position
+	##new_sunglasses.visible = sunglasses.visible
+	#
+	## build hierarchy
+	#limb.add_child(new_head)
+	#new_head.add_child(new_hair)
+	#new_head.add_child(new_hat)
+	##new_head.add_child(new_eyes)
+	##new_head.add_child(new_sunglasses)
+	#
+	## physics
+	#set_limb_physics(limb)
+	#
+	#TempEffectsNode.add_child(limb)

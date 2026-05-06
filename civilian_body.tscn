@@ -35,6 +35,7 @@ scale = Vector2(1, 0.5)
 texture = SubResource("CanvasTexture_aclks")
 
 [node name="Hat" type="Sprite2D" parent="Head" unique_id=1118180837]
+visible = false
 position = Vector2(0, -0.75)
 scale = Vector2(1, 0.5)
 texture = SubResource("CanvasTexture_aclks")
@@ -54,26 +55,88 @@ position = Vector2(0.25, 0)
 scale = Vector2(0.25, 0.625)
 texture = SubResource("CanvasTexture_jvyuy")
 
+[node name="Sunglasses" type="Node2D" parent="Head" unique_id=2074137623]
+visible = false
+
+[node name="Eye1" type="Sprite2D" parent="Head/Sunglasses" unique_id=269295547]
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(-0.25, 0.25)
+scale = Vector2(0.4, 0.2)
+texture = SubResource("CanvasTexture_jvyuy")
+
+[node name="Bridge" type="Sprite2D" parent="Head/Sunglasses" unique_id=1524122953]
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(0, 0.187)
+scale = Vector2(0.996, 0.075)
+texture = SubResource("CanvasTexture_jvyuy")
+
+[node name="Eye2" type="Sprite2D" parent="Head/Sunglasses" unique_id=307272188]
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(0.25, 0.25)
+scale = Vector2(0.4, 0.2)
+texture = SubResource("CanvasTexture_jvyuy")
+
 [node name="Pants" type="Sprite2D" parent="." unique_id=695677383]
+self_modulate = Color(0, 0, 0, 1)
 position = Vector2(0, 0.5)
 texture = SubResource("CanvasTexture_hairy")
 
 [node name="LegR" type="Sprite2D" parent="Pants" unique_id=152764271]
+self_modulate = Color(0, 0, 0, 1)
 position = Vector2(-0.25, 0.5)
 scale = Vector2(0.5, 1)
 texture = SubResource("CanvasTexture_hairy")
 offset = Vector2(0, 0.5)
 
 [node name="LegL" type="Sprite2D" parent="Pants" unique_id=794708916]
+self_modulate = Color(0, 0, 0, 1)
 position = Vector2(0.25, 0.5)
 scale = Vector2(0.5, 1)
 texture = SubResource("CanvasTexture_hairy")
 offset = Vector2(0, 0.5)
 
 [node name="Shirt" type="Sprite2D" parent="." unique_id=1143070944]
+self_modulate = Color(0, 0, 0, 1)
 texture = SubResource("CanvasTexture_hairy")
 
+[node name="Attachments" type="Node2D" parent="Shirt" unique_id=2077659626]
+
+[node name="Suit" type="Node2D" parent="Shirt/Attachments" unique_id=1248245711]
+visible = false
+
+[node name="White" type="Sprite2D" parent="Shirt/Attachments/Suit" unique_id=1587583982]
+position = Vector2(0, -0.5)
+rotation = 1.5707964
+scale = Vector2(1, 0.5)
+texture = SubResource("CanvasTexture_hairy")
+offset = Vector2(0.5, 0)
+
+[node name="Tie" type="Sprite2D" parent="Shirt/Attachments/Suit" unique_id=1500957417]
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(-1.0927846e-08, -0.25)
+rotation = 1.5707964
+scale = Vector2(0.5, 0.25)
+texture = SubResource("CanvasTexture_hairy")
+offset = Vector2(0.5, 0)
+
+[node name="Tie2" type="Sprite2D" parent="Shirt/Attachments/Suit" unique_id=1532062460]
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(-1.8626451e-08, -0.5)
+rotation = 1.5707964
+scale = Vector2(0.24999997, 0.15)
+texture = SubResource("CanvasTexture_hairy")
+offset = Vector2(0.5, 0)
+
+[node name="Tie3" type="Sprite2D" parent="Shirt/Attachments/Suit" unique_id=1404774198]
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(-3.7252903e-09, -0.5)
+rotation = 1.5707964
+scale = Vector2(0.1, 0.4)
+texture = SubResource("CanvasTexture_hairy")
+offset = Vector2(0.5, 0)
+
 [node name="ArmR" type="Sprite2D" parent="Shirt" unique_id=1649229205]
+self_modulate = Color(0, 0, 0, 1)
 position = Vector2(0.5, -0.25)
 rotation = 1.5707964
 scale = Vector2(1, 0.5)
@@ -81,6 +144,7 @@ texture = SubResource("CanvasTexture_hairy")
 offset = Vector2(0.5, 0)
 
 [node name="ArmL" type="Sprite2D" parent="Shirt" unique_id=356804306]
+self_modulate = Color(0, 0, 0, 1)
 position = Vector2(-0.5, -0.25)
 rotation = -1.5707964
 scale = Vector2(1, 0.5)

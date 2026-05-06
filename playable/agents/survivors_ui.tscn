@@ -1,0 +1,178 @@
+[gd_scene format=3 uid="uid://db8xc3vmn7lh8"]
+
+[ext_resource type="Script" uid="uid://dtlgrjbthlk85" path="res://survivorsUI.gd" id="1_3nh1f"]
+[ext_resource type="Script" uid="uid://c26h5hax6usk0" path="res://level_options.gd" id="2_lgh0a"]
+[ext_resource type="Script" uid="uid://db2t2p057r52k" path="res://item_stacker.gd" id="2_wful3"]
+[ext_resource type="PackedScene" uid="uid://bhh0hrhvyws1u" path="res://upgrades/amount_up.tscn" id="3_wful3"]
+[ext_resource type="PackedScene" uid="uid://cmhm542o3il4m" path="res://upgrades/burst_up.tscn" id="4_rvqbc"]
+[ext_resource type="PackedScene" uid="uid://cpyf1kfr5hfqp" path="res://upgrades/rubber_bullets.tscn" id="5_rj3ut"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wwd38"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yqk6d"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Theme" id="Theme_8bins"]
+
+[node name="SurvivorsUI" type="Control" unique_id=935884309]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3nh1f")
+
+[node name="XPMeter" type="ProgressBar" parent="." unique_id=644689042]
+layout_mode = 0
+offset_left = -144.0
+offset_top = -81.0
+offset_right = 144.0
+offset_bottom = -79.0
+size_flags_horizontal = 0
+theme_override_styles/background = SubResource("StyleBoxEmpty_wwd38")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yqk6d")
+show_percentage = false
+
+[node name="LevelLabel" type="Label" parent="." unique_id=2036228]
+layout_mode = 0
+offset_left = -140.0
+offset_top = -78.0
+offset_right = -86.0
+offset_bottom = -55.0
+scale = Vector2(0.22043915, 0.22043915)
+theme_override_font_sizes/font_size = 16
+text = "Level 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Items" type="GridContainer" parent="." unique_id=346222865]
+layout_mode = 1
+offset_left = -135.0
+offset_top = -66.0
+offset_right = -23.0
+offset_bottom = 114.0
+scale = Vector2(0.25, 0.25)
+theme_override_constants/h_separation = 50
+theme_override_constants/v_separation = 50
+columns = 4
+script = ExtResource("2_wful3")
+
+[node name="LevelUpLayer" type="CanvasLayer" parent="." unique_id=1231266931]
+layer = 10
+visible = false
+script = ExtResource("2_lgh0a")
+
+[node name="ColorRect" type="ColorRect" parent="LevelUpLayer" unique_id=1508386870]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.49019608)
+
+[node name="Label" type="Label" parent="LevelUpLayer" unique_id=845608256]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -92.0
+offset_top = 163.0
+offset_right = 43.0
+offset_bottom = 186.0
+grow_horizontal = 2
+text = "LEVEL OPTIONSW"
+
+[node name="LevelUpOptions" type="HBoxContainer" parent="LevelUpLayer" unique_id=872592051]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -192.0
+offset_bottom = -108.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="AmountUp" parent="LevelUpLayer/LevelUpOptions" unique_id=270019535 instance=ExtResource("3_wful3")]
+layout_mode = 2
+
+[node name="BurstUp" parent="LevelUpLayer/LevelUpOptions" unique_id=1915934967 instance=ExtResource("4_rvqbc")]
+layout_mode = 2
+
+[node name="RubberBullets" parent="LevelUpLayer/LevelUpOptions" unique_id=1637849664 instance=ExtResource("5_rj3ut")]
+layout_mode = 2
+
+[node name="LevelUpButtons" type="HBoxContainer" parent="LevelUpLayer" unique_id=991478232]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = 75.0
+offset_right = -192.0
+offset_bottom = 158.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="Control" type="Control" parent="LevelUpLayer/LevelUpButtons" unique_id=160119475]
+layout_mode = 2
+
+[node name="0" type="Button" parent="LevelUpLayer/LevelUpButtons/Control" unique_id=2044378959]
+layout_mode = 0
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+theme = SubResource("Theme_8bins")
+
+[node name="Control2" type="Control" parent="LevelUpLayer/LevelUpButtons" unique_id=202048344]
+layout_mode = 2
+
+[node name="1" type="Button" parent="LevelUpLayer/LevelUpButtons/Control2" unique_id=1535701054]
+layout_mode = 0
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+theme = SubResource("Theme_8bins")
+
+[node name="Control3" type="Control" parent="LevelUpLayer/LevelUpButtons" unique_id=195846215]
+layout_mode = 2
+
+[node name="2" type="Button" parent="LevelUpLayer/LevelUpButtons/Control3" unique_id=1914049777]
+layout_mode = 0
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+theme = SubResource("Theme_8bins")
+
+[node name="Control4" type="Control" parent="LevelUpLayer/LevelUpButtons" unique_id=1905738040]
+visible = false
+layout_mode = 2
+
+[node name="3" type="Button" parent="LevelUpLayer/LevelUpButtons/Control4" unique_id=772999108]
+layout_mode = 0
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+theme = SubResource("Theme_8bins")
+
+[node name="BonusLoot" type="CanvasLayer" parent="." unique_id=879837510]
+layer = 11
+
+[connection signal="child_entered_tree" from="Items" to="Items" method="_on_child_entered_tree"]
+[connection signal="pressed" from="LevelUpLayer/LevelUpButtons/Control/0" to="LevelUpLayer" method="selected" flags=18]
+[connection signal="pressed" from="LevelUpLayer/LevelUpButtons/Control2/1" to="LevelUpLayer" method="selected" flags=18]
+[connection signal="pressed" from="LevelUpLayer/LevelUpButtons/Control3/2" to="LevelUpLayer" method="selected" flags=18]
+[connection signal="pressed" from="LevelUpLayer/LevelUpButtons/Control4/3" to="LevelUpLayer" method="selected" flags=18]

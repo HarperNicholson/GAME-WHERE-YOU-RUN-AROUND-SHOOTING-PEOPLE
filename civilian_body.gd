@@ -3,11 +3,12 @@ extends Node2D
 @export var skin_gradient : Gradient
 @export var hair_gradient : Gradient
 
-var type : CIVILIAN_TYPE = CIVILIAN_TYPE.NONE
+@export var type : CIVILIAN_TYPE = CIVILIAN_TYPE.NONE
 
 enum CIVILIAN_TYPE {
 	NONE = -1,
 	POLICE,
+	AGENT,
 	GREEN_ALIEN
 }
 
@@ -15,35 +16,38 @@ var anim_time : float = randf() * TAU
 var drag_offset : float = 0.0
 var tilt_from_velocity : float = 0.0
 var was_moving : bool = false
+var holding_weapon : bool = false
 
 @onready var base_head_y : float = $Head.position.y
 @onready var base_pants_y : float = $Pants.position.y
 @onready var base_shirt_y : float = $Shirt.position.y
 
 
-@export var max_running_speed_before_considered_flying : float = 200.0
-@export var walking_anim_speed : float = 10.0
-@export var running_anim_speed : float = 15.0
-@export var walking_anim_swing_speed : float = 0.1
-@export var running_anim_swing_speed : float = 1.0
-@export var max_hop_speed : float = 12.0
-@export var max_hop_anim_height : float = 5.0
-@export var max_running_tilt_as_radians : float = 0.25
+var max_running_speed_before_considered_flying : float = 200.0
+var walking_anim_speed : float = 10.0
+var running_anim_speed : float = 15.0
+var walking_anim_swing_speed : float = 0.1
+var running_anim_swing_speed : float = 1.0
+var max_hop_speed : float = 12.0
+var max_hop_anim_height : float = 5.0
+var max_running_tilt_as_radians : float = 0.25
 
 var zombie : bool = false
 
 var prev_velocity_x : float = 0.0
 func _ready() -> void:
-	if randf() < 0.01: type = CIVILIAN_TYPE.values().pick_random()
 	match type:
 		CIVILIAN_TYPE.NONE: make_regular_civilian()
 		CIVILIAN_TYPE.POLICE: make_police_officer()
+		CIVILIAN_TYPE.AGENT: make_agent()
 		CIVILIAN_TYPE.GREEN_ALIEN: make_green_alien()
 	if zombie: zombify()
 
 func zombify():
 	#somehow indicate zombie arms animation
 	modulate = Color.FOREST_GREEN
+
+var weapon_to_point_toward : Node2D
 
 func animate(delta, velocity):
 	anim_time += delta
@@ -70,6 +74,11 @@ func animate(delta, velocity):
 	
 	was_moving = moving
 	
+	if get_parent().weapon != null:
+		weapon_to_point_toward = get_parent().weapon
+		holding_weapon = true
+	else:
+		holding_weapon = false
 	
 	if moving:
 		var t = anim_time * anim_speed
@@ -77,13 +86,22 @@ func animate(delta, velocity):
 		smooth_rot($Pants/LegL, sin(t) + tilt_from_velocity, delta)
 		smooth_rot($Pants/LegR, sin(t + PI) + tilt_from_velocity, delta)
 		
-		smooth_rot($Shirt/ArmL, sin(t) * swing - PI/3 + tilt_from_velocity, delta)
-		smooth_rot($Shirt/ArmR, sin(t + PI) * swing + PI/3 + tilt_from_velocity, delta)
+		if holding_weapon:
+			point_to_weapon($Shirt/ArmL, true)
+			point_to_weapon($Shirt/ArmR)
+		else:
+			smooth_rot($Shirt/ArmL, sin(t) * swing - PI/3 + tilt_from_velocity, delta)
+			smooth_rot($Shirt/ArmR, sin(t + PI) * swing + PI/3 + tilt_from_velocity, delta)
+		
 	else:
 		var breathe = sin(anim_time * 3.0) * 0.20
 		
-		smooth_rot($Shirt/ArmL, -PI / 3 - breathe, delta)
-		smooth_rot($Shirt/ArmR, PI / 3 + breathe, delta)
+		if holding_weapon:
+			point_to_weapon($Shirt/ArmL, true)
+			point_to_weapon($Shirt/ArmR)
+		else:
+			smooth_rot($Shirt/ArmL, -PI / 3 - breathe, delta)
+			smooth_rot($Shirt/ArmR, PI / 3 + breathe, delta)
 		
 		smooth_rot($Pants/LegL, -PI * 0.05 - breathe / 2, delta)
 		smooth_rot($Pants/LegR, PI * 0.05 + breathe / 2, delta)
@@ -93,6 +111,12 @@ func animate(delta, velocity):
 	
 	position.y = -abs(wave) * hop_amp
 
+func point_to_weapon(arm: Node2D, flip : bool = false):
+	var dir = weapon_to_point_toward.global_position - arm.global_position
+	var angle = dir.angle()
+	if flip:
+		angle += PI
+	arm.rotation = angle
 
 func smooth_rot(node: Node2D, target: float, delta: float, speed := 15.0):
 	node.rotation = lerp(node.rotation, target, delta * speed)
@@ -109,9 +133,9 @@ func die(nuked : bool = false):
 		EffectManager.spawn_limb($Pants/LegR)
 		EffectManager.spawn_limb($Shirt/ArmL)
 		EffectManager.spawn_limb($Shirt/ArmR)
-		EffectManager.spawn_limb($Shirt)
+		EffectManager.spawn_limb($Shirt, $Shirt/Attachments.get_children())
 		EffectManager.spawn_limb($Pants)
-		EffectManager.spawn_head($Head, $Head/Hair, $Head/Hat)
+		EffectManager.spawn_limb($Head, $Head.get_children())
 		
 		EffectManager.spawn_blood_splat_particle_effect(global_position)
 	queue_free()
@@ -124,6 +148,7 @@ func random_color_from_gradient(grad: Gradient) -> Color:
 	return grad.sample(randf())
 
 func make_regular_civilian():
+	if randf() < 0.01: type = CIVILIAN_TYPE.values().pick_random()
 	$Head.self_modulate = random_color_from_gradient(skin_gradient) # roll for rare chance at random color
 	$Head/Hair.self_modulate = random_color_from_gradient(hair_gradient)
 	$Head/Hair.visible = randf() < 0.9  # 90% chance
@@ -148,13 +173,32 @@ func make_police_officer():
 	$Head/Hat.show()
 
 func make_green_alien():
-	$Head.self_modulate = Color.LIME_GREEN
-	$Head/Hair.self_modulate = Color.LIME_GREEN
-	$Pants.self_modulate = Color.LIME_GREEN
-	$Pants/LegR.self_modulate = $Pants.self_modulate
-	$Pants/LegL.self_modulate = $Pants.self_modulate
-	$Shirt.self_modulate = Color.LIME_GREEN
-	$Shirt/ArmR.self_modulate = $Shirt.self_modulate
-	$Shirt/ArmL.self_modulate = $Shirt.self_modulate
+	var tint_randf = randf_range(0.8, 1.1)
+	var green = Color(0.19607843 * tint_randf, 0.8039216 * tint_randf, 0.19607843 * tint_randf, 1)
+
+	$Head.self_modulate = green
+	$Head/Hair.self_modulate = green
+	$Pants.self_modulate = green
+	$Pants/LegR.self_modulate = green
+	$Pants/LegL.self_modulate = green
+	$Shirt.self_modulate = green
+	$Shirt/ArmR.self_modulate = green
+	$Shirt/ArmL.self_modulate = green
 	$Head/Hat.hide()
 	$Head/Eyes.show()
+
+func make_agent():
+	$Head.self_modulate = random_color_from_gradient(skin_gradient) # roll for rare chance at random color
+	$Head/Hair.self_modulate = random_color_from_gradient(hair_gradient)
+	$Head/Hair.visible = randf() < 0.9  # 90% chance
+	if randf() < 0.03:
+		$Head/Hair.self_modulate = random_color()  # weird hair
+	$Pants.self_modulate = Color.BLACK
+	$Pants/LegR.self_modulate = $Pants.self_modulate
+	$Pants/LegL.self_modulate = $Pants.self_modulate
+	$Shirt.self_modulate = Color.BLACK
+	$Shirt/ArmR.self_modulate = $Shirt.self_modulate
+	$Shirt/ArmL.self_modulate = $Shirt.self_modulate
+	$Head/Sunglasses.show()
+	$Shirt/Attachments/Suit.show()
+	$Head/Hat.hide()

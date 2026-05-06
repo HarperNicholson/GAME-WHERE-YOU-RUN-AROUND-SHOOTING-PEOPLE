@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://cmhm542o3il4m"]
+
+[ext_resource type="Script" uid="uid://dd0dnt3nkw880" path="res://upgrades/burst_up.gd" id="1_bsh66"]
+[ext_resource type="Theme" uid="uid://byosmhxx70y8p" path="res://new_theme.tres" id="2_sl1au"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_f13q1"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1xx0f"]
+
+[node name="BurstUp" type="Control" unique_id=1915934967]
+layout_mode = 3
+anchors_preset = 0
+focus_mode = 2
+script = ExtResource("1_bsh66")
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="Panel" parent="." unique_id=448079541]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="Panel" unique_id=353781151]
+modulate = Color(1, 0.8666667, 0, 1)
+position = Vector2(20, 31)
+scale = Vector2(7.9999995, 12)
+texture = SubResource("CanvasTexture_f13q1")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Panel" unique_id=1428229562]
+modulate = Color(1, 0.8666667, 0, 1)
+position = Vector2(20.000002, 9)
+scale = Vector2(7.9999995, 12)
+texture = SubResource("CanvasTexture_f13q1")
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel" unique_id=777173080]
+position = Vector2(20, 20)
+scale = Vector2(1, 6)
+texture = SubResource("CanvasTexture_1xx0f")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Panel" unique_id=174931663]
+position = Vector2(20, 20)
+rotation = 1.5707964
+scale = Vector2(1, 6)
+texture = SubResource("CanvasTexture_1xx0f")
+
+[node name="Label" type="Label" parent="Panel" unique_id=1516104378]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2_sl1au")
+horizontal_alignment = 2
+vertical_alignment = 2
+metadata/_edit_lock_ = true

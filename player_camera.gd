@@ -9,7 +9,7 @@ var max_rotation := 0.05
 func _process(delta):
 	trauma = max(trauma - trauma_decay * delta, 0.0)
 
-	var shake := pow(trauma, 0.6) * (1.0 - 0.3 * trauma)
+	var shake := pow(trauma, 0.5) * (1.0 - 0.3 * trauma)
 
 	offset = Vector2(
 		randf_range(-1, 1),
@@ -19,4 +19,5 @@ func _process(delta):
 	rotation = randf_range(-1, 1) * max_rotation * shake
 
 func add_trauma(amount: float):
-	trauma = clamp(trauma + amount, 0.0, 1.0)
+	if Settings.camshake:
+		trauma = clamp(trauma + amount, 0.0, 1.0)

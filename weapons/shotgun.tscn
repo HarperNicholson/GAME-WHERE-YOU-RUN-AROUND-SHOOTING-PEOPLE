@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://ysit76fwbh2j" path="res://weapons/projectile_weapon.gd" id="1_64lnt"]
 [ext_resource type="PackedScene" uid="uid://cgth80mjckiks" path="res://projectiles/bullet.tscn" id="2_byptj"]
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_64lnt"]
+
 [node name="Shotgun" type="Node2D" unique_id=430989293]
 script = ExtResource("1_64lnt")
 recoil = 0.8
@@ -10,3 +12,19 @@ projectile_scene = ExtResource("2_byptj")
 fire_rate = 1.0
 spread_degrees = 11.0
 amount_of_projectiles = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=923867841]
+self_modulate = Color(0.28009677, 0.1307203, 0, 1)
+position = Vector2(-2.7274034, 7.4505806e-08)
+rotation = 0.64914346
+scale = Vector2(1.286485, 2.5150805)
+texture = SubResource("CanvasTexture_64lnt")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1237347672]
+self_modulate = Color(0.13319641, 0.13319641, 0.13319638, 1)
+position = Vector2(1.2872965, -0.73395497)
+scale = Vector2(8.043471, 1.5320901)
+texture = SubResource("CanvasTexture_64lnt")
+
+[node name="ProjectileSpawn" type="Node2D" parent="." unique_id=1262050937]
+position = Vector2(5.3090324, -0.75)

@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://cpyf1kfr5hfqp"]
+
+[ext_resource type="Script" uid="uid://cj14qr858tnmg" path="res://upgrades/rubber_bullets.gd" id="1_ndhu7"]
+[ext_resource type="Theme" uid="uid://byosmhxx70y8p" path="res://new_theme.tres" id="2_xbuxu"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_lmn7h"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_f13q1"]
+
+[node name="RubberBullets" type="Control" unique_id=1637849664]
+layout_mode = 3
+anchors_preset = 0
+focus_mode = 2
+script = ExtResource("1_ndhu7")
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="Panel" parent="." unique_id=448079541]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel" unique_id=871462282]
+position = Vector2(18.768293, 12.999999)
+rotation = -0.7853982
+scale = Vector2(1.6405617, 3.8269398)
+texture = SubResource("CanvasTexture_lmn7h")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Panel" unique_id=947879299]
+position = Vector2(24.000002, 18)
+rotation = -0.7853982
+scale = Vector2(1.6405617, 3.8269398)
+texture = SubResource("CanvasTexture_lmn7h")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Panel" unique_id=470366445]
+position = Vector2(18.000004, 29.000004)
+rotation = 0.7853982
+scale = Vector2(1.6405617, 3.8269398)
+texture = SubResource("CanvasTexture_lmn7h")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Panel" unique_id=848630503]
+position = Vector2(12.000004, 35.000004)
+rotation = 0.7853982
+scale = Vector2(1.6405617, 3.8269398)
+texture = SubResource("CanvasTexture_lmn7h")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Panel" unique_id=437198776]
+position = Vector2(24.000002, 22.933056)
+rotation = 0.7853982
+scale = Vector2(1.6405617, 3.8269398)
+texture = SubResource("CanvasTexture_lmn7h")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Panel" unique_id=1428229562]
+position = Vector2(30, 19.5)
+scale = Vector2(2.0000002, 35)
+texture = SubResource("CanvasTexture_f13q1")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Panel" unique_id=353781151]
+modulate = Color(1, 0.8666667, 0, 1)
+position = Vector2(14, 8.000003)
+rotation = -0.7853982
+scale = Vector2(7.999999, 11.999999)
+texture = SubResource("CanvasTexture_f13q1")
+
+[node name="Label" type="Label" parent="Panel" unique_id=33635692]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2_xbuxu")
+horizontal_alignment = 2
+vertical_alignment = 2
+metadata/_edit_lock_ = true

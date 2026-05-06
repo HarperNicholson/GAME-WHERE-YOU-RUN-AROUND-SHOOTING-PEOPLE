@@ -10,14 +10,24 @@ config_version=5
 
 [application]
 
-config/name="GAME WHERE YOU RUN AROUND SHOOTING PEOPLE"
+config/name="Agents and Aliens"
 run/main_scene="uid://dl323wmmlpjuq"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://dv70cpp2555aa"
+
 [autoload]
 
 EffectManager="*uid://dpe16bhpexpwk"
+Settings="*uid://bjt1gub1krax6"
+Global="*uid://dybatcgd4wnbx"
+
+[global_group]
+
+Player=""
 
 [input]
 

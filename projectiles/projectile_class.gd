@@ -4,16 +4,26 @@ class_name Projectile
 var shooter : Node
 var direction : Vector2 = Vector2.RIGHT
 
-var speed : float = 600.0
+var speed : float = 300.0
 var knockback : float = 50.0
+
+var damage : float = 0.0
 
 var has_hit : bool = false
 
 const MAX_DIST := 1000.0
 const MAX_DIST_SQ := MAX_DIST * MAX_DIST
 
+var bouncy : bool = false
+
+var ricochets : int = 0
+
 func _ready():
 	body_entered.connect(_on_body_entered)
+	if bouncy:
+		ricochets += 2
+		ricochets *= 2
+		damage *= 0.25
 
 
 func _on_body_entered(body):
@@ -23,7 +33,7 @@ func _on_body_entered(body):
 		return
 	if body is Civilian:
 		has_hit = true
-		body.hit()
+		body.hit(damage)
 		body.add_impulse(direction * knockback)
 		queue_free()
 

@@ -13,41 +13,115 @@ var is_alive : bool = true
 
 const MOVESPEED : float = 50.0
 const SPRINT_MOD : float = 2.0
-var hp : int = 3
+var hp : float = 3.0
+
+var xp_reward : int = 1
+
+var levelup_options : int = 3
+var levelup_rerolls : int = 0
 
 var elite : bool = false #triple HP, double size, half speed or something
+#drops upgrade reward
 
-func hit():
+func give_item(item : Global.ITEMS):
+	var item_instance = Global.item_scenes[item].instantiate()
+	item_instance.item_id = item
+	$SurvivorsUI/Items.add_child(item_instance)
+	item_instance.given_to_player()
+
+func hit(dmg : float):
 	#EffectManager.play_sound_effect("hit")
 	EffectManager.spawn_blood_splat_particle_effect(global_position, randi_range(1,3))
 	
 	flash_color()
 	
-	hp -= 1
-	if hp <= 0 and is_alive:
+	hp -= dmg
+	if hp <= 0.0 and is_alive:
 		kill()
+
+func change_player_hp():
+	pass
+
+var xp_orb_scene = preload("res://xp_orb_scene.tscn")
+
+func award_xp(_xp_reward):
+	$SurvivorsUI.change_xp(_xp_reward)
 
 func kill():
 	is_alive = false
+	
+	var current_scene = get_tree().get_current_scene()
+	
+	var xp_orb_instance = xp_orb_scene.instantiate()
+	xp_orb_instance.value = xp_reward
+	xp_orb_instance.global_position = global_position
+	xp_orb_instance.team = current_scene.enemy_team
+	current_scene.find_child("GameObjects").call_deferred("add_child", xp_orb_instance) #spawn XP orb
+	
+	get_tree().get_first_node_in_group("Player").award_xp(xp_reward * 0.1) #to give 10% of XP to player on kill
+	
 	$CivilianBody.die()
 	$EntityShadow.queue_free()
 	$CollisionShape2D.queue_free()
 	$Area2D.queue_free()
 
+var aim_deadzone : float = 0.1
+var weapon_scale_flip_deadzone := 0.1
+
+var weapon_holding_radius : float = 4.0
+
+var recoil_offset := Vector2.ZERO
+func add_weapon_holding_radius_recoil(recoil: float):
+	var aim_dir = controller.get_aim_direction()
+	if aim_dir == Vector2.ZERO:
+		return
+	
+	var dir = aim_dir.normalized()
+	
+	# small random spread
+	var rand = Vector2(
+		randf_range(-0.3, 0.3),
+		randf_range(-0.3, 0.3)
+	)
+	
+	# push backward + jitter
+	recoil_offset += (-dir + rand) * recoil * 6.0
+
 func attacks():
 	var aim_dir = controller.get_aim_direction()
-	if aim_dir != Vector2.ZERO:
-		weapon.rotation = aim_dir.angle()
+	if aim_dir.length() > aim_deadzone:
+		#aim_dir = aim_dir.normalized() #perfect circle
+		
+		var base = aim_dir * weapon_holding_radius + Vector2.UP
+		
+		$AimTarget.position = base + recoil_offset
+		$AimTarget.position.x *= 1.5
+		$AimTarget.rotation = aim_dir.angle()
+		
+		weapon.position = $AimTarget.position + $CivilianBody.position
+		weapon.rotation = $AimTarget.rotation
+		
+		#cosmetic, weapon scale flip to match facing direction
+		if aim_dir.x > weapon_scale_flip_deadzone:
+			weapon.scale.y = 1.0
+		elif aim_dir.x < -weapon_scale_flip_deadzone:
+			weapon.scale.y = -1.0
+		
 	if controller.is_shooting():
 		weapon.try_fire()
 
 func _physics_process(delta: float) -> void:
-	if !is_alive:
+	if !is_alive or Global.paused:
 		return
-
+	
 	if is_player:
 		attacks()
-
+	
+	recoil_offset = recoil_offset.lerp(Vector2.ZERO, delta * 20.0)
+	
+	
+	
+	
 	movement(delta)
 	collisions()
 	
@@ -58,7 +132,7 @@ func _physics_process(delta: float) -> void:
 func movement(delta):
 	var input_dir = controller.get_movement_direction_as_vector()
 	var target_velocity = input_dir * MOVESPEED * (SPRINT_MOD if (controller.is_sprinting() or always_sprinting) else 1.0)
-	var responsiveness : float = 10.0
+	
 	velocity = velocity.move_toward(target_velocity, MOVESPEED * responsiveness * delta)
 	
 	$CivilianBody.animate(delta, velocity)
@@ -98,6 +172,8 @@ func collisions():
 		velocity *= 0.7
 
 func add_impulse(force: Vector2):
+	if is_player:
+		return
 	velocity += force
 
 func calculate_shadow():

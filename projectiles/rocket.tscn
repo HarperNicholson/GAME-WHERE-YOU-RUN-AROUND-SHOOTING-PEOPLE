@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://crmb0qluyel1q" path="res://projectiles/rocket.gd" id="1_f4elh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v8qja"]
-radius = 2.0
+radius = 2.236068
 
 [sub_resource type="Curve" id="Curve_f4elh"]
 _limits = [0.0, 100.0, 0.0, 1.0]
@@ -51,7 +51,7 @@ color_ramp = SubResource("Gradient_iyl8n")
 color_initial_ramp = SubResource("Gradient_5ffeg")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=487655511]
-self_modulate = Color(0.30113852, 0, 0.00076490594, 1)
+self_modulate = Color(1, 1, 0.09803922, 1)
 position = Vector2(-8.940697e-08, 2.9802322e-08)
 scale = Vector2(4, 2)
 texture = SubResource("CanvasTexture_f4elh")

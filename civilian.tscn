@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://cx8hrv34rb561" path="res://civilian_class.gd" id="1_vepw6"]
 [ext_resource type="PackedScene" uid="uid://ctnxymgw58y7u" path="res://civilian_body.tscn" id="2_q2tsy"]
 [ext_resource type="Script" uid="uid://cgr3gjspbc40c" path="res://ai_controller.gd" id="3_6ru8d"]
-[ext_resource type="PackedScene" uid="uid://djnb5nyt76vje" path="res://weapons/gun.tscn" id="4_q2tsy"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_q2tsy"]
 
@@ -39,7 +38,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1636962079]
 shape = SubResource("CircleShape2D_6ru8d")
 
+[node name="AimTarget" type="Node2D" parent="." unique_id=1841882381]
+
 [node name="AIController" type="Node2D" parent="." unique_id=958736565]
 script = ExtResource("3_6ru8d")
-
-[node name="Gun" parent="." unique_id=430989293 instance=ExtResource("4_q2tsy")]

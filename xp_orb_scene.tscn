@@ -1,0 +1,138 @@
+[gd_scene format=3 uid="uid://cehwj44alnvao"]
+
+[ext_resource type="Script" uid="uid://cyxqifpfmfq1j" path="res://xp_orb_scene.gd" id="1_joao7"]
+[ext_resource type="Texture2D" uid="uid://bxi84dh6biwb2" path="res://icon.svg" id="2_dxa4q"]
+[ext_resource type="Texture2D" uid="uid://b5l41ao2rixjy" path="res://light.png" id="3_kjb5f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_joao7"]
+radius = 3.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_joao7"]
+
+[node name="XpOrbScene" type="Area2D" unique_id=1119322312]
+script = ExtResource("1_joao7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=596387185]
+shape = SubResource("CircleShape2D_joao7")
+
+[node name="DefaultSprite" type="Sprite2D" parent="." unique_id=299029162]
+visible = false
+position = Vector2(-5.9604645e-08, -8.940697e-08)
+scale = Vector2(0.1186159, 0.118615896)
+texture = ExtResource("2_dxa4q")
+
+[node name="OrbSprite" type="Sprite2D" parent="." unique_id=1184572588]
+visible = false
+self_modulate = Color(0.61960787, 1, 0.52156866, 1)
+position = Vector2(2.9802326e-08, -5.9604645e-08)
+scale = Vector2(4, 4)
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="Light" type="Sprite2D" parent="OrbSprite" unique_id=295370330]
+self_modulate = Color(0.61960787, 1, 0.52156866, 1)
+position = Vector2(-1.1920929e-07, -5.9604645e-08)
+scale = Vector2(0.01, 0.01)
+texture = ExtResource("3_kjb5f")
+
+[node name="OrbSpriteInner" type="Sprite2D" parent="OrbSprite" unique_id=206428160]
+position = Vector2(1.490116e-08, 2.2351742e-08)
+scale = Vector2(0.75, 0.75)
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="BrainSprite" type="Node2D" parent="." unique_id=1736563583]
+visible = false
+
+[node name="BrainSprite4" type="Sprite2D" parent="BrainSprite" unique_id=2003247419]
+self_modulate = Color(0.2159017, 0.21590173, 0.2159017, 0.5411765)
+position = Vector2(-5.9604645e-08, 1)
+scale = Vector2(3.9999998, 3)
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="BrainSprite3" type="Sprite2D" parent="BrainSprite" unique_id=668090285]
+self_modulate = Color(0.90588236, 0.7372549, 0.6431373, 1)
+position = Vector2(-5.9604645e-08, 0)
+scale = Vector2(3.9999998, 3)
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="BrainSprite2" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=468217259]
+self_modulate = Color(0.90588236, 0.7372549, 0.6431373, 1)
+position = Vector2(0.25000006, 0.5046787)
+rotation = 1.372476
+scale = Vector2(0.48841605, 0.18076351)
+skew = -0.14481246
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="BrainSprite3" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=1483919797]
+self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
+position = Vector2(1.4901163e-08, 0.16666667)
+scale = Vector2(0.75000125, 0.06666667)
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="BrainSprite4" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=877475272]
+self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
+position = Vector2(-0.24999999, -0.110677496)
+rotation = 1.5707964
+scale = Vector2(0.55468833, 0.05000001)
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="BrainSprite7" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=1850002257]
+self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
+position = Vector2(0.30250007, -0.16666667)
+rotation = 2.2142975
+scale = Vector2(0.49027982, 0.058925573)
+skew = 0.28379393
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="BrainSprite8" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=2107014060]
+self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
+position = Vector2(-0.36083984, -0.31445313)
+rotation = 0.92729515
+scale = Vector2(0.12081363, 0.058925573)
+skew = -0.28379405
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="BrainSprite9" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=823661901]
+self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
+position = Vector2(-0.36075, -0.41000003)
+rotation = -0.92729515
+scale = Vector2(0.12081363, 0.058925573)
+skew = 0.28379393
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="BrainSprite10" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=1656597910]
+self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
+position = Vector2(1.4901163e-08, -0.29500002)
+rotation = -1.5707964
+scale = Vector2(0.4116667, 0.05000001)
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="BrainSprite11" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=78586690]
+self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
+position = Vector2(0.25000006, -0.29500002)
+rotation = -1.5707964
+scale = Vector2(0.4116667, 0.05000001)
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="BrainSprite12" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=1498433741]
+self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
+position = Vector2(1.4901163e-08, 0.16666672)
+rotation = -2.2142975
+scale = Vector2(0.3638654, 0.058925573)
+skew = -0.28379405
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="BrainSprite13" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=1727447550]
+self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
+position = Vector2(-0.058499992, 0.004666671)
+rotation = 2.2142973
+scale = Vector2(0.16041483, 0.058925565)
+skew = 0.28379405
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="BrainSprite5" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=840339211]
+self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
+position = Vector2(0, -0.37233335)
+scale = Vector2(1.0000001, 0.06666667)
+texture = SubResource("CanvasTexture_joao7")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

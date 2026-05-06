@@ -3,14 +3,16 @@ extends Node2D
 
 
 @export var burst_count := 1
-@export var burst_delay := 0.05
+@export var burst_delay := 0.15
 @export var recoil := 0.33
 @export var projectile_scene : PackedScene
 @export var fire_rate : float = 0.5
 @export var spread_degrees : float = 3.0
 @export var amount_of_projectiles : int = 1
+@export var projectile_ricochets : int = 0
+@export var projectile_damage : float = 1.0
+@export var projectile_knockback : float = 50.0
 @export var SFX : EffectManager.SFX = EffectManager.SFX.GUN
-
 
 var cooldown := 0.0
 
@@ -35,7 +37,10 @@ func fire():
 			
 			var dir = Vector2.RIGHT.rotated(global_rotation + randf_range(-spread, spread))
 			
-			bullet.global_position = global_position
+			bullet.ricochets = projectile_ricochets
+			bullet.damage = projectile_damage
+			bullet.knockback = projectile_knockback
+			bullet.global_position = $ProjectileSpawn.global_position
 			bullet.direction = dir
 			bullet.rotation = dir.angle()
 			bullet.shooter = get_parent()
@@ -55,3 +60,5 @@ func apply_recoil():
 	
 	if "velocity" in owner:
 		owner.add_impulse(Vector2.LEFT.rotated(global_rotation) * recoil * 100.0)
+	
+	owner.add_weapon_holding_radius_recoil(recoil)

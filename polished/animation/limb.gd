@@ -21,13 +21,13 @@ func _ready():
 	base_position = position
 	ground_y = base_position.y + randf_range(-2, 3)
 	
-	shadow = Sprite2D.new()
-	shadow.texture = texture
-	shadow.modulate = Color(0,0,0,0.2)
-	shadow.scale = Vector2(1.2, 0.6) #squashed shadow look
-	shadow.z_index = -1
-	get_parent().add_child(shadow)
-	_update_shadow()  # place initially
+	#shadow = Sprite2D.new()
+	#shadow.texture = texture
+	#shadow.modulate = Color(0,0,0,0.2)
+	#shadow.scale = Vector2(1.2, 0.6) #squashed shadow look
+	#shadow.z_index = -1
+	#get_parent().add_child(shadow)
+	#_update_shadow()  # place initially
 
 func _process(delta):
 	elapsed_lifetime += delta
@@ -36,8 +36,8 @@ func _process(delta):
 		elapsed_lifetime = 0.0
 		var tween = get_tree().create_tween()
 		tween.parallel().tween_property(self, "modulate:a", 0.0, 1.0)
-		tween.parallel().tween_property(shadow, "modulate:a", 0.0, 1.0)
-		tween.tween_callback(func(): shadow.queue_free(); self.queue_free())
+		#tween.parallel().tween_property(shadow, "modulate:a", 0.0, 1.0)
+		tween.tween_callback(func(): self.queue_free())
 	
 	if landed:
 		return
@@ -45,7 +45,7 @@ func _process(delta):
 	position = base_position - Vector2(0, z * 0.5)
 	rotation += rot_v * delta
 	
-	_update_shadow()
+	#_update_shadow()
 
 func _physics_process(delta):
 	if landed:
@@ -64,17 +64,17 @@ func _physics_process(delta):
 		base_position.y = ground_y
 		land()
 
-func _update_shadow():
-	var height_factor = clamp(z / 300.0, 0.0, 1.0)
-	
-	shadow.global_position = base_position + Vector2(0,0.5)
-	
-	shadow.scale = 4.0 * Vector2(
-		1.2 + 0.6 * height_factor,
-		0.6 + 0.2 * height_factor
-	)
-	
-	shadow.modulate.a = 0.0#lerp(0.3, 0.1, height_factor)
+#func _update_shadow():
+	#var height_factor = clamp(z / 300.0, 0.0, 1.0)
+	#
+	#shadow.global_position = base_position + Vector2(0,0.5)
+	#
+	#shadow.scale = 4.0 * Vector2(
+		#1.2 + 0.6 * height_factor,
+		#0.6 + 0.2 * height_factor
+	#)
+	#
+	#shadow.modulate.a = lerp(0.3, 0.1, height_factor)
 
 func land():
 	landed = true

@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://ds140tyhljkd5"]
+
+[ext_resource type="Script" uid="uid://cx8hrv34rb561" path="res://civilian_class.gd" id="1_u30r3"]
+[ext_resource type="PackedScene" uid="uid://b8w5pgk0e78k0" path="res://player_camera_2d.tscn" id="2_u30r3"]
+[ext_resource type="PackedScene" uid="uid://ctnxymgw58y7u" path="res://civilian_body.tscn" id="3_4x7rj"]
+[ext_resource type="Script" uid="uid://diwjwmjc66ghv" path="res://player_controller.gd" id="4_te7xs"]
+[ext_resource type="PackedScene" uid="uid://blggr3awog7no" path="res://weapons/rocket_launcher.tscn" id="5_u30r3"]
+[ext_resource type="PackedScene" uid="uid://db8xc3vmn7lh8" path="res://playable/agents/survivors_ui.tscn" id="6_lgodf"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_q2tsy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q2tsy"]
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ru8d"]
+radius = 4.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1jxqw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u30r3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u30r3"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lgodf"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="RocketAgent" type="CharacterBody2D" unique_id=745263233 node_paths=PackedStringArray("weapon", "controller", "playercam") groups=["Player"]]
+z_index = 1
+collision_layer = 2
+motion_mode = 1
+floor_stop_on_slope = false
+script = ExtResource("1_u30r3")
+is_player = true
+weapon = NodePath("RocketLauncher")
+controller = NodePath("PlayerController")
+playercam = NodePath("PlayerCamera2D")
+
+[node name="PlayerCamera2D" parent="." unique_id=1503368257 instance=ExtResource("2_u30r3")]
+
+[node name="EntityShadow" type="Sprite2D" parent="." unique_id=145087866]
+self_modulate = Color(0, 0, 0, 0.4)
+position = Vector2(-1.1920929e-07, 7.5)
+scale = Vector2(6, 3)
+texture = SubResource("CanvasTexture_q2tsy")
+
+[node name="CivilianBody" parent="." unique_id=1593687168 instance=ExtResource("3_4x7rj")]
+type = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=81884564]
+shape = SubResource("CircleShape2D_q2tsy")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=951490163]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1636962079]
+shape = SubResource("CircleShape2D_6ru8d")
+
+[node name="AimTarget" type="Node2D" parent="." unique_id=318763824]
+modulate = Color(0.9691122, 0.00018539965, 0.8153268, 1)
+z_index = 10
+position = Vector2(4, 0)
+scale = Vector2(1.717689, 1.717689)
+
+[node name="Sprite2D" type="Sprite2D" parent="AimTarget" unique_id=2058357288]
+visible = false
+texture = SubResource("CanvasTexture_1jxqw")
+
+[node name="PlayerController" type="Node2D" parent="." unique_id=1165073739]
+script = ExtResource("4_te7xs")
+
+[node name="RocketLauncher" parent="." unique_id=430989293 instance=ExtResource("5_u30r3")]
+
+[node name="XPMagnet" type="Area2D" parent="." unique_id=818472103]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="XPMagnet" unique_id=2058044130]
+shape = SubResource("CircleShape2D_u30r3")
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=108254272]
+offset_left = -4.0
+offset_top = 10.0
+offset_right = 75.99999
+offset_bottom = 18.205128
+scale = Vector2(0.1, 0.1)
+theme_override_styles/background = SubResource("StyleBoxFlat_u30r3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lgodf")
+value = 50.47
+show_percentage = false
+
+[node name="SurvivorsUI" parent="." unique_id=935884309 instance=ExtResource("6_lgodf")]
