@@ -4,6 +4,8 @@ var damage : float = 0.0
 var radius : float = 0.0
 var knockback : float = 0.0
 
+var shooter
+
 func _ready():
 	await get_tree().physics_frame
 	EffectManager.spawn_explosion_particle_effect(global_position)
@@ -17,7 +19,7 @@ func _ready():
 		
 		var distance_from_center_factor = lerp(1.0, 0.1, t)
 		
-		if body is Civilian:
+		if body is Civilian and body != shooter:
 			var dir = (body.global_position - global_position).normalized()
 			
 			body.hit(damage * 2.0 * distance_from_center_factor)

@@ -11,9 +11,26 @@ var is_alive : bool = true
 @export var controller : Node
 @export var playercam : Node
 
-const MOVESPEED : float = 50.0
+@export var bouncy_projectiles : bool = false
+
+
+var speed : float = 65.0
 const SPRINT_MOD : float = 2.0
+
+var knockback_mod : float = 0.0
+var ricochet_mod : int = 0
+var burst_mod : int = 0
+var amount_mod : int = 0
+var spread_degrees_mod : float = 0.0
+var accuracy_mod : float = 0.0 # weapon spread degrees *= 1 - accuracy_mod. range from 0 to 1
+var damage_mod : float = 0.0 # as % increase
+var area_mod : float = 0.0 # as % increase
+var fire_rate_mod : float = 0.0 # as % reduction
+
+var max_hp = 3.0
 var hp : float = 3.0
+var regen : float = 0.1 #per second
+var luck
 
 var xp_reward : int = 1
 
@@ -36,11 +53,18 @@ func hit(dmg : float):
 	flash_color()
 	
 	hp -= dmg
+	
 	if hp <= 0.0 and is_alive:
 		kill()
 
-func change_player_hp():
-	pass
+func update_player_hp():
+	if !is_player:
+		return
+	
+	#healthbar color logic etc
+	$HealthBar.modulate = Color.RED
+	
+	$HealthBar.value = (hp / max_hp) * 100.0
 
 var xp_orb_scene = preload("res://xp_orb_scene.tscn")
 
@@ -52,18 +76,22 @@ func kill():
 	
 	var current_scene = get_tree().get_current_scene()
 	
-	var xp_orb_instance = xp_orb_scene.instantiate()
-	xp_orb_instance.value = xp_reward
-	xp_orb_instance.global_position = global_position
-	xp_orb_instance.team = current_scene.enemy_team
-	current_scene.find_child("GameObjects").call_deferred("add_child", xp_orb_instance) #spawn XP orb
+	if randf_range(0.0,1.0) > 0.5:
+		var xp_orb_instance = xp_orb_scene.instantiate()
+		xp_orb_instance.value = xp_reward
+		xp_orb_instance.global_position = global_position
+		xp_orb_instance.team = current_scene.enemy_team
+		current_scene.find_child("GameObjects").call_deferred("add_child", xp_orb_instance) #spawn XP orb
 	
 	get_tree().get_first_node_in_group("Player").award_xp(xp_reward * 0.1) #to give 10% of XP to player on kill
 	
 	$CivilianBody.die()
-	$EntityShadow.queue_free()
-	$CollisionShape2D.queue_free()
-	$Area2D.queue_free()
+	queue_free()
+
+#func _draw() -> void:
+	#if !is_player:
+		#return
+	#draw_line(weapon.position, aim_dir * 300.0, Color.RED)
 
 var aim_deadzone : float = 0.1
 var weapon_scale_flip_deadzone := 0.1
@@ -86,11 +114,15 @@ func add_weapon_holding_radius_recoil(recoil: float):
 	
 	# push backward + jitter
 	recoil_offset += (-dir + rand) * recoil * 6.0
+	
 
-func attacks():
-	var aim_dir = controller.get_aim_direction()
-	if aim_dir.length() > aim_deadzone:
-		#aim_dir = aim_dir.normalized() #perfect circle
+var aim_dir : Vector2 = Vector2.RIGHT
+
+func attacks(_delta):
+	var raw_aim_dir = controller.get_aim_direction()
+	
+	if raw_aim_dir.length() > aim_deadzone:
+		aim_dir = aim_dir.lerp(raw_aim_dir, _delta * 10.0)
 		
 		var base = aim_dir * weapon_holding_radius + Vector2.UP
 		
@@ -110,12 +142,19 @@ func attacks():
 	if controller.is_shooting():
 		weapon.try_fire()
 
+var regen_interval : float = 0.0
 func _physics_process(delta: float) -> void:
 	if !is_alive or Global.paused:
 		return
 	
 	if is_player:
-		attacks()
+		attacks(delta)
+		
+		regen_interval += delta
+		if regen_interval >= 1.0:
+			regenerate_hp()
+			regen_interval = 0.0
+		
 	
 	recoil_offset = recoil_offset.lerp(Vector2.ZERO, delta * 20.0)
 	
@@ -128,16 +167,26 @@ func _physics_process(delta: float) -> void:
 	calculate_shadow()
 	
 	move_and_slide()
+	
+	
+	update_player_hp()
+	
+
+func regenerate_hp():
+	if !is_player:
+		return
+	hp += regen
 
 func movement(delta):
 	var input_dir = controller.get_movement_direction_as_vector()
-	var target_velocity = input_dir * MOVESPEED * (SPRINT_MOD if (controller.is_sprinting() or always_sprinting) else 1.0)
+	var target_velocity = input_dir * speed#dw * (SPRINT_MOD if (controller.is_sprinting() or always_sprinting) else 1.0)
 	
-	velocity = velocity.move_toward(target_velocity, MOVESPEED * responsiveness * delta)
+	velocity = velocity.move_toward(target_velocity, speed * responsiveness * delta)
 	
 	$CivilianBody.animate(delta, velocity)
 
 func collisions():
+	
 	var push : Vector2 = Vector2.ZERO
 	var bodies = $Area2D.get_overlapping_bodies()
 	var count : int = min(bodies.size(), 6)
@@ -166,10 +215,11 @@ func collisions():
 	if push.length() < 0.05:
 		push = Vector2.ZERO
 	
+	
 	add_impulse(push * 10.0)
 	
 	if push != Vector2.ZERO:
-		velocity *= 0.7
+		velocity *= 0.7 if !is_player else 0.85
 
 func add_impulse(force: Vector2):
 	if is_player:

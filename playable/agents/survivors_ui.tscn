@@ -3,16 +3,41 @@
 [ext_resource type="Script" uid="uid://dtlgrjbthlk85" path="res://survivorsUI.gd" id="1_3nh1f"]
 [ext_resource type="Script" uid="uid://c26h5hax6usk0" path="res://level_options.gd" id="2_lgh0a"]
 [ext_resource type="Script" uid="uid://db2t2p057r52k" path="res://item_stacker.gd" id="2_wful3"]
-[ext_resource type="PackedScene" uid="uid://bhh0hrhvyws1u" path="res://upgrades/amount_up.tscn" id="3_wful3"]
-[ext_resource type="PackedScene" uid="uid://cmhm542o3il4m" path="res://upgrades/burst_up.tscn" id="4_rvqbc"]
-[ext_resource type="PackedScene" uid="uid://cpyf1kfr5hfqp" path="res://upgrades/rubber_bullets.tscn" id="5_rj3ut"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wwd38"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yqk6d"]
 bg_color = Color(1, 1, 1, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wful3"]
+bg_color = Color(0, 1, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.122, 0.122, 0.122, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rvqbc"]
+bg_color = Color(0, 1, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.122, 0.122, 0.122, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lgh0a"]
+bg_color = Color(1, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.122, 0.122, 0.122, 1)
+
 [sub_resource type="Theme" id="Theme_8bins"]
+Button/styles/disabled = null
+Button/styles/focus = SubResource("StyleBoxFlat_wful3")
+Button/styles/hover = SubResource("StyleBoxFlat_rvqbc")
+Button/styles/normal = SubResource("StyleBoxFlat_lgh0a")
 
 [node name="SurvivorsUI" type="Control" unique_id=935884309]
 layout_mode = 3
@@ -100,15 +125,6 @@ size_flags_vertical = 0
 theme_override_constants/separation = 60
 alignment = 1
 
-[node name="AmountUp" parent="LevelUpLayer/LevelUpOptions" unique_id=270019535 instance=ExtResource("3_wful3")]
-layout_mode = 2
-
-[node name="BurstUp" parent="LevelUpLayer/LevelUpOptions" unique_id=1915934967 instance=ExtResource("4_rvqbc")]
-layout_mode = 2
-
-[node name="RubberBullets" parent="LevelUpLayer/LevelUpOptions" unique_id=1637849664 instance=ExtResource("5_rj3ut")]
-layout_mode = 2
-
 [node name="LevelUpButtons" type="HBoxContainer" parent="LevelUpLayer" unique_id=991478232]
 anchors_preset = 8
 anchor_left = 0.5
@@ -136,6 +152,7 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
 theme = SubResource("Theme_8bins")
+action_mode = 0
 
 [node name="Control2" type="Control" parent="LevelUpLayer/LevelUpButtons" unique_id=202048344]
 layout_mode = 2
@@ -146,6 +163,7 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
 theme = SubResource("Theme_8bins")
+action_mode = 0
 
 [node name="Control3" type="Control" parent="LevelUpLayer/LevelUpButtons" unique_id=195846215]
 layout_mode = 2
@@ -156,6 +174,7 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
 theme = SubResource("Theme_8bins")
+action_mode = 0
 
 [node name="Control4" type="Control" parent="LevelUpLayer/LevelUpButtons" unique_id=1905738040]
 visible = false
@@ -167,6 +186,7 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
 theme = SubResource("Theme_8bins")
+action_mode = 0
 
 [node name="BonusLoot" type="CanvasLayer" parent="." unique_id=879837510]
 layer = 11

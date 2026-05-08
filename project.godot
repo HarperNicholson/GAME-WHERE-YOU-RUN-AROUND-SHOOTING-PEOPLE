@@ -28,6 +28,7 @@ Global="*uid://dybatcgd4wnbx"
 [global_group]
 
 Player=""
+Targetable=""
 
 [input]
 

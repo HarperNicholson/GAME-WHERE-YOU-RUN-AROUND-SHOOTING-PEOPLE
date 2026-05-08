@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://ncjggmkyw46k"]
+
+[ext_resource type="Script" uid="uid://btl3mj32raxnw" path="res://mainmenu.gd" id="1_cmhrf"]
+
+[node name="Mainmenu" type="Node2D" unique_id=1696680864]
+script = ExtResource("1_cmhrf")
+
+[node name="Control" type="Control" parent="." unique_id=1399270664]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control" unique_id=92778167]
+layout_mode = 0
+offset_left = 186.0
+offset_top = 104.0
+offset_right = 248.0
+offset_bottom = 127.0
+text = "AGENTS"
+
+[node name="Label2" type="Label" parent="Control" unique_id=2041373192]
+layout_mode = 0
+offset_left = 885.0
+offset_top = 104.0
+offset_right = 947.0
+offset_bottom = 127.0
+text = "ALIENS"
+
+[node name="AgentsTeamButton" type="Button" parent="Control" unique_id=2143084417]
+layout_mode = 0
+offset_left = 133.0
+offset_top = 531.0
+offset_right = 334.0
+offset_bottom = 608.0
+
+[node name="AliensTeamButton" type="Button" parent="Control" unique_id=1567424634]
+layout_mode = 0
+offset_left = 824.0
+offset_top = 536.0
+offset_right = 1028.0
+offset_bottom = 608.0
+
+[connection signal="pressed" from="Control/AgentsTeamButton" to="." method="_on_agents_team_button_pressed"]
+[connection signal="pressed" from="Control/AliensTeamButton" to="." method="_on_aliens_team_button_pressed"]

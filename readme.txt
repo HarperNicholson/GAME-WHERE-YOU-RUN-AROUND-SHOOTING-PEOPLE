@@ -1,44 +1,50 @@
-movespeed +
+setup full steam integration + steam input (deck compat) + aspect ratios / UI layout stuff
 
-auto aim toggle
 
-button stylebox
+levelups must have unique options only, and level up amounts are limited if options are limited
 
-auto aim + controller menu support
+flying speed animate
+multi-class upgrade (give secondary weapon/drone)
 
-player select menu
+
+
+
+laser sight (points laser from end of weapon, +25% crit chance, reduced spread by 5%)
+shield item
+laser net weapon
+aliens laser gun
+evolutions (weapons + upgrades combine, this is where survivors really shines)
+powerups
+powerup upgrades (meta progression)
+permanent character upgrades (meta progression)
+upgrade the game (meta progression)
+
+enemy waves / move types
+most enemies just walk toward you
+enemy recycler / spawner
+
+team/player select menu
 
 firerate up
-knockback up?
-
-when using multiple weapons: make player hold the modified stats instead of the weapon
-
-rocket ricochet
-
-rubber bullets (bouncy): -75% damage, 2x +2 ricochet
-
-laser net weapon
+knockback up
 
 
-wave controls
+rubber bullets class (bouncy): -75% damage, 2x +2 ricochet
 
-aliens laser gun
 
 full loop prototype + store page start by 14th
 
-little wisp of smoke effect
-
-demo
-
 2 songs
 
-
-healthbars 
+breakable objects with rare chance to spawn powerups
+looooots of feewdback when you level up
+fix brain graphic, orb sound, rename brain
+limb dismembering on shoot...
 dmg numbers
 
-fix brain graphic, orb sound, rename brain
 
 ----------------------------NON ESSENTIAL FOR SURVIVORS MODE:
+random names
 
 pass position to audiostream
 
@@ -53,8 +59,9 @@ joystick aim
 
 vehicles as player types?
 
-factor knockback into limbs on death
 
+
+factor knockback into limbs on death
 
 
 
@@ -68,4 +75,29 @@ just realized better way to do shadows. subviewport + skew
 ...maybe
 
 guts, bones...
-limb dismembering on shoot...
+
+
+--"I AM JESUS CHRIST. GOD NEEDS BLOOD. GOD HAS SPOKEN. 
+I AM HIM. HE SPEAKS THROUGH ME. I MUST FILL THE CUP. 
+DO NOT SPILL THE BLOOD OF CHRIST. HE DEMANDS SACRIFICE. 
+THE EARTH MUST DRINK FROM THAT WHICH IS THE DEVIL ITSELF --AND SWALLOW.
+ THE DEVIL MUST BE LIQUID AND FLOW BACK TO HIS DOMAIN. 
+YOU ARE HIS LIFEBLOOD IN ITS SOLID STATE AND MUST BOIL. 
+YOU ARE THE CLOTTED ARTERIES OF GOD AND WILL BE BLOODLET. 
+MANKIND IS A PLAGUE-- BREATHING HELL INTO EVERY CORNER OF THE ROTTED EARTH."
+
+co-op
+lots of cryptid types, world to explore, gamemodes/freeroam like stick it to the stickman
+side scroller arcade mode
+and moreand more
+
+Aliens / area 51 game. Different classes etc. MELEE GIANT would be fun AF 
+
+"Agents and Aliens"
+
+advance to wilder weaponry / styles and machines (attack helicopter)
+
+except more open ended like minecraft or gta?
+expand until the title of the game "game where you run around killing people" doesnt even make sense
+
+controller aim? not necessary in current state

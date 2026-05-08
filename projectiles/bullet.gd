@@ -5,7 +5,6 @@ func _physics_process(delta):
 	distance_cull_check()
 
 
-var last_hit
 
 func _on_body_entered(body):
 	if has_hit:

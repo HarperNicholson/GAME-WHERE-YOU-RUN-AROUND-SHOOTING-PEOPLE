@@ -41,12 +41,14 @@ position = Vector2(20.000002, 9)
 scale = Vector2(7.9999995, 12)
 texture = SubResource("CanvasTexture_f13q1")
 
-[node name="Sprite2D" type="Sprite2D" parent="Panel" unique_id=777173080]
+[node name="Node2D" type="Node2D" parent="Panel" unique_id=715113616]
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/Node2D" unique_id=777173080]
 position = Vector2(20, 20)
 scale = Vector2(1, 6)
 texture = SubResource("CanvasTexture_1xx0f")
 
-[node name="Sprite2D3" type="Sprite2D" parent="Panel" unique_id=174931663]
+[node name="Sprite2D3" type="Sprite2D" parent="Panel/Node2D" unique_id=174931663]
 position = Vector2(20, 20)
 rotation = 1.5707964
 scale = Vector2(1, 6)

@@ -2,4 +2,4 @@ extends Item
 
 
 func given_to_player():
-	get_tree().get_first_node_in_group("Player").weapon.burst_count += 1
+	get_tree().get_first_node_in_group("Player").burst_mod += 1

@@ -6,9 +6,6 @@ var levelups : int = 0
 
 var options : Array = []
 
-func _ready() -> void:
-	call_deferred("refresh")
-
 func refresh():
 	options.clear()
 	
@@ -29,6 +26,8 @@ func refresh():
 		$LevelUpButtons.get_child(i).show()
 		
 		$LevelUpOptions.add_child(option)
+	
+	$"LevelUpButtons/Control/0".grab_focus()
 
 func selected(button):
 	

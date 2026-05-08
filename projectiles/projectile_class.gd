@@ -18,6 +18,10 @@ var bouncy : bool = false
 
 var ricochets : int = 0
 
+var last_hit
+
+var area_mod : float = 0.0
+
 func _ready():
 	body_entered.connect(_on_body_entered)
 	if bouncy:

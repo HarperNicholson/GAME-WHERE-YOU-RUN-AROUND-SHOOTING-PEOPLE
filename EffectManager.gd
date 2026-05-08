@@ -85,7 +85,7 @@ var particle_amount_mult : int = 1
 var pool_size := 10
 var pool : Array[AudioStreamPlayer2D] = []
 var pool_index := 0
-
+var pool_initialized : bool = false
 
 func _ready():
 	await get_tree().process_frame
@@ -93,9 +93,12 @@ func _ready():
 		var p = AudioStreamPlayer2D.new()
 		AudioPool.add_child(p)
 		pool.append(p)
+	pool_initialized = true
 
 
 func play_sound_effect(effect : SFX, effect_global_position : Vector2):
+	if !pool_initialized:
+		return
 	var player = pool[pool_index]
 	pool_index = (pool_index + 1) % pool_size
 	

@@ -1,0 +1,161 @@
+[gd_scene format=3 uid="uid://dqtiwcsbvq7b3"]
+
+[ext_resource type="Script" uid="uid://fa7inlsd1mpt" path="res://upgrades/regen_up.gd" id="1_cbbdp"]
+[ext_resource type="Theme" uid="uid://byosmhxx70y8p" path="res://new_theme.tres" id="2_4mscn"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_aw3h7"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_4mscn"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_cbbdp"]
+
+[node name="RegenUp" type="Control" unique_id=1637849664]
+layout_mode = 3
+anchors_preset = 0
+focus_mode = 2
+script = ExtResource("1_cbbdp")
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="Panel" parent="." unique_id=448079541]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Character" type="Node2D" parent="Panel" unique_id=462269321]
+position = Vector2(20, 20)
+scale = Vector2(8, 8)
+
+[node name="Head" type="Sprite2D" parent="Panel/Character" unique_id=1778560936]
+position = Vector2(0, -1.25)
+texture = SubResource("CanvasTexture_aw3h7")
+
+[node name="Pants" type="Sprite2D" parent="Panel/Character" unique_id=1979219972]
+position = Vector2(0, 0.25)
+texture = SubResource("CanvasTexture_aw3h7")
+
+[node name="LegR" type="Sprite2D" parent="Panel/Character/Pants" unique_id=992730627]
+position = Vector2(-0.25, 0.5)
+rotation = 0.5235988
+scale = Vector2(0.5, 1)
+texture = SubResource("CanvasTexture_aw3h7")
+offset = Vector2(0, 0.5)
+
+[node name="LegL" type="Sprite2D" parent="Panel/Character/Pants" unique_id=1551483325]
+position = Vector2(0.25, 0.5)
+rotation = -0.5235988
+scale = Vector2(0.5, 1)
+texture = SubResource("CanvasTexture_aw3h7")
+offset = Vector2(0, 0.5)
+
+[node name="Shirt" type="Sprite2D" parent="Panel/Character" unique_id=1418781230]
+position = Vector2(0, -0.25)
+texture = SubResource("CanvasTexture_aw3h7")
+
+[node name="ArmR" type="Sprite2D" parent="Panel/Character/Shirt" unique_id=366188021]
+position = Vector2(0.5, -0.25)
+rotation = 0.7853982
+scale = Vector2(1, 0.5)
+texture = SubResource("CanvasTexture_aw3h7")
+offset = Vector2(0.5, 0)
+
+[node name="ArmL" type="Sprite2D" parent="Panel/Character/Shirt" unique_id=978785287]
+position = Vector2(-0.5, -0.25)
+rotation = -0.7853982
+scale = Vector2(1, 0.5)
+texture = SubResource("CanvasTexture_aw3h7")
+offset = Vector2(-0.5, 0)
+
+[node name="Heart" type="Node2D" parent="Panel" unique_id=1969371045]
+position = Vector2(20, 20)
+scale = Vector2(0.2, 0.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/Heart" unique_id=782963471]
+self_modulate = Color(1, 0, 0, 1)
+position = Vector2(-1.9073486e-06, -3.5)
+scale = Vector2(32, 11)
+texture = SubResource("CanvasTexture_4mscn")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Panel/Heart" unique_id=534144538]
+self_modulate = Color(1, 0, 0, 1)
+position = Vector2(0, 0.5)
+scale = Vector2(24, 11)
+texture = SubResource("CanvasTexture_4mscn")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Panel/Heart" unique_id=1242993994]
+self_modulate = Color(1, 0, 0, 1)
+position = Vector2(0, 6)
+scale = Vector2(16, 8)
+texture = SubResource("CanvasTexture_4mscn")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Panel/Heart" unique_id=536580031]
+self_modulate = Color(1, 0, 0, 1)
+position = Vector2(0, 12)
+scale = Vector2(8, 3.9999998)
+texture = SubResource("CanvasTexture_4mscn")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Panel/Heart" unique_id=112205819]
+self_modulate = Color(1, 0, 0, 1)
+position = Vector2(7, -11)
+scale = Vector2(9.999999, 4.0000005)
+texture = SubResource("CanvasTexture_4mscn")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Panel/Heart" unique_id=2071326019]
+self_modulate = Color(1, 0, 0, 1)
+position = Vector2(-7, -11)
+scale = Vector2(9.999999, 4.0000005)
+texture = SubResource("CanvasTexture_4mscn")
+
+[node name="Label" type="Label" parent="Panel" unique_id=1587723781]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2_4mscn")
+horizontal_alignment = 2
+vertical_alignment = 2
+metadata/_edit_lock_ = true
+
+[node name="Plus" type="Sprite2D" parent="Panel" unique_id=262236694]
+position = Vector2(30, 27)
+scale = Vector2(1, 6)
+texture = SubResource("CanvasTexture_cbbdp")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Panel/Plus" unique_id=1346747610]
+rotation = 1.5707966
+scale = Vector2(0.16666667, 6)
+texture = SubResource("CanvasTexture_cbbdp")
+
+[node name="Plus2" type="Sprite2D" parent="Panel" unique_id=940169824]
+position = Vector2(8, 15)
+scale = Vector2(1, 6)
+texture = SubResource("CanvasTexture_cbbdp")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Panel/Plus2" unique_id=1197071549]
+rotation = 1.5707966
+scale = Vector2(0.16666667, 6)
+texture = SubResource("CanvasTexture_cbbdp")
+
+[node name="Plus3" type="Sprite2D" parent="Panel" unique_id=272535486]
+position = Vector2(30, 8)
+scale = Vector2(1, 6)
+texture = SubResource("CanvasTexture_cbbdp")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Panel/Plus3" unique_id=2143884824]
+rotation = 1.5707966
+scale = Vector2(0.16666667, 6)
+texture = SubResource("CanvasTexture_cbbdp")
