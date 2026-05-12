@@ -1,9 +1,20 @@
 setup full steam integration + steam input (deck compat) + aspect ratios / UI layout stuff
 
+reduced tick rate for offscreen
 
-levelups must have unique options only, and level up amounts are limited if options are limited
+fix window scaling
 
-flying speed animate
+MVP: 
+backgrounds
+multi classing, 
+character select menu, 
+enemy spawner, 
+difficulty scale with time (enemy HP/damage/new color of xps)
+music, 
+store page approval)
+
+fast baby enemies
+
 multi-class upgrade (give secondary weapon/drone)
 
 
@@ -42,6 +53,7 @@ fix brain graphic, orb sound, rename brain
 limb dismembering on shoot...
 dmg numbers
 
+shell casing particle effect -- will require higher resolution on background textures. which means scaling up all physical objects
 
 ----------------------------NON ESSENTIAL FOR SURVIVORS MODE:
 random names
@@ -59,7 +71,7 @@ joystick aim
 
 vehicles as player types?
 
-
+COD ZOMBIES TYPE MODE WOULD BE FUN AF
 
 factor knockback into limbs on death
 

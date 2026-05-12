@@ -33,7 +33,7 @@ func _on_area_entered(area: Area2D) -> void:
 		var t := 0.0
 		
 		while true:
-			var delta = get_process_delta_time()
+			var delta = get_physics_process_delta_time()
 			t += delta
 			
 			

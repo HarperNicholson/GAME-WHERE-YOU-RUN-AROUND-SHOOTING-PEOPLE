@@ -17,6 +17,7 @@ var drag_offset : float = 0.0
 var tilt_from_velocity : float = 0.0
 var was_moving : bool = false
 var holding_weapon : bool = false
+var flying : bool = false
 
 @onready var base_head_y : float = $Head.position.y
 @onready var base_pants_y : float = $Pants.position.y
@@ -72,6 +73,11 @@ func animate(delta, velocity):
 		anim_time = 0.0
 	
 	
+	if factor >= 0.99:
+		flying = true
+	else:
+		flying = false
+	
 	was_moving = moving
 	
 	if get_parent().weapon != null:
@@ -82,16 +88,29 @@ func animate(delta, velocity):
 	
 	if moving:
 		var t = anim_time * anim_speed
-		
-		smooth_rot($Pants/LegL, sin(t) + tilt_from_velocity, delta)
-		smooth_rot($Pants/LegR, sin(t + PI) + tilt_from_velocity, delta)
-		
-		if holding_weapon:
-			point_to_weapon($Shirt/ArmL, true)
-			point_to_weapon($Shirt/ArmR)
+		if flying:
+			smooth_rot($Pants/LegL, sin(t) / 4 + tilt_from_velocity * deg_to_rad(180.0), delta)
+			smooth_rot($Pants/LegR, sin(t + PI) / 4 + tilt_from_velocity * deg_to_rad(180.0), delta)
+			
+			if holding_weapon:
+				point_to_weapon($Shirt/ArmL, true)
+				point_to_weapon($Shirt/ArmR)
+			else:
+				smooth_rot($Shirt/ArmL, sin(t) / 4 * swing - PI/3 + tilt_from_velocity * deg_to_rad(180.0), delta)
+				smooth_rot($Shirt/ArmR, sin(t + PI) / 4 * swing + PI/3 + tilt_from_velocity * deg_to_rad(180.0), delta)
+			
+			
 		else:
-			smooth_rot($Shirt/ArmL, sin(t) * swing - PI/3 + tilt_from_velocity, delta)
-			smooth_rot($Shirt/ArmR, sin(t + PI) * swing + PI/3 + tilt_from_velocity, delta)
+			smooth_rot($Pants/LegL, sin(t) + tilt_from_velocity, delta)
+			smooth_rot($Pants/LegR, sin(t + PI) + tilt_from_velocity, delta)
+			
+			if holding_weapon:
+				point_to_weapon($Shirt/ArmL, true)
+				point_to_weapon($Shirt/ArmR)
+			else:
+				smooth_rot($Shirt/ArmL, sin(t) * swing - PI/3 + tilt_from_velocity, delta)
+				smooth_rot($Shirt/ArmR, sin(t + PI) * swing + PI/3 + tilt_from_velocity, delta)
+		
 		
 	else:
 		var breathe = sin(anim_time * 3.0) * 0.20
@@ -107,9 +126,9 @@ func animate(delta, velocity):
 		smooth_rot($Pants/LegR, PI * 0.05 + breathe / 2, delta)
 	
 	#HOP
-	var wave = sin(anim_time * max_hop_speed)
+	var wave = sin(anim_time * max_hop_speed / (1 + int(flying)))
 	
-	position.y = -abs(wave) * hop_amp
+	position.y = -abs(wave) * hop_amp# if flying == false else lerp(position.y, -abs(wave) * hop_amp, delta * 6.0)
 
 func point_to_weapon(arm: Node2D, flip : bool = false):
 	var dir = weapon_to_point_toward.global_position - arm.global_position

@@ -4,6 +4,7 @@ var paused : bool = false
 var levelup_options : int = 3
 var levelup_rerolls : int = 0
 var player : CharacterBody2D
+var player_position : Vector2 = Vector2.ZERO
 
 enum ITEMS {
 	AMOUNT_UP, 

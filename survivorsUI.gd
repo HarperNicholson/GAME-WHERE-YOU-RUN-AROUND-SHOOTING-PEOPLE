@@ -21,7 +21,7 @@ func change_xp(amount):
 	#$XPMeter ranges from 0.0 - 100.0
 	
 	var percent = player_xp / xp_required
-	$XPMeter.value = percent * 100.0
+	$BaseLayer/XPMeter.value = percent * 100.0
 
 func level_up():
 	level += 1
@@ -29,6 +29,6 @@ func level_up():
 	$LevelUpLayer.show()
 	$"LevelUpLayer/LevelUpButtons/Control/0".grab_focus()
 	
-	$LevelLabel.text = "Level " + str(level)
+	$BaseLayer/LevelLabel.text = "Level " + str(level)
 	xp_required *= 1.2
 	Global.paused = true

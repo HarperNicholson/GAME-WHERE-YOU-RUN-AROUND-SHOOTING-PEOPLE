@@ -1,6 +1,7 @@
 class_name Civilian
 extends CharacterBody2D
-
+var visible_on_screen : bool = true
+var update_rate : float = 1.0
 
 @export var responsiveness : float = 10.0
 @export var always_sprinting : bool = false
@@ -43,7 +44,7 @@ var elite : bool = false #triple HP, double size, half speed or something
 func give_item(item : Global.ITEMS):
 	var item_instance = Global.item_scenes[item].instantiate()
 	item_instance.item_id = item
-	$SurvivorsUI/Items.add_child(item_instance)
+	$SurvivorsUI/BaseLayer/Items.add_child(item_instance)
 	item_instance.given_to_player()
 
 func hit(dmg : float):
@@ -99,8 +100,9 @@ var weapon_scale_flip_deadzone := 0.1
 var weapon_holding_radius : float = 4.0
 
 var recoil_offset := Vector2.ZERO
+var aim_dir : Vector2 = Vector2.RIGHT
 func add_weapon_holding_radius_recoil(recoil: float):
-	var aim_dir = controller.get_aim_direction()
+	aim_dir = controller.get_aim_direction()
 	if aim_dir == Vector2.ZERO:
 		return
 	
@@ -116,9 +118,11 @@ func add_weapon_holding_radius_recoil(recoil: float):
 	recoil_offset += (-dir + rand) * recoil * 6.0
 	
 
-var aim_dir : Vector2 = Vector2.RIGHT
 
 func attacks(_delta):
+	if !visible_on_screen:
+		return
+	
 	var raw_aim_dir = controller.get_aim_direction()
 	
 	if raw_aim_dir.length() > aim_deadzone:
@@ -148,21 +152,29 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	if is_player:
+		Global.player_position = global_position
+		
+		
+		
 		attacks(delta)
+		
 		
 		regen_interval += delta
 		if regen_interval >= 1.0:
 			regenerate_hp()
 			regen_interval = 0.0
-		
+			
 	
-	recoil_offset = recoil_offset.lerp(Vector2.ZERO, delta * 20.0)
 	
+	if visible_on_screen:
+		recoil_offset = recoil_offset.lerp(Vector2.ZERO, delta * 20.0)
+	else:
+		recoil_offset = Vector2.ZERO
 	
 	
 	
 	movement(delta)
-	collisions()
+	collisions(delta)
 	
 	calculate_shadow()
 	
@@ -170,7 +182,6 @@ func _physics_process(delta: float) -> void:
 	
 	
 	update_player_hp()
-	
 
 func regenerate_hp():
 	if !is_player:
@@ -178,14 +189,21 @@ func regenerate_hp():
 	hp += regen
 
 func movement(delta):
-	var input_dir = controller.get_movement_direction_as_vector()
-	var target_velocity = input_dir * speed#dw * (SPRINT_MOD if (controller.is_sprinting() or always_sprinting) else 1.0)
-	
-	velocity = velocity.move_toward(target_velocity, speed * responsiveness * delta)
-	
-	$CivilianBody.animate(delta, velocity)
+	if visible_on_screen:
+		var input_dir = controller.get_movement_direction_as_vector()
+		var target_velocity = input_dir * speed#dw * (SPRINT_MOD if (controller.is_sprinting() or always_sprinting) else 1.0)
+		
+		velocity = velocity.move_toward(target_velocity, speed * responsiveness * delta)
+		
+		$CivilianBody.animate(delta, velocity)
+	else:
+		var input_dir = controller.get_movement_direction_as_vector()
+		velocity = input_dir * speed
 
-func collisions():
+func collisions(_delta):
+	if !visible_on_screen:
+		return
+	
 	
 	var push : Vector2 = Vector2.ZERO
 	var bodies = $Area2D.get_overlapping_bodies()
@@ -219,7 +237,7 @@ func collisions():
 	add_impulse(push * 10.0)
 	
 	if push != Vector2.ZERO:
-		velocity *= 0.7 if !is_player else 0.85
+		velocity = lerp(velocity, velocity * (Vector2.ONE * 0.6 if !is_player else 0.85), _delta * 20.0)
 
 func add_impulse(force: Vector2):
 	if is_player:
@@ -227,6 +245,9 @@ func add_impulse(force: Vector2):
 	velocity += force
 
 func calculate_shadow():
+	if !visible:
+		return
+	
 	var hop_factor : float = clampf(-$CivilianBody.position.y / $CivilianBody.max_hop_anim_height, 0.0, 1.0)
 	var default_shadow_scale : Vector2 = Vector2(6.0,3.0)
 	var default_shadow_alpha : float = 0.4
@@ -238,3 +259,16 @@ func flash_color(color_to_flash_to : Color = Color.RED):
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "modulate", color_to_flash_to, 0.05)
 	tween.tween_property(self, "modulate", Color.WHITE, 0.1)
+
+
+func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	return
+	
+	visible_on_screen = true
+	
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	return
+	visible_on_screen = false
+	

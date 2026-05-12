@@ -71,7 +71,6 @@ texture = SubResource("CanvasTexture_1jxqw")
 script = ExtResource("4_te7xs")
 
 [node name="RocketLauncher" parent="." unique_id=430989293 instance=ExtResource("5_u30r3")]
-spread_degrees = 8.0
 
 [node name="XPMagnet" type="Area2D" parent="." unique_id=818472103]
 

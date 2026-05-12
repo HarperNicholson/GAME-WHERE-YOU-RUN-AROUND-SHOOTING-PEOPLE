@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" uid="uid://nnqliyjiq857" path="res://game.gd" id="1_80nbo"]
 [ext_resource type="PackedScene" uid="uid://dymb5bb7cy85r" path="res://civilian.tscn" id="2_e2o6t"]
-[ext_resource type="PackedScene" uid="uid://ds140tyhljkd5" path="res://playable/agents/rocket_agent.tscn" id="3_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://ds140tyhljkd5" path="res://playable/agents/rocket_agent.tscn" id="4_7jktm"]
 [ext_resource type="Texture2D" uid="uid://d3j28emlel3d1" path="res://grid.jpg" id="4_fc0e3"]
+[ext_resource type="Script" uid="uid://r0jx3kf0f4wh" path="res://enemy_spawner.gd" id="4_ryrav"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ryrav"]
 viewport_path = NodePath("PersistentFlatEffects")
@@ -20,30 +21,35 @@ script = ExtResource("1_80nbo")
 
 [node name="AudioPool" type="Node2D" parent="." unique_id=2098219275]
 y_sort_enabled = true
+metadata/_edit_lock_ = true
 
 [node name="Grid" type="Sprite2D" parent="." unique_id=1240839264]
 modulate = Color(0.67, 0.35644, 0.18759999, 1)
 z_index = -10
 texture_filter = 1
 texture = ExtResource("4_fc0e3")
+metadata/_edit_lock_ = true
 
 [node name="PersistentFlatEffectsTexture" type="Sprite2D" parent="." unique_id=625018878]
 z_index = -7
 texture_filter = 1
 position = Vector2(100, 100)
 texture = SubResource("ViewportTexture_ryrav")
+metadata/_edit_lock_ = true
 
 [node name="PersistentShadowsTexture" type="Sprite2D" parent="." unique_id=1963045960]
 z_index = -6
 texture_filter = 1
 position = Vector2(100, 100)
 texture = SubResource("ViewportTexture_7jktm")
+metadata/_edit_lock_ = true
 
 [node name="PersistentSolidsTexture" type="Sprite2D" parent="." unique_id=2117049111]
 z_index = -5
 texture_filter = 1
 position = Vector2(100, 100)
 texture = SubResource("ViewportTexture_fc0e3")
+metadata/_edit_lock_ = true
 
 [node name="PersistentFlatEffects" type="SubViewport" parent="." unique_id=1503967719]
 disable_3d = true
@@ -56,6 +62,7 @@ render_target_update_mode = 4
 [node name="Node2D" type="Node2D" parent="PersistentFlatEffects" unique_id=1455950600]
 y_sort_enabled = true
 texture_filter = 1
+metadata/_edit_lock_ = true
 
 [node name="PersistentShadows" type="SubViewport" parent="." unique_id=1035600063]
 disable_3d = true
@@ -68,6 +75,7 @@ render_target_update_mode = 4
 [node name="Node2D" type="Node2D" parent="PersistentShadows" unique_id=2098580889]
 y_sort_enabled = true
 texture_filter = 1
+metadata/_edit_lock_ = true
 
 [node name="PersistentSolids" type="SubViewport" parent="." unique_id=939225473]
 disable_3d = true
@@ -80,354 +88,939 @@ render_target_update_mode = 4
 [node name="Node2D" type="Node2D" parent="PersistentSolids" unique_id=1953948172]
 y_sort_enabled = true
 texture_filter = 1
+metadata/_edit_lock_ = true
 
 [node name="TempFlatEffects" type="Node2D" parent="." unique_id=1810468680]
 z_index = -7
+metadata/_edit_lock_ = true
 
 [node name="TempSolidEffects" type="Node2D" parent="." unique_id=1903295290]
 z_index = -5
+metadata/_edit_lock_ = true
 
 [node name="TempAirEffects" type="Node2D" parent="." unique_id=782142595]
 y_sort_enabled = true
+metadata/_edit_lock_ = true
 
 [node name="GameObjects" type="Node2D" parent="." unique_id=993515807]
 y_sort_enabled = true
+metadata/_edit_lock_ = true
 
-[node name="RocketAgent" parent="GameObjects" unique_id=745263233 instance=ExtResource("3_fc0e3")]
-position = Vector2(728, 448)
+[node name="Civilian" parent="GameObjects" unique_id=745263233 instance=ExtResource("2_e2o6t")]
 
-[node name="Civilian2" parent="GameObjects" unique_id=850501080 instance=ExtResource("2_e2o6t")]
-position = Vector2(827, 465)
+[node name="Civilian2" parent="GameObjects" unique_id=182784560 instance=ExtResource("2_e2o6t")]
+position = Vector2(38, 7)
 
-[node name="Civilian3" parent="GameObjects" unique_id=301345515 instance=ExtResource("2_e2o6t")]
-position = Vector2(815, 478)
+[node name="Civilian3" parent="GameObjects" unique_id=786427971 instance=ExtResource("2_e2o6t")]
+position = Vector2(33, -19)
 
-[node name="Civilian4" parent="GameObjects" unique_id=686482999 instance=ExtResource("2_e2o6t")]
-position = Vector2(797, 440)
+[node name="Civilian4" parent="GameObjects" unique_id=212400512 instance=ExtResource("2_e2o6t")]
+position = Vector2(-32, -36)
 
-[node name="Civilian5" parent="GameObjects" unique_id=546853076 instance=ExtResource("2_e2o6t")]
-position = Vector2(809, 436)
+[node name="Civilian5" parent="GameObjects" unique_id=516996322 instance=ExtResource("2_e2o6t")]
+position = Vector2(-87, -8)
 
-[node name="Civilian6" parent="GameObjects" unique_id=1280044143 instance=ExtResource("2_e2o6t")]
-position = Vector2(809, 463)
+[node name="Civilian6" parent="GameObjects" unique_id=659031528 instance=ExtResource("2_e2o6t")]
+position = Vector2(-165, -23)
 
-[node name="Civilian7" parent="GameObjects" unique_id=221166085 instance=ExtResource("2_e2o6t")]
-position = Vector2(794, 508)
+[node name="Civilian7" parent="GameObjects" unique_id=1293366887 instance=ExtResource("2_e2o6t")]
+position = Vector2(-167, -79)
 
-[node name="Civilian8" parent="GameObjects" unique_id=1505211816 instance=ExtResource("2_e2o6t")]
-position = Vector2(789, 474)
+[node name="Civilian8" parent="GameObjects" unique_id=1550930057 instance=ExtResource("2_e2o6t")]
+position = Vector2(-169, -51)
 
-[node name="Civilian9" parent="GameObjects" unique_id=2138015386 instance=ExtResource("2_e2o6t")]
-position = Vector2(808, 473)
+[node name="Civilian9" parent="GameObjects" unique_id=1769885655 instance=ExtResource("2_e2o6t")]
+position = Vector2(-151, -45)
 
-[node name="Civilian10" parent="GameObjects" unique_id=13884058 instance=ExtResource("2_e2o6t")]
-position = Vector2(796, 486)
+[node name="Civilian10" parent="GameObjects" unique_id=1564560654 instance=ExtResource("2_e2o6t")]
+position = Vector2(-151, -56)
 
-[node name="Civilian11" parent="GameObjects" unique_id=493893566 instance=ExtResource("2_e2o6t")]
-position = Vector2(778, 448)
+[node name="Civilian11" parent="GameObjects" unique_id=20079174 instance=ExtResource("2_e2o6t")]
+position = Vector2(-151, -56)
 
-[node name="Civilian12" parent="GameObjects" unique_id=284190344 instance=ExtResource("2_e2o6t")]
-position = Vector2(790, 444)
+[node name="Civilian12" parent="GameObjects" unique_id=379654643 instance=ExtResource("2_e2o6t")]
+position = Vector2(-178, -35)
 
-[node name="Civilian13" parent="GameObjects" unique_id=1408622375 instance=ExtResource("2_e2o6t")]
-position = Vector2(790, 471)
+[node name="Civilian13" parent="GameObjects" unique_id=1547150635 instance=ExtResource("2_e2o6t")]
+position = Vector2(-160, -29)
 
-[node name="Civilian14" parent="GameObjects" unique_id=228369413 instance=ExtResource("2_e2o6t")]
-position = Vector2(775, 516)
+[node name="Civilian14" parent="GameObjects" unique_id=591366148 instance=ExtResource("2_e2o6t")]
+position = Vector2(-160, -40)
 
-[node name="Civilian15" parent="GameObjects" unique_id=535433503 instance=ExtResource("2_e2o6t")]
-position = Vector2(770, 482)
+[node name="Civilian15" parent="GameObjects" unique_id=646802175 instance=ExtResource("2_e2o6t")]
+position = Vector2(-160, -40)
 
-[node name="Civilian16" parent="GameObjects" unique_id=1856129513 instance=ExtResource("2_e2o6t")]
-position = Vector2(816, 498)
+[node name="Civilian16" parent="GameObjects" unique_id=1583185044 instance=ExtResource("2_e2o6t")]
+position = Vector2(-180, -58)
 
-[node name="Civilian17" parent="GameObjects" unique_id=1054581809 instance=ExtResource("2_e2o6t")]
-position = Vector2(804, 511)
+[node name="Civilian17" parent="GameObjects" unique_id=1568161317 instance=ExtResource("2_e2o6t")]
+position = Vector2(-162, -52)
 
-[node name="Civilian18" parent="GameObjects" unique_id=2121384355 instance=ExtResource("2_e2o6t")]
-position = Vector2(786, 473)
+[node name="Civilian18" parent="GameObjects" unique_id=1732359947 instance=ExtResource("2_e2o6t")]
+position = Vector2(-162, -63)
 
-[node name="Civilian19" parent="GameObjects" unique_id=1440234313 instance=ExtResource("2_e2o6t")]
-position = Vector2(798, 469)
+[node name="Civilian19" parent="GameObjects" unique_id=1756049673 instance=ExtResource("2_e2o6t")]
+position = Vector2(-162, -63)
 
-[node name="Civilian20" parent="GameObjects" unique_id=121991333 instance=ExtResource("2_e2o6t")]
-position = Vector2(798, 496)
+[node name="Civilian20" parent="GameObjects" unique_id=2105607104 instance=ExtResource("2_e2o6t")]
+position = Vector2(-164, -70)
 
-[node name="Civilian21" parent="GameObjects" unique_id=1116850569 instance=ExtResource("2_e2o6t")]
-position = Vector2(783, 541)
+[node name="Civilian21" parent="GameObjects" unique_id=2033167744 instance=ExtResource("2_e2o6t")]
+position = Vector2(-146, -64)
 
-[node name="Civilian22" parent="GameObjects" unique_id=1734132668 instance=ExtResource("2_e2o6t")]
-position = Vector2(778, 507)
+[node name="Civilian22" parent="GameObjects" unique_id=1734393275 instance=ExtResource("2_e2o6t")]
+position = Vector2(-146, -75)
 
-[node name="Civilian23" parent="GameObjects" unique_id=850978669 instance=ExtResource("2_e2o6t")]
-position = Vector2(832, 472)
+[node name="Civilian23" parent="GameObjects" unique_id=1872617179 instance=ExtResource("2_e2o6t")]
+position = Vector2(-146, -75)
 
-[node name="Civilian24" parent="GameObjects" unique_id=1742084613 instance=ExtResource("2_e2o6t")]
-position = Vector2(820, 485)
+[node name="Civilian24" parent="GameObjects" unique_id=986559133 instance=ExtResource("2_e2o6t")]
+position = Vector2(-184, -70)
 
-[node name="Civilian25" parent="GameObjects" unique_id=199388643 instance=ExtResource("2_e2o6t")]
-position = Vector2(802, 447)
+[node name="Civilian25" parent="GameObjects" unique_id=320782700 instance=ExtResource("2_e2o6t")]
+position = Vector2(-166, -64)
 
-[node name="Civilian26" parent="GameObjects" unique_id=1568572905 instance=ExtResource("2_e2o6t")]
-position = Vector2(814, 443)
+[node name="Civilian26" parent="GameObjects" unique_id=474343298 instance=ExtResource("2_e2o6t")]
+position = Vector2(-166, -75)
 
-[node name="Civilian27" parent="GameObjects" unique_id=424959856 instance=ExtResource("2_e2o6t")]
-position = Vector2(814, 470)
+[node name="Civilian27" parent="GameObjects" unique_id=383614157 instance=ExtResource("2_e2o6t")]
+position = Vector2(-166, -75)
 
-[node name="Civilian28" parent="GameObjects" unique_id=863205471 instance=ExtResource("2_e2o6t")]
-position = Vector2(799, 515)
+[node name="Civilian28" parent="GameObjects" unique_id=1764324208 instance=ExtResource("2_e2o6t")]
+position = Vector2(-189, -47)
 
-[node name="Civilian29" parent="GameObjects" unique_id=106813600 instance=ExtResource("2_e2o6t")]
-position = Vector2(794, 481)
+[node name="Civilian29" parent="GameObjects" unique_id=247446326 instance=ExtResource("2_e2o6t")]
+position = Vector2(-171, -41)
 
-[node name="Civilian30" parent="GameObjects" unique_id=1214466229 instance=ExtResource("2_e2o6t")]
-position = Vector2(816, 472)
+[node name="Civilian30" parent="GameObjects" unique_id=1188945027 instance=ExtResource("2_e2o6t")]
+position = Vector2(-171, -52)
 
-[node name="Civilian31" parent="GameObjects" unique_id=1816647283 instance=ExtResource("2_e2o6t")]
-position = Vector2(804, 485)
+[node name="Civilian31" parent="GameObjects" unique_id=4730005 instance=ExtResource("2_e2o6t")]
+position = Vector2(-171, -52)
 
-[node name="Civilian32" parent="GameObjects" unique_id=164793724 instance=ExtResource("2_e2o6t")]
-position = Vector2(786, 447)
+[node name="Civilian32" parent="GameObjects" unique_id=1042715068 instance=ExtResource("2_e2o6t")]
+position = Vector2(-190, -63)
 
-[node name="Civilian33" parent="GameObjects" unique_id=975428881 instance=ExtResource("2_e2o6t")]
-position = Vector2(798, 443)
+[node name="Civilian33" parent="GameObjects" unique_id=1208675121 instance=ExtResource("2_e2o6t")]
+position = Vector2(-172, -57)
 
-[node name="Civilian34" parent="GameObjects" unique_id=1372958523 instance=ExtResource("2_e2o6t")]
-position = Vector2(798, 470)
+[node name="Civilian34" parent="GameObjects" unique_id=528106251 instance=ExtResource("2_e2o6t")]
+position = Vector2(-172, -68)
 
-[node name="Civilian35" parent="GameObjects" unique_id=299128755 instance=ExtResource("2_e2o6t")]
-position = Vector2(783, 515)
+[node name="Civilian35" parent="GameObjects" unique_id=309985263 instance=ExtResource("2_e2o6t")]
+position = Vector2(-172, -68)
 
-[node name="Civilian36" parent="GameObjects" unique_id=1997407348 instance=ExtResource("2_e2o6t")]
-position = Vector2(778, 481)
+[node name="Civilian36" parent="GameObjects" unique_id=1960802810 instance=ExtResource("2_e2o6t")]
+position = Vector2(-177, -46)
 
-[node name="Civilian37" parent="GameObjects" unique_id=1561029563 instance=ExtResource("2_e2o6t")]
-position = Vector2(812, 495)
+[node name="Civilian37" parent="GameObjects" unique_id=1072895294 instance=ExtResource("2_e2o6t")]
+position = Vector2(-159, -40)
 
-[node name="Civilian38" parent="GameObjects" unique_id=1996906516 instance=ExtResource("2_e2o6t")]
-position = Vector2(800, 508)
+[node name="Civilian38" parent="GameObjects" unique_id=2022902029 instance=ExtResource("2_e2o6t")]
+position = Vector2(-159, -51)
 
-[node name="Civilian39" parent="GameObjects" unique_id=377488600 instance=ExtResource("2_e2o6t")]
-position = Vector2(782, 470)
+[node name="Civilian39" parent="GameObjects" unique_id=2039866032 instance=ExtResource("2_e2o6t")]
+position = Vector2(-159, -51)
 
-[node name="Civilian40" parent="GameObjects" unique_id=587935256 instance=ExtResource("2_e2o6t")]
-position = Vector2(794, 466)
+[node name="Civilian40" parent="GameObjects" unique_id=2089316915 instance=ExtResource("2_e2o6t")]
+position = Vector2(-174, -60)
 
-[node name="Civilian41" parent="GameObjects" unique_id=688446510 instance=ExtResource("2_e2o6t")]
-position = Vector2(794, 493)
+[node name="Civilian41" parent="GameObjects" unique_id=1883459262 instance=ExtResource("2_e2o6t")]
+position = Vector2(-156, -54)
 
-[node name="Civilian42" parent="GameObjects" unique_id=1744021827 instance=ExtResource("2_e2o6t")]
-position = Vector2(779, 538)
+[node name="Civilian42" parent="GameObjects" unique_id=1607736072 instance=ExtResource("2_e2o6t")]
+position = Vector2(-156, -65)
 
-[node name="Civilian43" parent="GameObjects" unique_id=512746400 instance=ExtResource("2_e2o6t")]
-position = Vector2(774, 504)
+[node name="Civilian43" parent="GameObjects" unique_id=1051003197 instance=ExtResource("2_e2o6t")]
+position = Vector2(-156, -65)
 
-[node name="Civilian44" parent="GameObjects" unique_id=1646348551 instance=ExtResource("2_e2o6t")]
-position = Vector2(811, 466)
+[node name="Civilian44" parent="GameObjects" unique_id=1772671448 instance=ExtResource("2_e2o6t")]
+position = Vector2(-193, -73)
 
-[node name="Civilian45" parent="GameObjects" unique_id=1043643149 instance=ExtResource("2_e2o6t")]
-position = Vector2(799, 479)
+[node name="Civilian45" parent="GameObjects" unique_id=622155526 instance=ExtResource("2_e2o6t")]
+position = Vector2(-175, -67)
 
-[node name="Civilian46" parent="GameObjects" unique_id=783039453 instance=ExtResource("2_e2o6t")]
-position = Vector2(781, 441)
+[node name="Civilian46" parent="GameObjects" unique_id=710979562 instance=ExtResource("2_e2o6t")]
+position = Vector2(-175, -78)
 
-[node name="Civilian47" parent="GameObjects" unique_id=1183880327 instance=ExtResource("2_e2o6t")]
-position = Vector2(793, 437)
+[node name="Civilian47" parent="GameObjects" unique_id=942087301 instance=ExtResource("2_e2o6t")]
+position = Vector2(-175, -78)
 
-[node name="Civilian48" parent="GameObjects" unique_id=1098377334 instance=ExtResource("2_e2o6t")]
-position = Vector2(793, 464)
+[node name="Civilian48" parent="GameObjects" unique_id=551646488 instance=ExtResource("2_e2o6t")]
+position = Vector2(-170, -72)
 
-[node name="Civilian49" parent="GameObjects" unique_id=821461133 instance=ExtResource("2_e2o6t")]
-position = Vector2(778, 509)
+[node name="Civilian49" parent="GameObjects" unique_id=531770254 instance=ExtResource("2_e2o6t")]
+position = Vector2(-152, -66)
 
-[node name="Civilian50" parent="GameObjects" unique_id=175240512 instance=ExtResource("2_e2o6t")]
-position = Vector2(773, 475)
+[node name="Civilian50" parent="GameObjects" unique_id=1730704720 instance=ExtResource("2_e2o6t")]
+position = Vector2(-152, -77)
 
-[node name="Civilian51" parent="GameObjects" unique_id=1983584479 instance=ExtResource("2_e2o6t")]
-position = Vector2(826, 447)
+[node name="Civilian51" parent="GameObjects" unique_id=836631052 instance=ExtResource("2_e2o6t")]
+position = Vector2(-152, -77)
 
-[node name="Civilian52" parent="GameObjects" unique_id=566181735 instance=ExtResource("2_e2o6t")]
-position = Vector2(814, 460)
+[node name="Civilian52" parent="GameObjects" unique_id=2132274642 instance=ExtResource("2_e2o6t")]
+position = Vector2(-170, -72)
 
-[node name="Civilian53" parent="GameObjects" unique_id=966684231 instance=ExtResource("2_e2o6t")]
-position = Vector2(796, 422)
+[node name="Civilian53" parent="GameObjects" unique_id=1627966535 instance=ExtResource("2_e2o6t")]
+position = Vector2(-152, -66)
 
-[node name="Civilian54" parent="GameObjects" unique_id=1781332358 instance=ExtResource("2_e2o6t")]
-position = Vector2(808, 418)
+[node name="Civilian54" parent="GameObjects" unique_id=1383347311 instance=ExtResource("2_e2o6t")]
+position = Vector2(-152, -77)
 
-[node name="Civilian55" parent="GameObjects" unique_id=178007619 instance=ExtResource("2_e2o6t")]
-position = Vector2(808, 445)
+[node name="Civilian55" parent="GameObjects" unique_id=1702234423 instance=ExtResource("2_e2o6t")]
+position = Vector2(-152, -77)
 
-[node name="Civilian56" parent="GameObjects" unique_id=2029365920 instance=ExtResource("2_e2o6t")]
-position = Vector2(793, 490)
+[node name="Civilian56" parent="GameObjects" unique_id=688867296 instance=ExtResource("2_e2o6t")]
+position = Vector2(-76, -15)
 
-[node name="Civilian57" parent="GameObjects" unique_id=913642130 instance=ExtResource("2_e2o6t")]
-position = Vector2(788, 456)
+[node name="Civilian57" parent="GameObjects" unique_id=485198566 instance=ExtResource("2_e2o6t")]
+position = Vector2(-76, -15)
 
-[node name="Civilian58" parent="GameObjects" unique_id=155446405 instance=ExtResource("2_e2o6t")]
-position = Vector2(813, 471)
+[node name="Civilian58" parent="GameObjects" unique_id=1096990633 instance=ExtResource("2_e2o6t")]
+position = Vector2(-96, -33)
 
-[node name="Civilian59" parent="GameObjects" unique_id=725249891 instance=ExtResource("2_e2o6t")]
-position = Vector2(801, 484)
+[node name="Civilian59" parent="GameObjects" unique_id=1865201952 instance=ExtResource("2_e2o6t")]
+position = Vector2(-78, -27)
 
-[node name="Civilian60" parent="GameObjects" unique_id=119111579 instance=ExtResource("2_e2o6t")]
-position = Vector2(783, 446)
+[node name="Civilian60" parent="GameObjects" unique_id=2139270281 instance=ExtResource("2_e2o6t")]
+position = Vector2(-78, -38)
 
-[node name="Civilian61" parent="GameObjects" unique_id=1607432795 instance=ExtResource("2_e2o6t")]
-position = Vector2(795, 442)
+[node name="Civilian61" parent="GameObjects" unique_id=1921406034 instance=ExtResource("2_e2o6t")]
+position = Vector2(-78, -38)
 
-[node name="Civilian62" parent="GameObjects" unique_id=1050875637 instance=ExtResource("2_e2o6t")]
-position = Vector2(795, 469)
+[node name="Civilian62" parent="GameObjects" unique_id=1479220230 instance=ExtResource("2_e2o6t")]
+position = Vector2(-80, -45)
 
-[node name="Civilian63" parent="GameObjects" unique_id=1557541690 instance=ExtResource("2_e2o6t")]
-position = Vector2(780, 514)
+[node name="Civilian63" parent="GameObjects" unique_id=62120318 instance=ExtResource("2_e2o6t")]
+position = Vector2(-62, -39)
 
-[node name="Civilian64" parent="GameObjects" unique_id=2143800074 instance=ExtResource("2_e2o6t")]
-position = Vector2(775, 480)
+[node name="Civilian64" parent="GameObjects" unique_id=800099401 instance=ExtResource("2_e2o6t")]
+position = Vector2(-62, -50)
 
-[node name="Civilian65" parent="GameObjects" unique_id=1191294250 instance=ExtResource("2_e2o6t")]
-position = Vector2(792, 477)
+[node name="Civilian65" parent="GameObjects" unique_id=617528144 instance=ExtResource("2_e2o6t")]
+position = Vector2(-62, -50)
 
-[node name="Civilian66" parent="GameObjects" unique_id=283304044 instance=ExtResource("2_e2o6t")]
-position = Vector2(780, 490)
+[node name="Civilian66" parent="GameObjects" unique_id=622316133 instance=ExtResource("2_e2o6t")]
+position = Vector2(-100, -45)
 
-[node name="Civilian67" parent="GameObjects" unique_id=1908442237 instance=ExtResource("2_e2o6t")]
-position = Vector2(762, 452)
+[node name="Civilian67" parent="GameObjects" unique_id=1699879338 instance=ExtResource("2_e2o6t")]
+position = Vector2(-82, -39)
 
-[node name="Civilian68" parent="GameObjects" unique_id=1780190124 instance=ExtResource("2_e2o6t")]
-position = Vector2(774, 448)
+[node name="Civilian68" parent="GameObjects" unique_id=2003374868 instance=ExtResource("2_e2o6t")]
+position = Vector2(-82, -50)
 
-[node name="Civilian69" parent="GameObjects" unique_id=1215476652 instance=ExtResource("2_e2o6t")]
-position = Vector2(774, 475)
+[node name="Civilian69" parent="GameObjects" unique_id=1796994164 instance=ExtResource("2_e2o6t")]
+position = Vector2(-82, -50)
 
-[node name="Civilian70" parent="GameObjects" unique_id=2145289412 instance=ExtResource("2_e2o6t")]
-position = Vector2(759, 520)
+[node name="Civilian70" parent="GameObjects" unique_id=1327643115 instance=ExtResource("2_e2o6t")]
+position = Vector2(-105, -22)
 
-[node name="Civilian71" parent="GameObjects" unique_id=1129784257 instance=ExtResource("2_e2o6t")]
-position = Vector2(754, 486)
+[node name="Civilian71" parent="GameObjects" unique_id=564675519 instance=ExtResource("2_e2o6t")]
+position = Vector2(-87, -16)
 
-[node name="Civilian72" parent="GameObjects" unique_id=1519511696 instance=ExtResource("2_e2o6t")]
-position = Vector2(823, 463)
+[node name="Civilian72" parent="GameObjects" unique_id=301596279 instance=ExtResource("2_e2o6t")]
+position = Vector2(-87, -27)
 
-[node name="Civilian73" parent="GameObjects" unique_id=505803714 instance=ExtResource("2_e2o6t")]
-position = Vector2(811, 476)
+[node name="Civilian73" parent="GameObjects" unique_id=1221825235 instance=ExtResource("2_e2o6t")]
+position = Vector2(-87, -27)
 
-[node name="Civilian74" parent="GameObjects" unique_id=1511669364 instance=ExtResource("2_e2o6t")]
-position = Vector2(793, 438)
+[node name="Civilian74" parent="GameObjects" unique_id=1495202559 instance=ExtResource("2_e2o6t")]
+position = Vector2(-106, -38)
 
-[node name="Civilian75" parent="GameObjects" unique_id=1441077755 instance=ExtResource("2_e2o6t")]
-position = Vector2(805, 434)
+[node name="Civilian75" parent="GameObjects" unique_id=1837736710 instance=ExtResource("2_e2o6t")]
+position = Vector2(-88, -32)
 
-[node name="Civilian76" parent="GameObjects" unique_id=1595959846 instance=ExtResource("2_e2o6t")]
-position = Vector2(805, 461)
+[node name="Civilian76" parent="GameObjects" unique_id=502176721 instance=ExtResource("2_e2o6t")]
+position = Vector2(-88, -43)
 
-[node name="Civilian77" parent="GameObjects" unique_id=946481139 instance=ExtResource("2_e2o6t")]
-position = Vector2(790, 506)
+[node name="Civilian77" parent="GameObjects" unique_id=939241660 instance=ExtResource("2_e2o6t")]
+position = Vector2(-88, -43)
 
-[node name="Civilian78" parent="GameObjects" unique_id=2109997129 instance=ExtResource("2_e2o6t")]
-position = Vector2(785, 472)
+[node name="Civilian78" parent="GameObjects" unique_id=1890844858 instance=ExtResource("2_e2o6t")]
+position = Vector2(-93, -21)
 
-[node name="Civilian79" parent="GameObjects" unique_id=1486040420 instance=ExtResource("2_e2o6t")]
-position = Vector2(800, 493)
+[node name="Civilian79" parent="GameObjects" unique_id=936207322 instance=ExtResource("2_e2o6t")]
+position = Vector2(-75, -15)
 
-[node name="Civilian80" parent="GameObjects" unique_id=885529727 instance=ExtResource("2_e2o6t")]
-position = Vector2(788, 506)
+[node name="Civilian80" parent="GameObjects" unique_id=990164855 instance=ExtResource("2_e2o6t")]
+position = Vector2(-75, -26)
 
-[node name="Civilian81" parent="GameObjects" unique_id=42571984 instance=ExtResource("2_e2o6t")]
-position = Vector2(770, 468)
+[node name="Civilian81" parent="GameObjects" unique_id=1695504064 instance=ExtResource("2_e2o6t")]
+position = Vector2(-75, -26)
 
-[node name="Civilian82" parent="GameObjects" unique_id=1604830322 instance=ExtResource("2_e2o6t")]
-position = Vector2(782, 464)
+[node name="Civilian82" parent="GameObjects" unique_id=1303173435 instance=ExtResource("2_e2o6t")]
+position = Vector2(-90, -35)
 
-[node name="Civilian83" parent="GameObjects" unique_id=488889062 instance=ExtResource("2_e2o6t")]
-position = Vector2(782, 491)
+[node name="Civilian83" parent="GameObjects" unique_id=1251234939 instance=ExtResource("2_e2o6t")]
+position = Vector2(-72, -29)
 
-[node name="Civilian84" parent="GameObjects" unique_id=1566167442 instance=ExtResource("2_e2o6t")]
-position = Vector2(767, 536)
+[node name="Civilian84" parent="GameObjects" unique_id=1382136189 instance=ExtResource("2_e2o6t")]
+position = Vector2(-72, -40)
 
-[node name="Civilian85" parent="GameObjects" unique_id=757152925 instance=ExtResource("2_e2o6t")]
-position = Vector2(762, 502)
+[node name="Civilian85" parent="GameObjects" unique_id=732914577 instance=ExtResource("2_e2o6t")]
+position = Vector2(-72, -40)
 
-[node name="Civilian86" parent="GameObjects" unique_id=1144812802 instance=ExtResource("2_e2o6t")]
-position = Vector2(823, 459)
+[node name="Civilian86" parent="GameObjects" unique_id=1388764927 instance=ExtResource("2_e2o6t")]
+position = Vector2(-109, -48)
 
-[node name="Civilian87" parent="GameObjects" unique_id=1237637670 instance=ExtResource("2_e2o6t")]
-position = Vector2(811, 472)
+[node name="Civilian87" parent="GameObjects" unique_id=605350093 instance=ExtResource("2_e2o6t")]
+position = Vector2(-91, -42)
 
-[node name="Civilian88" parent="GameObjects" unique_id=1280470478 instance=ExtResource("2_e2o6t")]
-position = Vector2(793, 434)
+[node name="Civilian88" parent="GameObjects" unique_id=890779107 instance=ExtResource("2_e2o6t")]
+position = Vector2(-91, -53)
 
-[node name="Civilian89" parent="GameObjects" unique_id=1959345983 instance=ExtResource("2_e2o6t")]
-position = Vector2(805, 430)
+[node name="Civilian89" parent="GameObjects" unique_id=1984344608 instance=ExtResource("2_e2o6t")]
+position = Vector2(-91, -53)
 
-[node name="Civilian90" parent="GameObjects" unique_id=1758410648 instance=ExtResource("2_e2o6t")]
-position = Vector2(805, 457)
+[node name="Civilian90" parent="GameObjects" unique_id=1299570654 instance=ExtResource("2_e2o6t")]
+position = Vector2(-86, -47)
 
-[node name="Civilian91" parent="GameObjects" unique_id=1935786237 instance=ExtResource("2_e2o6t")]
-position = Vector2(790, 502)
+[node name="Civilian91" parent="GameObjects" unique_id=843735138 instance=ExtResource("2_e2o6t")]
+position = Vector2(-68, -41)
 
-[node name="Civilian92" parent="GameObjects" unique_id=1170344018 instance=ExtResource("2_e2o6t")]
-position = Vector2(785, 468)
+[node name="Civilian92" parent="GameObjects" unique_id=465447302 instance=ExtResource("2_e2o6t")]
+position = Vector2(-68, -52)
 
-[node name="Civilian93" parent="GameObjects" unique_id=1340340864 instance=ExtResource("2_e2o6t")]
-position = Vector2(863, 461)
+[node name="Civilian93" parent="GameObjects" unique_id=785175264 instance=ExtResource("2_e2o6t")]
+position = Vector2(-68, -52)
 
-[node name="Civilian94" parent="GameObjects" unique_id=333217754 instance=ExtResource("2_e2o6t")]
-position = Vector2(851, 474)
+[node name="Civilian94" parent="GameObjects" unique_id=351378404 instance=ExtResource("2_e2o6t")]
+position = Vector2(-86, -47)
 
-[node name="Civilian95" parent="GameObjects" unique_id=721882111 instance=ExtResource("2_e2o6t")]
-position = Vector2(833, 436)
+[node name="Civilian95" parent="GameObjects" unique_id=737265701 instance=ExtResource("2_e2o6t")]
+position = Vector2(-68, -41)
 
-[node name="Civilian96" parent="GameObjects" unique_id=1103069979 instance=ExtResource("2_e2o6t")]
-position = Vector2(845, 432)
+[node name="Civilian96" parent="GameObjects" unique_id=131773395 instance=ExtResource("2_e2o6t")]
+position = Vector2(-68, -52)
 
-[node name="Civilian97" parent="GameObjects" unique_id=827465096 instance=ExtResource("2_e2o6t")]
-position = Vector2(845, 459)
+[node name="Civilian97" parent="GameObjects" unique_id=1830291861 instance=ExtResource("2_e2o6t")]
+position = Vector2(-68, -52)
 
-[node name="Civilian98" parent="GameObjects" unique_id=1683812448 instance=ExtResource("2_e2o6t")]
-position = Vector2(830, 504)
+[node name="Civilian98" parent="GameObjects" unique_id=1829119163 instance=ExtResource("2_e2o6t")]
+position = Vector2(87, -91)
 
-[node name="Civilian99" parent="GameObjects" unique_id=1503333512 instance=ExtResource("2_e2o6t")]
-position = Vector2(825, 470)
+[node name="Civilian99" parent="GameObjects" unique_id=381038769 instance=ExtResource("2_e2o6t")]
+position = Vector2(87, -91)
 
-[node name="Civilian100" parent="GameObjects" unique_id=712093573 instance=ExtResource("2_e2o6t")]
-position = Vector2(814, 463)
+[node name="Civilian100" parent="GameObjects" unique_id=154154593 instance=ExtResource("2_e2o6t")]
+position = Vector2(67, -109)
 
-[node name="Civilian101" parent="GameObjects" unique_id=582415353 instance=ExtResource("2_e2o6t")]
-position = Vector2(802, 476)
+[node name="Civilian101" parent="GameObjects" unique_id=679932522 instance=ExtResource("2_e2o6t")]
+position = Vector2(85, -103)
 
-[node name="Civilian102" parent="GameObjects" unique_id=1654502204 instance=ExtResource("2_e2o6t")]
-position = Vector2(784, 438)
+[node name="Civilian102" parent="GameObjects" unique_id=1810743351 instance=ExtResource("2_e2o6t")]
+position = Vector2(85, -114)
 
-[node name="Civilian103" parent="GameObjects" unique_id=766941490 instance=ExtResource("2_e2o6t")]
-position = Vector2(796, 434)
+[node name="Civilian103" parent="GameObjects" unique_id=1638428490 instance=ExtResource("2_e2o6t")]
+position = Vector2(85, -114)
 
-[node name="Civilian104" parent="GameObjects" unique_id=2040984134 instance=ExtResource("2_e2o6t")]
-position = Vector2(796, 461)
+[node name="Civilian104" parent="GameObjects" unique_id=761839605 instance=ExtResource("2_e2o6t")]
+position = Vector2(83, -121)
 
-[node name="Civilian105" parent="GameObjects" unique_id=1998715892 instance=ExtResource("2_e2o6t")]
-position = Vector2(781, 506)
+[node name="Civilian105" parent="GameObjects" unique_id=105770972 instance=ExtResource("2_e2o6t")]
+position = Vector2(101, -115)
 
-[node name="Civilian106" parent="GameObjects" unique_id=522335113 instance=ExtResource("2_e2o6t")]
-position = Vector2(776, 472)
+[node name="Civilian106" parent="GameObjects" unique_id=291570854 instance=ExtResource("2_e2o6t")]
+position = Vector2(101, -126)
 
-[node name="Civilian107" parent="GameObjects" unique_id=950868503 instance=ExtResource("2_e2o6t")]
-position = Vector2(842, 412)
+[node name="Civilian107" parent="GameObjects" unique_id=2133562242 instance=ExtResource("2_e2o6t")]
+position = Vector2(101, -126)
 
-[node name="Civilian108" parent="GameObjects" unique_id=2039322830 instance=ExtResource("2_e2o6t")]
-position = Vector2(830, 425)
+[node name="Civilian108" parent="GameObjects" unique_id=895964312 instance=ExtResource("2_e2o6t")]
+position = Vector2(63, -121)
 
-[node name="Civilian109" parent="GameObjects" unique_id=109501708 instance=ExtResource("2_e2o6t")]
-position = Vector2(812, 387)
+[node name="Civilian109" parent="GameObjects" unique_id=123265180 instance=ExtResource("2_e2o6t")]
+position = Vector2(81, -115)
 
-[node name="Civilian110" parent="GameObjects" unique_id=1865872947 instance=ExtResource("2_e2o6t")]
-position = Vector2(824, 383)
+[node name="Civilian110" parent="GameObjects" unique_id=317364229 instance=ExtResource("2_e2o6t")]
+position = Vector2(81, -126)
 
-[node name="Civilian111" parent="GameObjects" unique_id=2017265071 instance=ExtResource("2_e2o6t")]
-position = Vector2(824, 410)
+[node name="Civilian111" parent="GameObjects" unique_id=1607375988 instance=ExtResource("2_e2o6t")]
+position = Vector2(81, -126)
 
-[node name="Civilian112" parent="GameObjects" unique_id=62941139 instance=ExtResource("2_e2o6t")]
-position = Vector2(809, 455)
+[node name="Civilian112" parent="GameObjects" unique_id=794387868 instance=ExtResource("2_e2o6t")]
+position = Vector2(58, -98)
 
-[node name="Civilian113" parent="GameObjects" unique_id=1750549148 instance=ExtResource("2_e2o6t")]
-position = Vector2(803, 423)
+[node name="Civilian113" parent="GameObjects" unique_id=2107562048 instance=ExtResource("2_e2o6t")]
+position = Vector2(76, -92)
+
+[node name="Civilian114" parent="GameObjects" unique_id=1000459029 instance=ExtResource("2_e2o6t")]
+position = Vector2(76, -103)
+
+[node name="Civilian115" parent="GameObjects" unique_id=532319350 instance=ExtResource("2_e2o6t")]
+position = Vector2(76, -103)
+
+[node name="Civilian116" parent="GameObjects" unique_id=1894403703 instance=ExtResource("2_e2o6t")]
+position = Vector2(57, -114)
+
+[node name="Civilian117" parent="GameObjects" unique_id=1332014023 instance=ExtResource("2_e2o6t")]
+position = Vector2(75, -108)
+
+[node name="Civilian118" parent="GameObjects" unique_id=2113880495 instance=ExtResource("2_e2o6t")]
+position = Vector2(75, -119)
+
+[node name="Civilian119" parent="GameObjects" unique_id=1060955047 instance=ExtResource("2_e2o6t")]
+position = Vector2(75, -119)
+
+[node name="Civilian120" parent="GameObjects" unique_id=1457408310 instance=ExtResource("2_e2o6t")]
+position = Vector2(70, -97)
+
+[node name="Civilian121" parent="GameObjects" unique_id=628146400 instance=ExtResource("2_e2o6t")]
+position = Vector2(88, -91)
+
+[node name="Civilian122" parent="GameObjects" unique_id=1411524796 instance=ExtResource("2_e2o6t")]
+position = Vector2(88, -102)
+
+[node name="Civilian123" parent="GameObjects" unique_id=999787520 instance=ExtResource("2_e2o6t")]
+position = Vector2(88, -102)
+
+[node name="Civilian124" parent="GameObjects" unique_id=1841475488 instance=ExtResource("2_e2o6t")]
+position = Vector2(73, -111)
+
+[node name="Civilian125" parent="GameObjects" unique_id=1287983095 instance=ExtResource("2_e2o6t")]
+position = Vector2(91, -105)
+
+[node name="Civilian126" parent="GameObjects" unique_id=1751454119 instance=ExtResource("2_e2o6t")]
+position = Vector2(91, -116)
+
+[node name="Civilian127" parent="GameObjects" unique_id=118633060 instance=ExtResource("2_e2o6t")]
+position = Vector2(91, -116)
+
+[node name="Civilian128" parent="GameObjects" unique_id=907569707 instance=ExtResource("2_e2o6t")]
+position = Vector2(54, -124)
+
+[node name="Civilian129" parent="GameObjects" unique_id=1513658437 instance=ExtResource("2_e2o6t")]
+position = Vector2(72, -118)
+
+[node name="Civilian130" parent="GameObjects" unique_id=938315043 instance=ExtResource("2_e2o6t")]
+position = Vector2(72, -129)
+
+[node name="Civilian131" parent="GameObjects" unique_id=1447466010 instance=ExtResource("2_e2o6t")]
+position = Vector2(72, -129)
+
+[node name="Civilian132" parent="GameObjects" unique_id=2126675405 instance=ExtResource("2_e2o6t")]
+position = Vector2(77, -123)
+
+[node name="Civilian133" parent="GameObjects" unique_id=2034552346 instance=ExtResource("2_e2o6t")]
+position = Vector2(95, -117)
+
+[node name="Civilian134" parent="GameObjects" unique_id=1776184717 instance=ExtResource("2_e2o6t")]
+position = Vector2(95, -128)
+
+[node name="Civilian135" parent="GameObjects" unique_id=1079495940 instance=ExtResource("2_e2o6t")]
+position = Vector2(95, -128)
+
+[node name="Civilian136" parent="GameObjects" unique_id=1992047053 instance=ExtResource("2_e2o6t")]
+position = Vector2(77, -123)
+
+[node name="Civilian137" parent="GameObjects" unique_id=922226103 instance=ExtResource("2_e2o6t")]
+position = Vector2(95, -117)
+
+[node name="Civilian138" parent="GameObjects" unique_id=195684308 instance=ExtResource("2_e2o6t")]
+position = Vector2(95, -128)
+
+[node name="Civilian139" parent="GameObjects" unique_id=2094225452 instance=ExtResource("2_e2o6t")]
+position = Vector2(95, -128)
+
+[node name="Civilian140" parent="GameObjects" unique_id=1003837193 instance=ExtResource("2_e2o6t")]
+position = Vector2(115, -83)
+
+[node name="Civilian141" parent="GameObjects" unique_id=232033957 instance=ExtResource("2_e2o6t")]
+position = Vector2(115, -83)
+
+[node name="Civilian142" parent="GameObjects" unique_id=2051384027 instance=ExtResource("2_e2o6t")]
+position = Vector2(95, -101)
+
+[node name="Civilian143" parent="GameObjects" unique_id=43344648 instance=ExtResource("2_e2o6t")]
+position = Vector2(113, -95)
+
+[node name="Civilian144" parent="GameObjects" unique_id=446647654 instance=ExtResource("2_e2o6t")]
+position = Vector2(113, -106)
+
+[node name="Civilian145" parent="GameObjects" unique_id=853537987 instance=ExtResource("2_e2o6t")]
+position = Vector2(113, -106)
+
+[node name="Civilian146" parent="GameObjects" unique_id=570695736 instance=ExtResource("2_e2o6t")]
+position = Vector2(111, -113)
+
+[node name="Civilian147" parent="GameObjects" unique_id=1930746902 instance=ExtResource("2_e2o6t")]
+position = Vector2(129, -107)
+
+[node name="Civilian148" parent="GameObjects" unique_id=1302728770 instance=ExtResource("2_e2o6t")]
+position = Vector2(129, -118)
+
+[node name="Civilian149" parent="GameObjects" unique_id=235490386 instance=ExtResource("2_e2o6t")]
+position = Vector2(129, -118)
+
+[node name="Civilian150" parent="GameObjects" unique_id=1608275573 instance=ExtResource("2_e2o6t")]
+position = Vector2(91, -113)
+
+[node name="Civilian151" parent="GameObjects" unique_id=1195854863 instance=ExtResource("2_e2o6t")]
+position = Vector2(109, -107)
+
+[node name="Civilian152" parent="GameObjects" unique_id=1361202521 instance=ExtResource("2_e2o6t")]
+position = Vector2(109, -118)
+
+[node name="Civilian153" parent="GameObjects" unique_id=333458999 instance=ExtResource("2_e2o6t")]
+position = Vector2(109, -118)
+
+[node name="Civilian154" parent="GameObjects" unique_id=162435773 instance=ExtResource("2_e2o6t")]
+position = Vector2(86, -90)
+
+[node name="Civilian155" parent="GameObjects" unique_id=1702434131 instance=ExtResource("2_e2o6t")]
+position = Vector2(104, -84)
+
+[node name="Civilian156" parent="GameObjects" unique_id=462319730 instance=ExtResource("2_e2o6t")]
+position = Vector2(104, -95)
+
+[node name="Civilian157" parent="GameObjects" unique_id=1252250188 instance=ExtResource("2_e2o6t")]
+position = Vector2(104, -95)
+
+[node name="Civilian158" parent="GameObjects" unique_id=991693044 instance=ExtResource("2_e2o6t")]
+position = Vector2(85, -106)
+
+[node name="Civilian159" parent="GameObjects" unique_id=1704754901 instance=ExtResource("2_e2o6t")]
+position = Vector2(103, -100)
+
+[node name="Civilian160" parent="GameObjects" unique_id=1361110778 instance=ExtResource("2_e2o6t")]
+position = Vector2(103, -111)
+
+[node name="Civilian161" parent="GameObjects" unique_id=384476968 instance=ExtResource("2_e2o6t")]
+position = Vector2(103, -111)
+
+[node name="Civilian162" parent="GameObjects" unique_id=1835612829 instance=ExtResource("2_e2o6t")]
+position = Vector2(98, -89)
+
+[node name="Civilian163" parent="GameObjects" unique_id=1277160781 instance=ExtResource("2_e2o6t")]
+position = Vector2(116, -83)
+
+[node name="Civilian164" parent="GameObjects" unique_id=1811579068 instance=ExtResource("2_e2o6t")]
+position = Vector2(116, -94)
+
+[node name="Civilian165" parent="GameObjects" unique_id=285641021 instance=ExtResource("2_e2o6t")]
+position = Vector2(116, -94)
+
+[node name="Civilian166" parent="GameObjects" unique_id=203802613 instance=ExtResource("2_e2o6t")]
+position = Vector2(101, -103)
+
+[node name="Civilian167" parent="GameObjects" unique_id=709548445 instance=ExtResource("2_e2o6t")]
+position = Vector2(119, -97)
+
+[node name="Civilian168" parent="GameObjects" unique_id=1861305876 instance=ExtResource("2_e2o6t")]
+position = Vector2(119, -108)
+
+[node name="Civilian169" parent="GameObjects" unique_id=1253071512 instance=ExtResource("2_e2o6t")]
+position = Vector2(119, -108)
+
+[node name="Civilian170" parent="GameObjects" unique_id=548383749 instance=ExtResource("2_e2o6t")]
+position = Vector2(82, -116)
+
+[node name="Civilian171" parent="GameObjects" unique_id=1693379171 instance=ExtResource("2_e2o6t")]
+position = Vector2(100, -110)
+
+[node name="Civilian172" parent="GameObjects" unique_id=701989124 instance=ExtResource("2_e2o6t")]
+position = Vector2(100, -121)
+
+[node name="Civilian173" parent="GameObjects" unique_id=1198297793 instance=ExtResource("2_e2o6t")]
+position = Vector2(100, -121)
+
+[node name="Civilian174" parent="GameObjects" unique_id=1823368330 instance=ExtResource("2_e2o6t")]
+position = Vector2(105, -115)
+
+[node name="Civilian175" parent="GameObjects" unique_id=441443453 instance=ExtResource("2_e2o6t")]
+position = Vector2(123, -109)
+
+[node name="Civilian176" parent="GameObjects" unique_id=47821407 instance=ExtResource("2_e2o6t")]
+position = Vector2(123, -120)
+
+[node name="Civilian177" parent="GameObjects" unique_id=1453083754 instance=ExtResource("2_e2o6t")]
+position = Vector2(123, -120)
+
+[node name="Civilian178" parent="GameObjects" unique_id=256414260 instance=ExtResource("2_e2o6t")]
+position = Vector2(105, -115)
+
+[node name="Civilian179" parent="GameObjects" unique_id=432077179 instance=ExtResource("2_e2o6t")]
+position = Vector2(123, -109)
+
+[node name="Civilian180" parent="GameObjects" unique_id=309213517 instance=ExtResource("2_e2o6t")]
+position = Vector2(123, -120)
+
+[node name="Civilian181" parent="GameObjects" unique_id=986182417 instance=ExtResource("2_e2o6t")]
+position = Vector2(123, -120)
+
+[node name="Civilian182" parent="GameObjects" unique_id=1836866226 instance=ExtResource("2_e2o6t")]
+position = Vector2(92, -76)
+
+[node name="Civilian183" parent="GameObjects" unique_id=1071807645 instance=ExtResource("2_e2o6t")]
+position = Vector2(92, -76)
+
+[node name="Civilian184" parent="GameObjects" unique_id=1653002315 instance=ExtResource("2_e2o6t")]
+position = Vector2(72, -94)
+
+[node name="Civilian185" parent="GameObjects" unique_id=140492461 instance=ExtResource("2_e2o6t")]
+position = Vector2(90, -88)
+
+[node name="Civilian186" parent="GameObjects" unique_id=45489222 instance=ExtResource("2_e2o6t")]
+position = Vector2(90, -99)
+
+[node name="Civilian187" parent="GameObjects" unique_id=714794687 instance=ExtResource("2_e2o6t")]
+position = Vector2(90, -99)
+
+[node name="Civilian188" parent="GameObjects" unique_id=783181214 instance=ExtResource("2_e2o6t")]
+position = Vector2(88, -106)
+
+[node name="Civilian189" parent="GameObjects" unique_id=1631577159 instance=ExtResource("2_e2o6t")]
+position = Vector2(106, -100)
+
+[node name="Civilian190" parent="GameObjects" unique_id=900485999 instance=ExtResource("2_e2o6t")]
+position = Vector2(106, -111)
+
+[node name="Civilian191" parent="GameObjects" unique_id=1906563645 instance=ExtResource("2_e2o6t")]
+position = Vector2(106, -111)
+
+[node name="Civilian192" parent="GameObjects" unique_id=584188338 instance=ExtResource("2_e2o6t")]
+position = Vector2(68, -106)
+
+[node name="Civilian193" parent="GameObjects" unique_id=647558605 instance=ExtResource("2_e2o6t")]
+position = Vector2(86, -100)
+
+[node name="Civilian194" parent="GameObjects" unique_id=1141173829 instance=ExtResource("2_e2o6t")]
+position = Vector2(86, -111)
+
+[node name="Civilian195" parent="GameObjects" unique_id=1599337262 instance=ExtResource("2_e2o6t")]
+position = Vector2(86, -111)
+
+[node name="Civilian196" parent="GameObjects" unique_id=426547969 instance=ExtResource("2_e2o6t")]
+position = Vector2(63, -83)
+
+[node name="Civilian197" parent="GameObjects" unique_id=924797988 instance=ExtResource("2_e2o6t")]
+position = Vector2(81, -77)
+
+[node name="Civilian198" parent="GameObjects" unique_id=1096931442 instance=ExtResource("2_e2o6t")]
+position = Vector2(81, -88)
+
+[node name="Civilian199" parent="GameObjects" unique_id=1234876332 instance=ExtResource("2_e2o6t")]
+position = Vector2(81, -88)
+
+[node name="Civilian200" parent="GameObjects" unique_id=1496054618 instance=ExtResource("2_e2o6t")]
+position = Vector2(62, -99)
+
+[node name="Civilian201" parent="GameObjects" unique_id=766658168 instance=ExtResource("2_e2o6t")]
+position = Vector2(80, -93)
+
+[node name="Civilian202" parent="GameObjects" unique_id=389550084 instance=ExtResource("2_e2o6t")]
+position = Vector2(80, -104)
+
+[node name="Civilian203" parent="GameObjects" unique_id=1007641105 instance=ExtResource("2_e2o6t")]
+position = Vector2(80, -104)
+
+[node name="Civilian204" parent="GameObjects" unique_id=105199033 instance=ExtResource("2_e2o6t")]
+position = Vector2(75, -82)
+
+[node name="Civilian205" parent="GameObjects" unique_id=1037939286 instance=ExtResource("2_e2o6t")]
+position = Vector2(93, -76)
+
+[node name="Civilian206" parent="GameObjects" unique_id=915676724 instance=ExtResource("2_e2o6t")]
+position = Vector2(93, -87)
+
+[node name="Civilian207" parent="GameObjects" unique_id=907200916 instance=ExtResource("2_e2o6t")]
+position = Vector2(93, -87)
+
+[node name="Civilian208" parent="GameObjects" unique_id=300631171 instance=ExtResource("2_e2o6t")]
+position = Vector2(78, -96)
+
+[node name="Civilian209" parent="GameObjects" unique_id=1746232479 instance=ExtResource("2_e2o6t")]
+position = Vector2(96, -90)
+
+[node name="Civilian210" parent="GameObjects" unique_id=809928981 instance=ExtResource("2_e2o6t")]
+position = Vector2(96, -101)
+
+[node name="Civilian211" parent="GameObjects" unique_id=138582441 instance=ExtResource("2_e2o6t")]
+position = Vector2(96, -101)
+
+[node name="Civilian212" parent="GameObjects" unique_id=1811333028 instance=ExtResource("2_e2o6t")]
+position = Vector2(59, -109)
+
+[node name="Civilian213" parent="GameObjects" unique_id=1360628516 instance=ExtResource("2_e2o6t")]
+position = Vector2(77, -103)
+
+[node name="Civilian214" parent="GameObjects" unique_id=129756711 instance=ExtResource("2_e2o6t")]
+position = Vector2(77, -114)
+
+[node name="Civilian215" parent="GameObjects" unique_id=1741489181 instance=ExtResource("2_e2o6t")]
+position = Vector2(77, -114)
+
+[node name="Civilian216" parent="GameObjects" unique_id=1537052918 instance=ExtResource("2_e2o6t")]
+position = Vector2(82, -108)
+
+[node name="Civilian217" parent="GameObjects" unique_id=1334625486 instance=ExtResource("2_e2o6t")]
+position = Vector2(100, -102)
+
+[node name="Civilian218" parent="GameObjects" unique_id=798243109 instance=ExtResource("2_e2o6t")]
+position = Vector2(100, -113)
+
+[node name="Civilian219" parent="GameObjects" unique_id=315392451 instance=ExtResource("2_e2o6t")]
+position = Vector2(100, -113)
+
+[node name="Civilian220" parent="GameObjects" unique_id=274567949 instance=ExtResource("2_e2o6t")]
+position = Vector2(82, -108)
+
+[node name="Civilian221" parent="GameObjects" unique_id=798400346 instance=ExtResource("2_e2o6t")]
+position = Vector2(100, -102)
+
+[node name="Civilian222" parent="GameObjects" unique_id=1673387662 instance=ExtResource("2_e2o6t")]
+position = Vector2(100, -113)
+
+[node name="Civilian223" parent="GameObjects" unique_id=1519563114 instance=ExtResource("2_e2o6t")]
+position = Vector2(100, -113)
+
+[node name="Civilian224" parent="GameObjects" unique_id=1967046427 instance=ExtResource("2_e2o6t")]
+position = Vector2(92, -76)
+
+[node name="Civilian225" parent="GameObjects" unique_id=658451475 instance=ExtResource("2_e2o6t")]
+position = Vector2(92, -76)
+
+[node name="Civilian226" parent="GameObjects" unique_id=1202577050 instance=ExtResource("2_e2o6t")]
+position = Vector2(72, -94)
+
+[node name="Civilian227" parent="GameObjects" unique_id=786309443 instance=ExtResource("2_e2o6t")]
+position = Vector2(90, -88)
+
+[node name="Civilian228" parent="GameObjects" unique_id=1712423230 instance=ExtResource("2_e2o6t")]
+position = Vector2(90, -99)
+
+[node name="Civilian229" parent="GameObjects" unique_id=2045620308 instance=ExtResource("2_e2o6t")]
+position = Vector2(90, -99)
+
+[node name="Civilian230" parent="GameObjects" unique_id=979108591 instance=ExtResource("2_e2o6t")]
+position = Vector2(88, -106)
+
+[node name="Civilian231" parent="GameObjects" unique_id=931433412 instance=ExtResource("2_e2o6t")]
+position = Vector2(106, -100)
+
+[node name="Civilian232" parent="GameObjects" unique_id=10088456 instance=ExtResource("2_e2o6t")]
+position = Vector2(106, -111)
+
+[node name="Civilian233" parent="GameObjects" unique_id=92594809 instance=ExtResource("2_e2o6t")]
+position = Vector2(106, -111)
+
+[node name="Civilian234" parent="GameObjects" unique_id=1909222203 instance=ExtResource("2_e2o6t")]
+position = Vector2(68, -106)
+
+[node name="Civilian235" parent="GameObjects" unique_id=2088650393 instance=ExtResource("2_e2o6t")]
+position = Vector2(86, -100)
+
+[node name="Civilian236" parent="GameObjects" unique_id=1219338193 instance=ExtResource("2_e2o6t")]
+position = Vector2(86, -111)
+
+[node name="Civilian237" parent="GameObjects" unique_id=722403757 instance=ExtResource("2_e2o6t")]
+position = Vector2(86, -111)
+
+[node name="Civilian238" parent="GameObjects" unique_id=478634362 instance=ExtResource("2_e2o6t")]
+position = Vector2(63, -83)
+
+[node name="Civilian239" parent="GameObjects" unique_id=1532709202 instance=ExtResource("2_e2o6t")]
+position = Vector2(81, -77)
+
+[node name="Civilian240" parent="GameObjects" unique_id=789030622 instance=ExtResource("2_e2o6t")]
+position = Vector2(81, -88)
+
+[node name="Civilian241" parent="GameObjects" unique_id=1450240788 instance=ExtResource("2_e2o6t")]
+position = Vector2(81, -88)
+
+[node name="Civilian242" parent="GameObjects" unique_id=572670128 instance=ExtResource("2_e2o6t")]
+position = Vector2(62, -99)
+
+[node name="Civilian243" parent="GameObjects" unique_id=1330469718 instance=ExtResource("2_e2o6t")]
+position = Vector2(80, -93)
+
+[node name="Civilian244" parent="GameObjects" unique_id=318242500 instance=ExtResource("2_e2o6t")]
+position = Vector2(80, -104)
+
+[node name="Civilian245" parent="GameObjects" unique_id=724513124 instance=ExtResource("2_e2o6t")]
+position = Vector2(80, -104)
+
+[node name="Civilian246" parent="GameObjects" unique_id=266616021 instance=ExtResource("2_e2o6t")]
+position = Vector2(75, -82)
+
+[node name="Civilian247" parent="GameObjects" unique_id=19930566 instance=ExtResource("2_e2o6t")]
+position = Vector2(93, -76)
+
+[node name="Civilian248" parent="GameObjects" unique_id=278362135 instance=ExtResource("2_e2o6t")]
+position = Vector2(93, -87)
+
+[node name="Civilian249" parent="GameObjects" unique_id=526856939 instance=ExtResource("2_e2o6t")]
+position = Vector2(93, -87)
+
+[node name="Civilian250" parent="GameObjects" unique_id=2015530173 instance=ExtResource("2_e2o6t")]
+position = Vector2(78, -96)
+
+[node name="Civilian251" parent="GameObjects" unique_id=1407605093 instance=ExtResource("2_e2o6t")]
+position = Vector2(96, -90)
+
+[node name="Civilian252" parent="GameObjects" unique_id=1782117876 instance=ExtResource("2_e2o6t")]
+position = Vector2(96, -101)
+
+[node name="Civilian253" parent="GameObjects" unique_id=1295499099 instance=ExtResource("2_e2o6t")]
+position = Vector2(96, -101)
+
+[node name="Civilian254" parent="GameObjects" unique_id=906645301 instance=ExtResource("2_e2o6t")]
+position = Vector2(59, -109)
+
+[node name="Civilian255" parent="GameObjects" unique_id=999833048 instance=ExtResource("2_e2o6t")]
+position = Vector2(77, -103)
+
+[node name="Civilian256" parent="GameObjects" unique_id=1300196940 instance=ExtResource("2_e2o6t")]
+position = Vector2(77, -114)
+
+[node name="Civilian257" parent="GameObjects" unique_id=1775228195 instance=ExtResource("2_e2o6t")]
+position = Vector2(77, -114)
+
+[node name="Civilian258" parent="GameObjects" unique_id=618251178 instance=ExtResource("2_e2o6t")]
+position = Vector2(82, -108)
+
+[node name="Civilian259" parent="GameObjects" unique_id=189345152 instance=ExtResource("2_e2o6t")]
+position = Vector2(100, -102)
+
+[node name="Civilian260" parent="GameObjects" unique_id=804266941 instance=ExtResource("2_e2o6t")]
+position = Vector2(100, -113)
+
+[node name="Civilian261" parent="GameObjects" unique_id=121814133 instance=ExtResource("2_e2o6t")]
+position = Vector2(100, -113)
+
+[node name="Civilian262" parent="GameObjects" unique_id=646327023 instance=ExtResource("2_e2o6t")]
+position = Vector2(82, -108)
+
+[node name="Civilian263" parent="GameObjects" unique_id=625675127 instance=ExtResource("2_e2o6t")]
+position = Vector2(100, -102)
+
+[node name="Civilian264" parent="GameObjects" unique_id=428950987 instance=ExtResource("2_e2o6t")]
+position = Vector2(100, -113)
+
+[node name="Civilian265" parent="GameObjects" unique_id=87349760 instance=ExtResource("2_e2o6t")]
+position = Vector2(100, -113)
+
+[node name="Civilian266" parent="GameObjects" unique_id=205369482 instance=ExtResource("2_e2o6t")]
+position = Vector2(221, 45)
+
+[node name="Civilian267" parent="GameObjects" unique_id=642042059 instance=ExtResource("2_e2o6t")]
+position = Vector2(221, 45)
+
+[node name="Civilian268" parent="GameObjects" unique_id=603938815 instance=ExtResource("2_e2o6t")]
+position = Vector2(184, 37)
+
+[node name="Civilian269" parent="GameObjects" unique_id=1890106374 instance=ExtResource("2_e2o6t")]
+position = Vector2(202, 43)
+
+[node name="Civilian270" parent="GameObjects" unique_id=1592117784 instance=ExtResource("2_e2o6t")]
+position = Vector2(202, 32)
+
+[node name="Civilian271" parent="GameObjects" unique_id=855307313 instance=ExtResource("2_e2o6t")]
+position = Vector2(202, 32)
+
+[node name="Civilian272" parent="GameObjects" unique_id=1008741912 instance=ExtResource("2_e2o6t")]
+position = Vector2(207, 38)
+
+[node name="Civilian273" parent="GameObjects" unique_id=810045117 instance=ExtResource("2_e2o6t")]
+position = Vector2(225, 44)
+
+[node name="Civilian274" parent="GameObjects" unique_id=994456948 instance=ExtResource("2_e2o6t")]
+position = Vector2(225, 33)
+
+[node name="Civilian275" parent="GameObjects" unique_id=2060635032 instance=ExtResource("2_e2o6t")]
+position = Vector2(225, 33)
+
+[node name="Civilian276" parent="GameObjects" unique_id=1256940797 instance=ExtResource("2_e2o6t")]
+position = Vector2(207, 38)
+
+[node name="Civilian277" parent="GameObjects" unique_id=108791737 instance=ExtResource("2_e2o6t")]
+position = Vector2(225, 44)
+
+[node name="Civilian278" parent="GameObjects" unique_id=132147834 instance=ExtResource("2_e2o6t")]
+position = Vector2(225, 33)
+
+[node name="Civilian279" parent="GameObjects" unique_id=930012043 instance=ExtResource("2_e2o6t")]
+position = Vector2(225, 33)
+
+[node name="Civilian280" parent="GameObjects" unique_id=144870885 instance=ExtResource("2_e2o6t")]
+position = Vector2(217, 70)
+
+[node name="Civilian281" parent="GameObjects" unique_id=1304363465 instance=ExtResource("2_e2o6t")]
+position = Vector2(217, 70)
+
+[node name="Civilian282" parent="GameObjects" unique_id=34319805 instance=ExtResource("2_e2o6t")]
+position = Vector2(197, 52)
+
+[node name="Civilian283" parent="GameObjects" unique_id=580275601 instance=ExtResource("2_e2o6t")]
+position = Vector2(215, 58)
+
+[node name="Civilian284" parent="GameObjects" unique_id=1058578547 instance=ExtResource("2_e2o6t")]
+position = Vector2(215, 47)
+
+[node name="Civilian285" parent="GameObjects" unique_id=1946330868 instance=ExtResource("2_e2o6t")]
+position = Vector2(215, 47)
+
+[node name="Civilian286" parent="GameObjects" unique_id=1338826266 instance=ExtResource("2_e2o6t")]
+position = Vector2(213, 40)
+
+[node name="Civilian287" parent="GameObjects" unique_id=1055820392 instance=ExtResource("2_e2o6t")]
+position = Vector2(231, 46)
+
+[node name="Civilian288" parent="GameObjects" unique_id=1453096099 instance=ExtResource("2_e2o6t")]
+position = Vector2(231, 35)
+
+[node name="Civilian289" parent="GameObjects" unique_id=1753057884 instance=ExtResource("2_e2o6t")]
+position = Vector2(231, 35)
+
+[node name="Civilian290" parent="GameObjects" unique_id=1131910002 instance=ExtResource("2_e2o6t")]
+position = Vector2(193, 40)
+
+[node name="Civilian291" parent="GameObjects" unique_id=1657079597 instance=ExtResource("2_e2o6t")]
+position = Vector2(211, 46)
+
+[node name="Civilian292" parent="GameObjects" unique_id=1517391109 instance=ExtResource("2_e2o6t")]
+position = Vector2(211, 35)
+
+[node name="Civilian293" parent="GameObjects" unique_id=785797073 instance=ExtResource("2_e2o6t")]
+position = Vector2(211, 35)
+
+[node name="Civilian294" parent="GameObjects" unique_id=1082053211 instance=ExtResource("2_e2o6t")]
+position = Vector2(188, 63)
+
+[node name="Civilian295" parent="GameObjects" unique_id=1241278318 instance=ExtResource("2_e2o6t")]
+position = Vector2(206, 69)
+
+[node name="Civilian296" parent="GameObjects" unique_id=1333414195 instance=ExtResource("2_e2o6t")]
+position = Vector2(206, 58)
+
+[node name="Civilian297" parent="GameObjects" unique_id=1450482959 instance=ExtResource("2_e2o6t")]
+position = Vector2(206, 58)
+
+[node name="Civilian298" parent="GameObjects" unique_id=1146388996 instance=ExtResource("2_e2o6t")]
+position = Vector2(187, 47)
+
+[node name="Civilian299" parent="GameObjects" unique_id=30313839 instance=ExtResource("2_e2o6t")]
+position = Vector2(205, 53)
+
+[node name="Civilian300" parent="GameObjects" unique_id=1083688142 instance=ExtResource("2_e2o6t")]
+position = Vector2(205, 42)
+
+[node name="Civilian301" parent="GameObjects" unique_id=1200348489 instance=ExtResource("2_e2o6t")]
+position = Vector2(205, 42)
+
+[node name="Civilian302" parent="GameObjects" unique_id=537920529 instance=ExtResource("2_e2o6t")]
+position = Vector2(200, 64)
+
+[node name="Civilian303" parent="GameObjects" unique_id=1081785467 instance=ExtResource("2_e2o6t")]
+position = Vector2(218, 70)
+
+[node name="Civilian304" parent="GameObjects" unique_id=1302380204 instance=ExtResource("2_e2o6t")]
+position = Vector2(218, 59)
+
+[node name="Civilian305" parent="GameObjects" unique_id=1864441312 instance=ExtResource("2_e2o6t")]
+position = Vector2(218, 59)
+
+[node name="RocketAgent" parent="GameObjects" unique_id=392668871 instance=ExtResource("4_7jktm")]
+
+[node name="EnemySpawner" type="Node2D" parent="." unique_id=2008874964]
+script = ExtResource("4_ryrav")

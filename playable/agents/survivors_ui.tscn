@@ -48,36 +48,32 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3nh1f")
 
-[node name="XPMeter" type="ProgressBar" parent="." unique_id=644689042]
-layout_mode = 0
-offset_left = -144.0
-offset_top = -81.0
-offset_right = 144.0
-offset_bottom = -79.0
+[node name="BaseLayer" type="CanvasLayer" parent="." unique_id=444460457]
+
+[node name="XPMeter" type="ProgressBar" parent="BaseLayer" unique_id=644689042]
+offset_right = 288.0
+offset_bottom = 2.0
+scale = Vector2(4, 4)
 size_flags_horizontal = 0
 theme_override_styles/background = SubResource("StyleBoxEmpty_wwd38")
 theme_override_styles/fill = SubResource("StyleBoxFlat_yqk6d")
 show_percentage = false
 
-[node name="LevelLabel" type="Label" parent="." unique_id=2036228]
-layout_mode = 0
-offset_left = -140.0
-offset_top = -78.0
-offset_right = -86.0
-offset_bottom = -55.0
-scale = Vector2(0.22043915, 0.22043915)
+[node name="LevelLabel" type="Label" parent="BaseLayer" unique_id=2036228]
+offset_left = 4.0
+offset_top = 15.0
+offset_right = 58.0
+offset_bottom = 38.0
 theme_override_font_sizes/font_size = 16
 text = "Level 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Items" type="GridContainer" parent="." unique_id=346222865]
-layout_mode = 1
-offset_left = -135.0
-offset_top = -66.0
-offset_right = -23.0
-offset_bottom = 114.0
-scale = Vector2(0.25, 0.25)
+[node name="Items" type="GridContainer" parent="BaseLayer" unique_id=346222865]
+offset_left = 29.0
+offset_top = 62.0
+offset_right = 141.0
+offset_bottom = 242.0
 theme_override_constants/h_separation = 50
 theme_override_constants/v_separation = 50
 columns = 4
@@ -191,7 +187,7 @@ action_mode = 0
 [node name="BonusLoot" type="CanvasLayer" parent="." unique_id=879837510]
 layer = 11
 
-[connection signal="child_entered_tree" from="Items" to="Items" method="_on_child_entered_tree"]
+[connection signal="child_entered_tree" from="BaseLayer/Items" to="BaseLayer/Items" method="_on_child_entered_tree"]
 [connection signal="pressed" from="LevelUpLayer/LevelUpButtons/Control/0" to="LevelUpLayer" method="selected" flags=18]
 [connection signal="pressed" from="LevelUpLayer/LevelUpButtons/Control2/1" to="LevelUpLayer" method="selected" flags=18]
 [connection signal="pressed" from="LevelUpLayer/LevelUpButtons/Control3/2" to="LevelUpLayer" method="selected" flags=18]
