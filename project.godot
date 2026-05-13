@@ -29,6 +29,7 @@ Global="*uid://dybatcgd4wnbx"
 
 Player=""
 Targetable=""
+Pickup=""
 
 [input]
 

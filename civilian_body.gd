@@ -43,6 +43,9 @@ func _ready() -> void:
 		CIVILIAN_TYPE.AGENT: make_agent()
 		CIVILIAN_TYPE.GREEN_ALIEN: make_green_alien()
 	if zombie: zombify()
+	
+	for child in get_children():
+		child.material = material
 
 func zombify():
 	#somehow indicate zombie arms animation
@@ -148,13 +151,13 @@ func die(nuked : bool = false):
 		print("nuked")
 		#ashy stain from nuked
 	else:
-		EffectManager.spawn_limb($Pants/LegL)
-		EffectManager.spawn_limb($Pants/LegR)
-		EffectManager.spawn_limb($Shirt/ArmL)
-		EffectManager.spawn_limb($Shirt/ArmR)
-		EffectManager.spawn_limb($Shirt, $Shirt/Attachments.get_children())
-		EffectManager.spawn_limb($Pants)
-		EffectManager.spawn_limb($Head, $Head.get_children())
+		EffectManager.spawn_limb($Pants/LegL, owner.velocity, 1.0 + owner.size_mod)
+		EffectManager.spawn_limb($Pants/LegR, owner.velocity, 1.0 + owner.size_mod)
+		EffectManager.spawn_limb($Shirt/ArmL, owner.velocity, 1.0 + owner.size_mod)
+		EffectManager.spawn_limb($Shirt/ArmR, owner.velocity, 1.0 + owner.size_mod)
+		EffectManager.spawn_limb($Shirt, owner.velocity, 1.0 + owner.size_mod, $Shirt/Attachments.get_children())
+		EffectManager.spawn_limb($Pants, owner.velocity, 1.0 + owner.size_mod)
+		EffectManager.spawn_limb($Head, owner.velocity, 1.0 + owner.size_mod, $Head.get_children())
 		
 		EffectManager.spawn_blood_splat_particle_effect(global_position)
 	queue_free()

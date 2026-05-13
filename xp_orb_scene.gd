@@ -6,16 +6,18 @@ var team : int
 
 #need a little wobble up and down while chillin
 
+# green 9eff85
+
 func _ready() -> void:
 	match team:
 		1: $BrainSprite.show()
 		2: $OrbSprite.show()
 #		3: #zombies rotten brain etc
-	#set sprite based on common enemy, agent or alien etcdw
 
 var speed : float = 0.0
 
 #this so fuckin ugly, clean up tomorrow
+#tomorrow i say: this works
 var dir_to_area
 func _on_area_entered(area: Area2D) -> void:
 	if area.name == "XPMagnet":
@@ -72,7 +74,7 @@ func _on_area_entered(area: Area2D) -> void:
 		twe.tween_property(self, "scale", Vector2.ZERO, 0.03)
 		twe.tween_property(self, "global_position", area.global_position, 0.03)
 		await twe.finished
-		EffectManager.spawn_xp_sparkle(global_position, finaldir.angle(), 8, Color.RED if team == 1 else Color.WHITE)
+		EffectManager.spawn_xp_sparkle(global_position, finaldir.angle(), 12, Color.RED if team == 1 else Color.WHITE)
 		EffectManager.play_sound_effect(EffectManager.SFX.BRAIN if team == 1 else EffectManager.SFX.XPORB, global_position)
 		area.get_parent().award_xp(value)
 		queue_free()

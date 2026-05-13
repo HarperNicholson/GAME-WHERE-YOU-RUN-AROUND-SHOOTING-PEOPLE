@@ -18,7 +18,10 @@ func _on_body_entered(body):
 		has_hit = true
 		
 		body.hit(damage)
-		body.add_impulse(direction * knockback)
+		
+		if not body.has_projectile_impulse:
+				body.add_projectile_impulse(direction * knockback)
+		
 		#pick a semi random opposite direction
 		var angle_offset = randf_range(-PI/3, PI/3)
 		direction = direction.rotated(angle_offset).normalized()

@@ -1,28 +1,57 @@
 setup full steam integration + steam input (deck compat) + aspect ratios / UI layout stuff
 
-reduced tick rate for offscreen
 
-fix window scaling
+
+flamethrower agent
+laser net auto weapon
+mines auto weapon
+mk ultra perk / agent
+dagger auto weapon - slash in facing direction
+frag grenade weapon
+
+flame perk
+
+zombies weapon crate
+-pickups
+-breakables
+-powerups
+
+alien lightsaber weapon
+alien raygun
+
+perk soda bubbling up into rick portal gun syringe -- items fly by, and you only get ONE
+but multiple portal gun caps on super speshial crates
+----before it injects into you!
+you use element 115 to upgrade your shit
+and the tubes are full of element 115
 
 MVP: 
-backgrounds
-multi classing, 
+multi-class upgrade (give secondary weapon/drone)
 character select menu, 
-enemy spawner, 
-difficulty scale with time (enemy HP/damage/new color of xps)
 music, 
+backgrounds
 store page approval)
 
-fast baby enemies
 
-multi-class upgrade (give secondary weapon/drone)
 
+world border wrapover
+
+xp color mod from difficulty
+define wave elites / difficulty spikes / timed rewards
+enchanting table shader for wave elites
+ 
+
+
+
+
+full loop prototype + store page start by 14th
+
+2 songs
 
 
 
 laser sight (points laser from end of weapon, +25% crit chance, reduced spread by 5%)
 shield item
-laser net weapon
 aliens laser gun
 evolutions (weapons + upgrades combine, this is where survivors really shines)
 powerups
@@ -30,32 +59,35 @@ powerup upgrades (meta progression)
 permanent character upgrades (meta progression)
 upgrade the game (meta progression)
 
-enemy waves / move types
-most enemies just walk toward you
-enemy recycler / spawner
 
-team/player select menu
-
-firerate up
-knockback up
+looooots of feewdback when you level up
 
 
 rubber bullets class (bouncy): -75% damage, 2x +2 ricochet
 
+knockback up
+firerate up
+area up
 
-full loop prototype + store page start by 14th
+enemy waves / move types
+fast baby enemies
+boids?
 
-2 songs
 
-breakable objects with rare chance to spawn powerups
-looooots of feewdback when you level up
-fix brain graphic, orb sound, rename brain
+
+
+
+
+
+
+----------------------------NON ESSENTIAL FOR SURVIVORS MODE:
 limb dismembering on shoot...
 dmg numbers
 
-shell casing particle effect -- will require higher resolution on background textures. which means scaling up all physical objects
+fix window scaling
 
-----------------------------NON ESSENTIAL FOR SURVIVORS MODE:
+orb sound fix
+
 random names
 
 pass position to audiostream
@@ -69,17 +101,16 @@ stomp
 
 joystick aim
 
-vehicles as player types?
+vehicles as player types
 
 COD ZOMBIES TYPE MODE WOULD BE FUN AF
+HORDE SLIME ZOMBIE MODE OMG
 
-factor knockback into limbs on death
-
+"hole game" giant mode where you get bigger and stronger
 
 
 could technically bake cosmetic sprites (gun, faces) into a viewport and save as texture to replace the piles of sprite2ds 
 
-bake map resolution fix
 
 restore shadows
 shadows kinda funky, maybe could they be limb shape * 1.1
@@ -105,11 +136,15 @@ and moreand more
 
 Aliens / area 51 game. Different classes etc. MELEE GIANT would be fun AF 
 
-"Agents and Aliens"
-
 advance to wilder weaponry / styles and machines (attack helicopter)
 
-except more open ended like minecraft or gta?
-expand until the title of the game "game where you run around killing people" doesnt even make sense
+redstone and building bruh
 
 controller aim? not necessary in current state
+
+reduced physics tick rate for offscreen
+need better separation on horde, because get_colliding_bodies() or whatever is expensive the more dense it is
+
+limb shadows
+shell casing particle effect -- will require higher resolution on background textures. which means scaling up all physical objects
+muzzle flash/particle effect

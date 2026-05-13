@@ -21,28 +21,29 @@ position = Vector2(-5.9604645e-08, -8.940697e-08)
 scale = Vector2(0.1186159, 0.118615896)
 texture = ExtResource("2_dxa4q")
 
-[node name="OrbSprite" type="Sprite2D" parent="." unique_id=1184572588]
-visible = false
+[node name="Light" type="Sprite2D" parent="." unique_id=295370330]
 self_modulate = Color(0.61960787, 1, 0.52156866, 1)
-position = Vector2(2.9802326e-08, -5.9604645e-08)
-scale = Vector2(4, 4)
-texture = SubResource("CanvasTexture_joao7")
-
-[node name="Light" type="Sprite2D" parent="OrbSprite" unique_id=295370330]
-self_modulate = Color(0.61960787, 1, 0.52156866, 1)
-position = Vector2(-1.1920929e-07, -5.9604645e-08)
-scale = Vector2(0.01, 0.01)
+position = Vector2(-4.4703484e-07, -2.9802322e-07)
+scale = Vector2(0.04, 0.04)
 texture = ExtResource("3_kjb5f")
 
-[node name="OrbSpriteInner" type="Sprite2D" parent="OrbSprite" unique_id=206428160]
-position = Vector2(1.490116e-08, 2.2351742e-08)
-scale = Vector2(0.75, 0.75)
+[node name="OrbSprite" type="Sprite2D" parent="." unique_id=206428160]
+visible = false
+position = Vector2(8.940697e-08, 2.9802322e-08)
+scale = Vector2(3, 3)
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="OrbSprite2" type="Sprite2D" parent="OrbSprite" unique_id=1184572588]
+z_index = -1
+position = Vector2(-1.9868214e-08, -2.9802322e-08)
+scale = Vector2(1.3333334, 1.3333334)
 texture = SubResource("CanvasTexture_joao7")
 
 [node name="BrainSprite" type="Node2D" parent="." unique_id=1736563583]
 visible = false
 
-[node name="BrainSprite4" type="Sprite2D" parent="BrainSprite" unique_id=2003247419]
+[node name="Shadow" type="Sprite2D" parent="BrainSprite" unique_id=2003247419]
+visible = false
 self_modulate = Color(0.2159017, 0.21590173, 0.2159017, 0.5411765)
 position = Vector2(-5.9604645e-08, 1)
 scale = Vector2(3.9999998, 3)
@@ -66,6 +67,12 @@ texture = SubResource("CanvasTexture_joao7")
 self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
 position = Vector2(1.4901163e-08, 0.16666667)
 scale = Vector2(0.75000125, 0.06666667)
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="BrainSprite6" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=1530882261]
+self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
+position = Vector2(-1.1175871e-08, 0.466)
+scale = Vector2(1, 0.06666667)
 texture = SubResource("CanvasTexture_joao7")
 
 [node name="BrainSprite4" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=877475272]
@@ -99,6 +106,54 @@ scale = Vector2(0.12081363, 0.058925573)
 skew = 0.28379393
 texture = SubResource("CanvasTexture_joao7")
 
+[node name="BrainSprite20" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=2107354491]
+self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
+position = Vector2(0.259, 0.553)
+rotation = -0.4466285
+scale = Vector2(0.18486536, 0.058925573)
+skew = 0.28379393
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="BrainSprite21" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=1083600204]
+self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
+position = Vector2(0.27802652, 0.63897353)
+rotation = -0.44597888
+scale = Vector2(0.17454098, 0.058925573)
+skew = 0.28379393
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="BrainSprite16" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=1244854443]
+self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
+position = Vector2(0.30392182, 0.16744265)
+rotation = 0.92729515
+scale = Vector2(0.12081363, 0.058925573)
+skew = -0.28379405
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="BrainSprite17" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=1030942192]
+self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
+position = Vector2(0.30401155, 0.07189569)
+rotation = -0.92729515
+scale = Vector2(0.12081363, 0.058925573)
+skew = 0.28379393
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="BrainSprite18" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=452473541]
+self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
+position = Vector2(-0.4460783, 0.16744263)
+rotation = 0.92729515
+scale = Vector2(0.12081363, 0.058925573)
+skew = -0.28379405
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="BrainSprite19" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=1937291462]
+self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
+position = Vector2(-0.44598845, 0.071895726)
+rotation = -0.92729515
+scale = Vector2(0.12081363, 0.058925573)
+skew = 0.28379393
+texture = SubResource("CanvasTexture_joao7")
+
 [node name="BrainSprite10" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=1656597910]
 self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
 position = Vector2(1.4901163e-08, -0.29500002)
@@ -110,6 +165,33 @@ texture = SubResource("CanvasTexture_joao7")
 self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
 position = Vector2(0.25000006, -0.29500002)
 rotation = -1.5707964
+scale = Vector2(0.4116667, 0.05000001)
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="BrainSprite22" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=2096085269]
+self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
+position = Vector2(0, 0.273)
+rotation = -1.5707964
+scale = Vector2(0.4116667, 0.05000001)
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="BrainSprite23" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=901166676]
+self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
+position = Vector2(0.25000003, 0.33333334)
+rotation = -1.5707964
+scale = Vector2(0.4116667, 0.05000001)
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="BrainSprite24" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=768029818]
+self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
+position = Vector2(-0.36, 0.288)
+rotation = -1.5707964
+scale = Vector2(0.4116667, 0.05000001)
+texture = SubResource("CanvasTexture_joao7")
+
+[node name="BrainSprite25" type="Sprite2D" parent="BrainSprite/BrainSprite3" unique_id=1647766046]
+self_modulate = Color(0.83138317, 0.59890133, 0.46597493, 1)
+position = Vector2(0.25000003, -2.9802322e-08)
 scale = Vector2(0.4116667, 0.05000001)
 texture = SubResource("CanvasTexture_joao7")
 

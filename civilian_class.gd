@@ -3,6 +3,8 @@ extends CharacterBody2D
 var visible_on_screen : bool = true
 var update_rate : float = 1.0
 
+var has_projectile_impulse : bool = false
+
 @export var responsiveness : float = 10.0
 @export var always_sprinting : bool = false
 @export var is_player : bool = false
@@ -15,7 +17,8 @@ var is_alive : bool = true
 @export var bouncy_projectiles : bool = false
 
 
-var speed : float = 65.0
+@export var max_velocity := 300.0
+@export var speed : float = 50.0
 const SPRINT_MOD : float = 2.0
 
 var knockback_mod : float = 0.0
@@ -28,6 +31,8 @@ var damage_mod : float = 0.0 # as % increase
 var area_mod : float = 0.0 # as % increase
 var fire_rate_mod : float = 0.0 # as % reduction
 
+var size_mod : float = 0.0 #as % increase to body "scale"
+
 var max_hp = 3.0
 var hp : float = 3.0
 var regen : float = 0.1 #per second
@@ -39,7 +44,15 @@ var levelup_options : int = 3
 var levelup_rerolls : int = 0
 
 var elite : bool = false #triple HP, double size, half speed or something
-#drops upgrade reward
+var is_wave_elite : bool = false #ensures drop
+
+func update_body_size():
+	$Area2D/CollisionShape2D.scale *= 1.0 + size_mod
+	$CollisionShape2D.scale *= 1.0 + size_mod
+	$CivilianBody.scale *= 1.0 + size_mod
+	default_shadow_scale *= 1.0 + size_mod
+	$EntityShadow.position.y *= 1.0 + size_mod
+	weapon_holding_radius *= 1.0 + size_mod
 
 func give_item(item : Global.ITEMS):
 	var item_instance = Global.item_scenes[item].instantiate()
@@ -75,19 +88,31 @@ func award_xp(_xp_reward):
 func kill():
 	is_alive = false
 	
-	var current_scene = get_tree().get_current_scene()
-	
 	if randf_range(0.0,1.0) > 0.5:
 		var xp_orb_instance = xp_orb_scene.instantiate()
 		xp_orb_instance.value = xp_reward
 		xp_orb_instance.global_position = global_position
-		xp_orb_instance.team = current_scene.enemy_team
-		current_scene.find_child("GameObjects").call_deferred("add_child", xp_orb_instance) #spawn XP orb
+		xp_orb_instance.team = Global.enemy_team
+		get_tree().get_current_scene().find_child("GameObjects").call_deferred("add_child", xp_orb_instance) #spawn XP orb
+	
+	if elite:
+		if is_wave_elite:
+			drop_chest()
+		elif randf() < 1.01:
+			drop_chest()
 	
 	get_tree().get_first_node_in_group("Player").award_xp(xp_reward * 0.1) #to give 10% of XP to player on kill
 	
 	$CivilianBody.die()
 	queue_free()
+
+func drop_chest():
+	print("WHABAM LOOT")
+	var chest_instance = Global.weapon_crate_scene.instantiate()
+	
+	chest_instance.global_position = global_position
+	
+	get_tree().get_current_scene().spawn_object(chest_instance)
 
 #func _draw() -> void:
 	#if !is_player:
@@ -175,6 +200,7 @@ func _physics_process(delta: float) -> void:
 	
 	movement(delta)
 	collisions(delta)
+	velocity = velocity.limit_length(max_velocity)
 	
 	calculate_shadow()
 	
@@ -191,7 +217,7 @@ func regenerate_hp():
 func movement(delta):
 	if visible_on_screen:
 		var input_dir = controller.get_movement_direction_as_vector()
-		var target_velocity = input_dir * speed#dw * (SPRINT_MOD if (controller.is_sprinting() or always_sprinting) else 1.0)
+		var target_velocity = input_dir * speed# * (SPRINT_MOD if (controller.is_sprinting() or always_sprinting) else 1.0)
 		
 		velocity = velocity.move_toward(target_velocity, speed * responsiveness * delta)
 		
@@ -213,7 +239,10 @@ func collisions(_delta):
 		var other = bodies[i]
 		if other == self:
 			continue
-
+		
+		if other.is_in_group("Pickup"):
+			other.pickup()
+		
 		#spinning sawblade lol
 		#if is_player:
 			#if other.is_player == false:
@@ -234,23 +263,41 @@ func collisions(_delta):
 		push = Vector2.ZERO
 	
 	
-	add_impulse(push * 10.0)
+	add_impulse(push * 10.0) #can this be smoother and something else somehow.....
 	
 	if push != Vector2.ZERO:
-		velocity = lerp(velocity, velocity * (Vector2.ONE * 0.6 if !is_player else 0.85), _delta * 20.0)
+		velocity = lerp(velocity, velocity * (Vector2.ONE * 0.4 if !is_player else 0.85) / (1.0 + size_mod), _delta * 20.0)
 
 func add_impulse(force: Vector2):
 	if is_player:
 		return
-	velocity += force
+	velocity += force / (1.0 + size_mod)
+
+var default_shadow_scale : Vector2 = Vector2(6.0,3.0)
+var default_shadow_alpha : float = 0.4
+
+func add_projectile_impulse(impulse: Vector2):
+	
+	if has_projectile_impulse:
+		return
+	
+	has_projectile_impulse = true
+	
+	add_impulse(impulse)
+	
+	reset_projectile_impulse_next_frame()
+
+func reset_projectile_impulse_next_frame():
+	await get_tree().physics_frame
+	has_projectile_impulse = false
+
 
 func calculate_shadow():
 	if !visible:
 		return
 	
 	var hop_factor : float = clampf(-$CivilianBody.position.y / $CivilianBody.max_hop_anim_height, 0.0, 1.0)
-	var default_shadow_scale : Vector2 = Vector2(6.0,3.0)
-	var default_shadow_alpha : float = 0.4
+	
 	
 	$EntityShadow.scale = lerp(default_shadow_scale, default_shadow_scale * 0.7, hop_factor)
 	$EntityShadow.self_modulate.a = lerp(default_shadow_alpha, default_shadow_alpha * 0.7, hop_factor)
@@ -272,3 +319,9 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	return
 	visible_on_screen = false
 	
+
+func set_civilian_body_type(_type):
+	match _type:
+		Global.TEAM.NONE: $CivilianBody.type = $CivilianBody.CIVILIAN_TYPE.NONE
+		Global.TEAM.AGENTS: $CivilianBody.type = $CivilianBody.CIVILIAN_TYPE.AGENT
+		Global.TEAM.ALIENS: $CivilianBody.type = $CivilianBody.CIVILIAN_TYPE.GREEN_ALIEN

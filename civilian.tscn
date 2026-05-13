@@ -19,6 +19,7 @@ motion_mode = 1
 floor_stop_on_slope = false
 script = ExtResource("1_vepw6")
 controller = NodePath("AIController")
+speed = 25.0
 
 [node name="EntityShadow" type="Sprite2D" parent="." unique_id=145087866]
 self_modulate = Color(0, 0, 0, 0.4)

@@ -11,7 +11,7 @@ var damage : float = 0.0
 
 var has_hit : bool = false
 
-const MAX_DIST := 1000.0
+const MAX_DIST := 220.0
 const MAX_DIST_SQ := MAX_DIST * MAX_DIST
 
 var bouncy : bool = false

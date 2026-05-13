@@ -64,17 +64,17 @@ func _physics_process(delta):
 		base_position.y = ground_y
 		land()
 
-#func _update_shadow():
-	#var height_factor = clamp(z / 300.0, 0.0, 1.0)
-	#
-	#shadow.global_position = base_position + Vector2(0,0.5)
-	#
-	#shadow.scale = 4.0 * Vector2(
-		#1.2 + 0.6 * height_factor,
-		#0.6 + 0.2 * height_factor
-	#)
-	#
-	#shadow.modulate.a = lerp(0.3, 0.1, height_factor)
+func _update_shadow():
+	var height_factor = clamp(z / 300.0, 0.0, 1.0)
+	
+	shadow.global_position = base_position + Vector2(0,0.5)
+	
+	shadow.scale = 4.0 * Vector2(
+		1.2 + 0.6 * height_factor,
+		0.6 + 0.2 * height_factor
+	)
+	
+	shadow.modulate.a = lerp(0.3, 0.1, height_factor)
 
 func land():
 	landed = true

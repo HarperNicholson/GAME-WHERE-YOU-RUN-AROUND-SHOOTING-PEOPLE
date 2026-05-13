@@ -58,6 +58,7 @@ var MapNode : Node2D
 
 #var animated_effect_scene : PackedScene = preload("res://polished/animation/animated_effect.tscn")
 #var value_popup_scene : PackedScene = preload("res://polished/animation/value_popup.tscn")
+var explosion_flat_decal_scene : PackedScene = preload("res://polished/animation/explosion_flat_decal.tscn")
 var explosion_particle_effect_scene : PackedScene = preload("res://polished/animation/explosion_particle_effect.tscn")
 var blood_splat_particle_effect_scene : PackedScene = preload("res://polished/animation/blood_splat_particle_effect.tscn")
 var blood_pool_particle_effect_scene : PackedScene = preload("res://polished/animation/blood_pool.tscn")
@@ -74,7 +75,7 @@ var sounds := {
 	SFX.ROCKET: preload("res://audio/rocketShoot.wav"),
 	SFX.LASER: preload("res://audio/laserShoot.wav"),
 	SFX.LEVELUP: preload("res://audio/levelUp.wav"),
-	SFX.BRAIN: preload("res://audio/brain2.wav"),
+	SFX.BRAIN: preload("res://audio/xpBrain.wav"),
 	SFX.XPORB: preload("res://audio/xpOrb.wav"),
 	SFX.CLICK: preload("res://audio/click.wav"),
 	
@@ -87,7 +88,7 @@ var pool : Array[AudioStreamPlayer2D] = []
 var pool_index := 0
 var pool_initialized : bool = false
 
-func _ready():
+func _initialize_audio_pool():
 	await get_tree().process_frame
 	for i in pool_size:
 		var p = AudioStreamPlayer2D.new()
@@ -136,6 +137,19 @@ func spawn_explosion_particle_effect(_global_position : Vector2):
 	await instance.finished
 	instance.queue_free()
 
+func spawn_explosion_flat_decal(_global_position : Vector2):
+	var instance = explosion_flat_decal_scene.instantiate()
+	var instance_seed = randi()
+	instance.emitting = true
+	instance.seed = instance_seed
+	instance.global_position = _global_position
+	#instance.amount = amount# * particle_amount_mult
+	
+	PersistentSolidsNode.add_child(instance)
+	
+	await instance.finished
+	instance.queue_free()
+
 func spawn_blood_splat_particle_effect(_global_position : Vector2, amount : int = 12):
 	var instance = blood_splat_particle_effect_scene.instantiate()
 	var instance_seed = randi()
@@ -165,21 +179,27 @@ func spawn_blood_pool_particle_effect(_global_position : Vector2):
 	
 	PersistentFlatEffectsNode.add_child(instance)
 
-func set_limb_physics(limb):
-	limb.vel = Vector2(randf_range(-50,50), randf_range(-80,80))
-	limb.vz = randf_range(180,260)
-	limb.rot_v = randf_range(-50,50)
+func set_limb_physics(limb, inherited_velocity):
+	
+	
+	limb.vel = inherited_velocity + Vector2(
+		randf_range(-50, 50),
+		randf_range(-80, 80)
+	)
+	
+	limb.vz = randf_range(180, 260)
+	limb.rot_v = randf_range(-50, 50)
 
-func spawn_limb(from: Sprite2D, limb_children : Array = []):
+func spawn_limb(from: Sprite2D, body_velocity, _size_mod : float, limb_children : Array = []):
 	var limb = limb_scene.instantiate()
 	
 	limb.texture = from.texture
 	limb.self_modulate = from.self_modulate
 	limb.global_position = from.global_position
-	limb.scale = from.scale * 4.0
+	limb.scale = from.scale * 4.0 * _size_mod
 	limb.rotation = from.global_rotation
 	
-	set_limb_physics(limb)
+	set_limb_physics(limb, body_velocity)
 	
 	TempSolidEffectsNode.add_child(limb)
 	

@@ -14,7 +14,7 @@ extends Node2D
 @export var projectile_knockback : float = 50.0
 @export var SFX : EffectManager.SFX = EffectManager.SFX.GUN
 
-var cooldown := 0.0
+var cooldown : float = 0.0
 
 func _process(delta):
 	cooldown -= delta

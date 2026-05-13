@@ -1,10 +1,19 @@
 extends Node
 
+var weapon_crate_scene : PackedScene = preload("res://weapon_crate.tscn")
+
+
 var paused : bool = false
 var levelup_options : int = 3
 var levelup_rerolls : int = 0
 var player : CharacterBody2D
 var player_position : Vector2 = Vector2.ZERO
+
+var difficulty : float = 0.0
+
+var enemy_team : TEAM = TEAM.AGENTS
+
+enum TEAM { NONE, AGENTS, ALIENS}
 
 enum ITEMS {
 	AMOUNT_UP, 

@@ -23,6 +23,9 @@ func get_aim_direction() -> Vector2:
 		
 		var distance : float = get_parent().global_position.distance_squared_to(target.global_position)
 		
+		if distance > max_targetable_distance * max_targetable_distance:
+			continue
+		
 		if distance < nearest_distance:
 			nearest_distance = distance
 			nearest = target

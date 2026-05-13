@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://cfbggwj2jsxb8"]
+
+[ext_resource type="Script" uid="uid://3dwmfoknpi1g" path="res://weapon_crate.gd" id="1_hcfla"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_44u3b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_44u3b"]
+radius = 6.0
+
+[node name="WeaponCrate" type="Node2D" unique_id=242550196 groups=["Pickup"]]
+script = ExtResource("1_hcfla")
+
+[node name="dropshadow" type="Sprite2D" parent="." unique_id=1101509582]
+self_modulate = Color(0, 0, 0, 0.4)
+position = Vector2(0, 2.5)
+scale = Vector2(15.999999, 3.9087982)
+texture = SubResource("CanvasTexture_44u3b")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1891820517]
+self_modulate = Color(0.61, 0.40829334, 0.2318, 1)
+position = Vector2(-3.5762787e-07, 1.1920929e-07)
+scale = Vector2(13.605, 5.831)
+texture = SubResource("CanvasTexture_44u3b")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D" unique_id=290002756]
+self_modulate = Color(0.9020187, 0.70007515, 0.5292455, 1)
+position = Vector2(-0.478, 0.299)
+rotation = -0.009940141
+scale = Vector2(0.07350235, 0.4287429)
+texture = SubResource("CanvasTexture_44u3b")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Sprite2D" unique_id=11924023]
+self_modulate = Color(0.9020187, 0.70007515, 0.5292455, 1)
+position = Vector2(0.471, 0.299)
+rotation = 0.011334165
+scale = Vector2(0.07350235, 0.4287429)
+texture = SubResource("CanvasTexture_44u3b")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Sprite2D" unique_id=1456842451]
+self_modulate = Color(0.9020187, 0.70007515, 0.5292455, 1)
+position = Vector2(0, -0.03)
+scale = Vector2(1.044518, 0.19304594)
+texture = SubResource("CanvasTexture_44u3b")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Sprite2D" unique_id=1114253562]
+self_modulate = Color(0.9020187, 0.70007515, 0.5292455, 1)
+position = Vector2(2.62865e-08, 0.17149717)
+scale = Vector2(0.8490226, 0.14361168)
+texture = SubResource("CanvasTexture_44u3b")
+
+[node name="Sprite2D8" type="Sprite2D" parent="Sprite2D" unique_id=2270164]
+self_modulate = Color(0.9020187, 0.70007515, 0.5292455, 1)
+position = Vector2(2.62865e-08, 0.34299433)
+scale = Vector2(0.8490226, 0.14361168)
+texture = SubResource("CanvasTexture_44u3b")
+
+[node name="Sprite2D9" type="Sprite2D" parent="Sprite2D" unique_id=106267883]
+self_modulate = Color(0.9020187, 0.70007515, 0.5292455, 1)
+position = Vector2(0, 0.481)
+rotation = -0.01178801
+scale = Vector2(0.85089123, 0.08845984)
+texture = SubResource("CanvasTexture_44u3b")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Sprite2D" unique_id=454347918]
+self_modulate = Color(0.9020187, 0.70007515, 0.5292455, 1)
+position = Vector2(0, -0.441)
+scale = Vector2(1.044518, 0.17246623)
+texture = SubResource("CanvasTexture_44u3b")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Sprite2D" unique_id=1776692182]
+self_modulate = Color(0.9020187, 0.70007515, 0.5292455, 1)
+position = Vector2(0, -0.239)
+rotation = 0.027913809
+scale = Vector2(1.0599678, 0.15540405)
+texture = SubResource("CanvasTexture_44u3b")
+
+[node name="Sprite2D11" type="Sprite2D" parent="Sprite2D" unique_id=678221470]
+self_modulate = Color(0.24, 0.18356, 0.0408, 1)
+position = Vector2(2.6402919e-08, -0.141)
+rotation = -0.00994014
+scale = Vector2(0.11823321, 0.33044484)
+texture = SubResource("CanvasTexture_44u3b")
+
+[node name="Sprite2D12" type="Sprite2D" parent="Sprite2D" unique_id=319977773]
+self_modulate = Color(0.9019608, 0.7019608, 0.5294118, 1)
+position = Vector2(0.002383976, -0.141)
+rotation = -0.00994014
+scale = Vector2(0.09517729, 0.24385433)
+texture = SubResource("CanvasTexture_44u3b")
+
+[node name="Sprite2D10" type="Sprite2D" parent="Sprite2D" unique_id=1240186370]
+self_modulate = Color(0.24, 0.18356, 0.0408, 1)
+position = Vector2(2.6286504e-08, -0.34299436)
+rotation = -0.00994014
+scale = Vector2(0.10360658, 0.4784528)
+texture = SubResource("CanvasTexture_44u3b")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2104214991]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1793036795]
+shape = SubResource("CircleShape2D_44u3b")
