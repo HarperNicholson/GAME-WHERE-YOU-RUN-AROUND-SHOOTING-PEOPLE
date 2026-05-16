@@ -1,7 +1,6 @@
 setup full steam integration + steam input (deck compat) + aspect ratios / UI layout stuff
 
 
-
 flamethrower agent
 laser net auto weapon
 mines auto weapon

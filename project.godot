@@ -30,6 +30,7 @@ Global="*uid://dybatcgd4wnbx"
 Player=""
 Targetable=""
 Pickup=""
+Enemies=""
 
 [input]
 

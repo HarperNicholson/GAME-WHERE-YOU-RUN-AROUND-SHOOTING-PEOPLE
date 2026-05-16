@@ -12,7 +12,7 @@ radius = 3.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_6ru8d"]
 radius = 4.1231055
 
-[node name="Civilian" type="CharacterBody2D" unique_id=745263233 node_paths=PackedStringArray("controller") groups=["Targetable"]]
+[node name="Civilian" type="CharacterBody2D" unique_id=745263233 node_paths=PackedStringArray("controller") groups=["Enemies", "Targetable"]]
 z_index = 1
 collision_layer = 2
 motion_mode = 1

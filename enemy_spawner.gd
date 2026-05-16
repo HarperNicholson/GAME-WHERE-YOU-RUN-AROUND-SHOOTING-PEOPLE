@@ -16,7 +16,6 @@ func _process(delta: float) -> void:
 		recycle_timer = 0.0
 		recycle_far_enemies()
 	
-	#difficulty-scaled spawn income
 	spawn_budget += delta * spawn_rate * Global.difficulty
 	
 	var enemy_count := get_tree().get_nodes_in_group("Enemies").size()
@@ -95,7 +94,7 @@ func make_elite(enemy):
 	enemy.update_body_size()
 
 func recycle_far_enemies():
-	var max_dist := 240.0
+	var max_dist := 200.0
 	var max_dist_sq := max_dist * max_dist
 	
 	for enemy in get_tree().get_nodes_in_group("Enemies"):

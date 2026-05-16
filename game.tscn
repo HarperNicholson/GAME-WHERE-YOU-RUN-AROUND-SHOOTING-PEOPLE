@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://nnqliyjiq857" path="res://game.gd" id="1_80nbo"]
 [ext_resource type="PackedScene" uid="uid://dymb5bb7cy85r" path="res://civilian.tscn" id="2_e2o6t"]
-[ext_resource type="PackedScene" uid="uid://4abw21jsqgwi" path="res://playable/agents/shotgun_agent.tscn" id="3_7jktm"]
+[ext_resource type="PackedScene" uid="uid://ds140tyhljkd5" path="res://playable/agents/rocket_agent.tscn" id="3_7jktm"]
 [ext_resource type="Texture2D" uid="uid://d3j28emlel3d1" path="res://grid.jpg" id="4_fc0e3"]
 [ext_resource type="Script" uid="uid://r0jx3kf0f4wh" path="res://enemy_spawner.gd" id="4_ryrav"]
 
@@ -106,7 +106,7 @@ metadata/_edit_lock_ = true
 y_sort_enabled = true
 metadata/_edit_lock_ = true
 
-[node name="ShotgunAgent" parent="GameObjects" unique_id=745263233 instance=ExtResource("3_7jktm")]
+[node name="RocketAgent" parent="GameObjects" unique_id=745263233 instance=ExtResource("3_7jktm")]
 
 [node name="EnemySpawner" type="Node2D" parent="." unique_id=2008874964]
 script = ExtResource("4_ryrav")
