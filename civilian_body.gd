@@ -83,7 +83,7 @@ func animate(delta, velocity):
 	
 	was_moving = moving
 	
-	if get_parent().weapon != null:
+	if "weapon" in get_parent() and get_parent().weapon != null:
 		weapon_to_point_toward = get_parent().weapon
 		holding_weapon = true
 	else:

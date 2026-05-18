@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ncjggmkyw46k"]
 
 [ext_resource type="Script" uid="uid://btl3mj32raxnw" path="res://mainmenu.gd" id="1_cmhrf"]
+[ext_resource type="PackedScene" uid="uid://ctnxymgw58y7u" path="res://civilian_body.tscn" id="2_d2nv2"]
 
 [node name="Mainmenu" type="Node2D" unique_id=1696680864]
 script = ExtResource("1_cmhrf")
@@ -52,6 +53,16 @@ offset_left = 824.0
 offset_right = 1028.0
 offset_bottom = 647.0
 text = "ALIENS"
+
+[node name="CivilianBody" parent="Control" unique_id=1593687168 instance=ExtResource("2_d2nv2")]
+position = Vector2(238, 304)
+scale = Vector2(64, 64)
+type = 1
+
+[node name="CivilianBody2" parent="Control" unique_id=862567157 instance=ExtResource("2_d2nv2")]
+position = Vector2(920, 290)
+scale = Vector2(64, 64)
+type = 2
 
 [connection signal="pressed" from="Control/AgentsTeamButton" to="." method="_on_agents_team_button_pressed"]
 [connection signal="pressed" from="Control/AliensTeamButton" to="." method="_on_aliens_team_button_pressed"]

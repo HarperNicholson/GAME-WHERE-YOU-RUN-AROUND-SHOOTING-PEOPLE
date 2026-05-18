@@ -2,6 +2,10 @@ extends Node2D
 
 enum MENU_SPOT { LEFT, CENTER, RIGHT }
 
+func _physics_process(delta: float) -> void:
+	$Control/CivilianBody.animate(delta, Vector2.ZERO)
+	$Control/CivilianBody2.animate(delta, Vector2.ZERO)
+
 func _on_aliens_team_button_pressed() -> void:
 	set_gui_node_inputs_disabled()
 	move_menu(MENU_SPOT.LEFT)
