@@ -42,17 +42,15 @@ text = "ALIENSGRAPHIC"
 [node name="AgentsTeamButton" type="Button" parent="Control" unique_id=2143084417 groups=["disableable"]]
 layout_mode = 0
 offset_left = 133.0
-offset_top = 531.0
 offset_right = 334.0
-offset_bottom = 608.0
+offset_bottom = 647.0
 text = "AGENTS"
 
 [node name="AliensTeamButton" type="Button" parent="Control" unique_id=1567424634 groups=["disableable"]]
 layout_mode = 0
 offset_left = 824.0
-offset_top = 536.0
 offset_right = 1028.0
-offset_bottom = 608.0
+offset_bottom = 647.0
 text = "ALIENS"
 
 [connection signal="pressed" from="Control/AgentsTeamButton" to="." method="_on_agents_team_button_pressed"]
