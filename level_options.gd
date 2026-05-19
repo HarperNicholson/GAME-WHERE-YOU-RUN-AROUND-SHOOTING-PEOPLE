@@ -21,6 +21,8 @@ func refresh():
 	available_items.shuffle()
 	
 	for i in range(min(Global.levelup_options, available_items.size())):
+		
+		#levelup options must be unique. if only one option is available, only one will show.
 		var item = available_items[i]
 		
 		options.append(item)

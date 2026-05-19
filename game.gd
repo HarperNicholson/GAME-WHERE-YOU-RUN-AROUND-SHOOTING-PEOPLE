@@ -42,6 +42,9 @@ func _physics_process(delta: float) -> void:
 
 func spawn_player():
 	#global_position = world_size / 2
+	#Global.player = playerinstance or wahtever
+	#but for now
+	Global.player = $GameObjects/RocketAgent
 	pass
 
 func spawn_object(object_instance):

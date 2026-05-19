@@ -62,33 +62,64 @@ var item_scenes := {
 	#ITEMS.RUBBER_BULLETS: preload("res://upgrades/rubber_bullets.tscn"),
 }
 
-func get_available_items() -> Array[ITEMS]:
-	var result : Array[ITEMS] = ITEMS.values()
+func get_available_items() -> Array:
+	var result : Array = ITEMS.values()
 	
-	var player_items = player.find_child("SurvivorsUI").find_child("Items").get_children()
+	var player_item_nodes = player.find_child("SurvivorsUI").find_child("Items").get_children()
 	
-	for item in player_items:
-		var item_id = item.item_id #this will return ITEMS.ITEM_NAME
-		var item_copies = item.copies #this will return an int >= 1
+	var player_items : Array = []
+	
+	for item_node in player_item_nodes:
+		var item_id_and_copies : Array = []
+		item_id_and_copies.append(item_node.item_id)
+		item_id_and_copies.append(item_node.copies)
+		player_items.append(item_id_and_copies)
+	
+	var player_level_nines : Array = []
+	
+	var player_passives : int = 0
+	var player_weapons : int = 0
+	
+	for _item_id_and_copies in player_items:
+		var item_id = _item_id_and_copies[0] #this will return ITEMS.ITEM_NAME
+		var item_copies = _item_id_and_copies[1] #this will return an int >= 1
 		
-		#tally up item types first, then start removing conditional
 		
-		#if > 6 weapons:
-		#remove all weapons
 		
-		#same goes for passives, if >6 passives remove all passives
+		if item_id in PASSIVES_POOL: player_passives += 1
+		if item_id in WEAPONS_POOL: player_weapons += 1
 		
-		if item.copies == 9:
+		if player_weapons >= 6:
+			for weapon in WEAPONS_POOL:
+				if result.has(weapon):
+					result.remove_at(result.find(weapon))
+			#remove all weapons from result
+		
+		if player_passives >= 6:
+			for passive in PASSIVES_POOL:
+				if result.has(passive):
+					result.remove_at(result.find(passive))
+			#remove all passives from result
+		
+		if item_copies == 9: 
+			#mark as ingredient ready
+			player_level_nines.append(item_id)
 			if result.has(item_id):
 				result.remove_at(result.find(item_id))
-		
+	
+	
+	for evo in EVOLUTIONS_POOL:
+		if player_items.has(evo): result.remove_at(result.find(evo))
+		elif player_level_nines.has(evo): continue
+		elif result.has(evo):
+			result.remove_at(result.find(evo))
 	
 	#no more than 6 unique weapons and 6 unique passives. 
 	#no item can be given more than 9 times. 
-	#evolutions can appear when an evolution ingredient is at copy level 9. 
+	#evolution of item can appear when evo. ingredient is at 9 copies 
 	#when an evolution is taken, both ingredients are set to level 9 
 	#evolutions can be given only once each.
-	#levelup options must be unique. if only one option is available, only one will show.
+	
 	
 	
 	return result
