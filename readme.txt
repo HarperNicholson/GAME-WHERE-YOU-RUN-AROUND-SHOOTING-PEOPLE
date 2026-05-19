@@ -1,5 +1,23 @@
 setup full steam integration + steam input (deck compat) + aspect ratios / UI layout stuff
 
+agents - arsenal and dark conspiracy
+aliens - turn the enemy against itself? or maybe high defense
+
+rocket trail emission is being cut off too soon. change emitting instead of existence
+pretty it up too. the grey is ugly
+
+5 screenshots
+quick pitch trailer
+gamemode concept screenshots (trailer only)
+
+jetpack evolution - item pool conditions
+
+
+incremental digging mode
+survival 2d mode
+
+
+lateralus man
 
 flamethrower agent
 laser net auto weapon
@@ -7,8 +25,6 @@ mines auto weapon
 mk ultra perk / agent
 dagger auto weapon - slash in facing direction
 frag grenade weapon
-
-flame perk
 
 zombies weapon crate
 -pickups

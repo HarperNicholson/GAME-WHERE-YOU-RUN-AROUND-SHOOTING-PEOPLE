@@ -39,7 +39,7 @@ func fire():
 			projectile_instance.ricochets = projectile_ricochets + owner.ricochet_mod
 			projectile_instance.damage = projectile_damage * (1 + owner.damage_mod)
 			projectile_instance.knockback = projectile_knockback + owner.knockback_mod
-			projectile_instance.area_mod = owner.area_mod
+			projectile_instance._owner = owner
 			projectile_instance.bouncy = owner.bouncy_projectiles
 			
 			projectile_instance.global_position = $ProjectileSpawn.global_position

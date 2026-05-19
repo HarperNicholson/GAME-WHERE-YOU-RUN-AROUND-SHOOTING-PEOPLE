@@ -17,6 +17,18 @@ colors = PackedColorArray(0.8560673, 0.8560673, 0.856067, 1, 0.07683588, 0.07683
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_jvyuy"]
 
+[sub_resource type="Curve" id="Curve_vo3hp"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_jvyuy"]
+offsets = PackedFloat32Array(0, 0.20963173, 0.47308782, 0.81303114, 0.9936508)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.88030297, 0, 1, 1, 0.18333334, 0, 1, 0.27, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_gvutl"]
+offsets = PackedFloat32Array(0.7507082)
+colors = PackedColorArray(1, 0.9692308, 0.9692308, 1)
+
 [node name="CivilianBody" type="Node2D" unique_id=1593687168]
 scale = Vector2(4, 4)
 script = ExtResource("1_aclks")
@@ -150,3 +162,22 @@ rotation = -1.5707964
 scale = Vector2(1, 0.5)
 texture = SubResource("CanvasTexture_hairy")
 offset = Vector2(-0.5, 0)
+
+[node name="BurnEffect" type="CPUParticles2D" parent="." unique_id=524854016]
+position = Vector2(5.9604638e-08, 0.75)
+rotation = -1.5707964
+scale = Vector2(0.05, 0.02)
+emitting = false
+lifetime = 0.4
+randomness = 0.46
+direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 150.0
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+scale_amount_min = 3.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_vo3hp")
+color_ramp = SubResource("Gradient_jvyuy")
+color_initial_ramp = SubResource("Gradient_gvutl")

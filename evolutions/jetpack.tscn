@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://fatpaf6ch1e3"]
+
+[ext_resource type="Script" uid="uid://b5sy8fw64qjjb" path="res://evolutions/jetpack.gd" id="1_65oo5"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_64lnt"]
+
+[sub_resource type="Curve" id="Curve_213xq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_f6nig"]
+offsets = PackedFloat32Array(0, 0.20963173, 0.47308782, 0.81303114, 0.9936508)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.88030297, 0, 1, 1, 0.18333334, 0, 1, 0.27, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_e6ebn"]
+offsets = PackedFloat32Array(0.7507082)
+colors = PackedColorArray(1, 0.9692308, 0.9692308, 1)
+
+[node name="Jetpack" type="Node2D" unique_id=1301511203 groups=["ProcessItem"]]
+z_index = -1
+scale = Vector2(0.25, 0.25)
+script = ExtResource("1_65oo5")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1822090432]
+self_modulate = Color(0.7708395, 0.77083945, 0.77083945, 1)
+position = Vector2(2.5, 1)
+rotation = 1.5707964
+scale = Vector2(5, 2)
+texture = SubResource("CanvasTexture_64lnt")
+
+[node name="ExplosionParticleEffect" type="CPUParticles2D" parent="Sprite2D2" unique_id=497383976]
+z_index = -1
+position = Vector2(0.5, 0)
+scale = Vector2(0.05, 0.02)
+amount = 24
+lifetime = 0.5
+randomness = 0.46
+direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_213xq")
+color_ramp = SubResource("Gradient_f6nig")
+color_initial_ramp = SubResource("Gradient_e6ebn")
+
+[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=1894395974]
+self_modulate = Color(0.7708395, 0.77083945, 0.77083945, 1)
+position = Vector2(-2.5, 1)
+rotation = 1.5707964
+scale = Vector2(5, 2)
+texture = SubResource("CanvasTexture_64lnt")
+
+[node name="ExplosionParticleEffect" type="CPUParticles2D" parent="Sprite2D3" unique_id=609141070]
+z_index = -1
+position = Vector2(0.5, 0)
+scale = Vector2(0.05, 0.02)
+amount = 24
+lifetime = 0.5
+randomness = 0.46
+direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_213xq")
+color_ramp = SubResource("Gradient_f6nig")
+color_initial_ramp = SubResource("Gradient_e6ebn")

@@ -21,6 +21,8 @@ var is_alive : bool = true
 @export var speed : float = 50.0
 const SPRINT_MOD : float = 2.0
 
+var burn_tick_delta : float = 0.0
+
 var knockback_mod : float = 0.0
 var ricochet_mod : int = 0
 var burst_mod : int = 0
@@ -30,6 +32,8 @@ var accuracy_mod : float = 0.0 # weapon spread degrees *= 1 - accuracy_mod. rang
 var damage_mod : float = 0.0 # as % increase
 var area_mod : float = 0.0 # as % increase
 var fire_rate_mod : float = 0.0 # as % reduction
+
+var burn_damage : float = 0.2
 
 var size_mod : float = 0.0 #as % increase to body "scale"
 
@@ -159,6 +163,9 @@ func attacks(_delta):
 		$AimTarget.position.x *= 1.5
 		$AimTarget.rotation = aim_dir.angle()
 		
+		if weapon == null:
+			return
+		
 		weapon.position = $AimTarget.position + $CivilianBody.position
 		weapon.rotation = $AimTarget.rotation
 		
@@ -190,6 +197,15 @@ func _physics_process(delta: float) -> void:
 			regen_interval = 0.0
 			
 	
+	if burn_time > 0.0:
+		$CivilianBody.burning = true
+		burn_time -= delta
+		burn_tick_delta += delta
+		if burn_tick_delta > burn_tick_interval:
+			burn_tick_delta = 0.0
+			hit(given_burn_damage)
+	else:
+		$CivilianBody.burning = false
 	
 	if visible_on_screen:
 		recoil_offset = recoil_offset.lerp(Vector2.ZERO, delta * 20.0)
@@ -206,6 +222,9 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	
+	for item in $CivilianBody.get_children():
+		if item.is_in_group("ProcessItem"):
+			item._item_process(delta)
 	
 	update_player_hp()
 
@@ -325,3 +344,14 @@ func set_civilian_body_type(_type):
 		Global.TEAM.NONE: $CivilianBody.type = $CivilianBody.CIVILIAN_TYPE.NONE
 		Global.TEAM.AGENTS: $CivilianBody.type = $CivilianBody.CIVILIAN_TYPE.AGENT
 		Global.TEAM.ALIENS: $CivilianBody.type = $CivilianBody.CIVILIAN_TYPE.GREEN_ALIEN
+
+var burn_time : float = 0.0
+
+
+#called once.
+var burn_tick_interval : float = 0.5
+var given_burn_damage : float = 0.0
+func burn(time : float, _burn_dmg):
+	burn_time += time
+	given_burn_damage = _burn_dmg
+	hit(_burn_dmg) #take one tick of burn damage

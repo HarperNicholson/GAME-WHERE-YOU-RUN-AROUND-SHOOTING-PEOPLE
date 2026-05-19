@@ -31,6 +31,7 @@ Player=""
 Targetable=""
 Pickup=""
 Enemies=""
+ProcessItem=""
 
 [input]
 

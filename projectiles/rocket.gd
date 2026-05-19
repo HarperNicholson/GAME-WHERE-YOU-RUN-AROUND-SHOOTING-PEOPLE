@@ -47,8 +47,10 @@ func explode():
 	
 	var explosion = explosion_scene.instantiate()
 	explosion.global_position = global_position
-	explosion.damage = damage
-	explosion.radius = 20.0 * (1 + area_mod) #placeholder, could be set by player's radius mod
+	explosion.damage_mod_from_owner = _owner.damage_mod
+	explosion.burn_damage = _owner.burn_damage
+	explosion.damage = damage * (1 + _owner.damage_mod)
+	explosion.radius = 20.0 * (1 + _owner.area_mod) #placeholder, could be set by player's radius mod
 	explosion.knockback = knockback
 	explosion.shooter = shooter
 	get_tree().current_scene.add_child(explosion)

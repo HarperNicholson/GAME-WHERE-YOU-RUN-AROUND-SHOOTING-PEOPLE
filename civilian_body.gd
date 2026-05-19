@@ -35,6 +35,9 @@ var max_running_tilt_as_radians : float = 0.25
 
 var zombie : bool = false
 
+var burning : bool = false
+
+
 var prev_velocity_x : float = 0.0
 func _ready() -> void:
 	match type:
@@ -54,6 +57,9 @@ func zombify():
 var weapon_to_point_toward : Node2D
 
 func animate(delta, velocity):
+	$BurnEffect.emitting = burning
+	#modulate/shader darken if burning
+	
 	anim_time += delta
 	
 	var speed = velocity.length()
