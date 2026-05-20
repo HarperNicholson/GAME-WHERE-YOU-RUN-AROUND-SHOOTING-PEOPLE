@@ -10,9 +10,10 @@ var has_projectile_impulse : bool = false
 @export var is_player : bool = false
 var is_alive : bool = true
 
-@export var weapon : Node
+@export var starting_items : Array[Global.ITEMS] = []
 @export var controller : Node
 @export var playercam : Node
+var weapon : Node #set to first weapon in starting items
 
 @export var bouncy_projectiles : bool = false
 
@@ -49,6 +50,10 @@ var levelup_rerolls : int = 0
 
 var elite : bool = false #triple HP, double size, half speed or something
 var is_wave_elite : bool = false #ensures drop
+
+func _ready():
+	for item in starting_items:
+		give_item(item)
 
 func update_body_size():
 	$Area2D/CollisionShape2D.scale *= 1.0 + size_mod

@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://bwnlecmbwev7u"]
+
+[ext_resource type="Script" uid="uid://cv7mffboaskxc" path="res://upgrades/rocket_launcher_item.gd" id="1_dh22x"]
+[ext_resource type="Theme" uid="uid://byosmhxx70y8p" path="res://new_theme.tres" id="3_h2728"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_dh22x"]
+
+[node name="RocketLauncherItem" type="Control" unique_id=1637849664]
+layout_mode = 3
+anchors_preset = 0
+focus_mode = 2
+script = ExtResource("1_dh22x")
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="Panel" parent="." unique_id=448079541]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Node2D" type="Node2D" parent="Panel" unique_id=751718191]
+position = Vector2(16, 20)
+scale = Vector2(3.2690816, 3.2690816)
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/Node2D" unique_id=1304832554]
+self_modulate = Color(0.21, 0.19047, 0.1449, 1)
+position = Vector2(-1.2613544, 1.1231098)
+scale = Vector2(1.1641431, 1.1641431)
+texture = SubResource("CanvasTexture_dh22x")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Panel/Node2D" unique_id=1715213592]
+self_modulate = Color(0.21, 0.19047, 0.1449, 1)
+position = Vector2(1.7386456, 1.1231098)
+scale = Vector2(1.1641431, 1.1641431)
+texture = SubResource("CanvasTexture_dh22x")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Panel/Node2D" unique_id=925964378]
+self_modulate = Color(0.21, 0.19047, 0.1449, 1)
+position = Vector2(1.2386456, -0.12689018)
+scale = Vector2(10.477287, 1.7462146)
+texture = SubResource("CanvasTexture_dh22x")
+
+[node name="Label" type="Label" parent="Panel" unique_id=1587723781]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("3_h2728")
+horizontal_alignment = 2
+vertical_alignment = 2
+metadata/_edit_lock_ = true

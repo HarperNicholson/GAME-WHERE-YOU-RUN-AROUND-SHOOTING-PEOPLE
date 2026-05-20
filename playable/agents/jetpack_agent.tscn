@@ -32,9 +32,10 @@ motion_mode = 1
 floor_stop_on_slope = false
 script = ExtResource("1_mv3a4")
 is_player = true
+starting_items = Array[int]([6])
 controller = NodePath("PlayerController")
 playercam = NodePath("PlayerCamera2D")
-speed = 200.0
+speed = 185.0
 
 [node name="PlayerCamera2D" parent="." unique_id=1503368257 instance=ExtResource("2_k20p8")]
 

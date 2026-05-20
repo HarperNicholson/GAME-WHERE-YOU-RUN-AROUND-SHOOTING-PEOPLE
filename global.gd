@@ -24,6 +24,8 @@ var evolutions := {
 
 var WEAPONS_POOL := [
 	ITEMS.ROCKET_LAUNCHER,
+	ITEMS.GUN,
+	ITEMS.SHOTGUN,
 ]
 
 var PASSIVES_POOL := [
@@ -47,7 +49,9 @@ enum ITEMS {
 	MAX_HEALTH_UP,
 	REGEN_UP,
 	JETPACK,
-	ROCKET_LAUNCHER
+	ROCKET_LAUNCHER,
+	GUN,
+	SHOTGUN,
 	} #, RUBBER_BULLETS
 
 var item_scenes := {
@@ -57,7 +61,12 @@ var item_scenes := {
 	ITEMS.MOVESPEED_UP: preload("res://upgrades/movespeed_up.tscn"),
 	ITEMS.MAX_HEALTH_UP: preload("res://upgrades/max_health_up.tscn"),
 	ITEMS.REGEN_UP: preload("res://upgrades/regen_up.tscn"),
-	ITEMS.JETPACK: preload("res://upgrades/jetpack_icon.tscn"),
+	ITEMS.JETPACK: preload("res://upgrades/jetpack_item.tscn"),
+	ITEMS.ROCKET_LAUNCHER: preload("res://upgrades/rocket_launcher_item.tscn"),
+	ITEMS.GUN: preload("res://upgrades/gun_item.tscn"),
+	ITEMS.SHOTGUN: preload("res://upgrades/shotgun_item.tscn"),
+	#ITEMS.ITEMNAME: preload(),
+	#ITEMS.ITEMNAME: preload(),
 	#ITEMS.ITEMNAME: preload(),
 	#ITEMS.RUBBER_BULLETS: preload("res://upgrades/rubber_bullets.tscn"),
 }
@@ -67,22 +76,20 @@ func get_available_items() -> Array:
 	
 	var player_item_nodes = player.find_child("SurvivorsUI").find_child("Items").get_children()
 	
-	var player_items : Array = []
-	
-	for item_node in player_item_nodes:
-		var item_id_and_copies : Array = []
-		item_id_and_copies.append(item_node.item_id)
-		item_id_and_copies.append(item_node.copies)
-		player_items.append(item_id_and_copies)
+	#for item_node in player_item_nodes:
+		#var item_id_and_copies : Array = []
+		#item_id_and_copies.append(item_node.item_id)
+		#item_id_and_copies.append(item_node.copies)
+		#player_items.append(item_id_and_copies)
 	
 	var player_level_nines : Array = []
 	
 	var player_passives : int = 0
 	var player_weapons : int = 0
 	
-	for _item_id_and_copies in player_items:
-		var item_id = _item_id_and_copies[0] #this will return ITEMS.ITEM_NAME
-		var item_copies = _item_id_and_copies[1] #this will return an int >= 1
+	for item_node in player_item_nodes:
+		var item_id = item_node.item_id
+		var item_copies = item_node.copies
 		
 		
 		
@@ -109,8 +116,21 @@ func get_available_items() -> Array:
 	
 	
 	for evo in EVOLUTIONS_POOL:
-		if player_items.has(evo): result.remove_at(result.find(evo))
-		elif player_level_nines.has(evo): continue
+		
+		var player_has_evo := false
+		
+		for item_node in player_item_nodes:
+			if item_node.item_id == evo:
+				player_has_evo = true
+				break
+		
+		if player_has_evo:
+			result.remove_at(result.find(evo))
+		
+		elif player_level_nines.has(evolutions[evo]["weapon"]) \
+		and player_level_nines.has(evolutions[evo]["passive"]):
+			continue
+		
 		elif result.has(evo):
 			result.remove_at(result.find(evo))
 	

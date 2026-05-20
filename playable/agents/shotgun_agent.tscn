@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://b8w5pgk0e78k0" path="res://player_camera_2d.tscn" id="2_kgdmu"]
 [ext_resource type="PackedScene" uid="uid://ctnxymgw58y7u" path="res://civilian_body.tscn" id="3_te5cc"]
 [ext_resource type="Script" uid="uid://diwjwmjc66ghv" path="res://player_controller.gd" id="4_5st0m"]
-[ext_resource type="PackedScene" uid="uid://y5ta1gv2f8pe" path="res://weapons/shotgun.tscn" id="5_kgdmu"]
 [ext_resource type="PackedScene" uid="uid://db8xc3vmn7lh8" path="res://playable/agents/survivors_ui.tscn" id="6_05ccx"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_q2tsy"]
@@ -25,14 +24,14 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_05ccx"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="ShotgunAgent" type="CharacterBody2D" unique_id=745263233 node_paths=PackedStringArray("weapon", "controller", "playercam") groups=["Player"]]
+[node name="ShotgunAgent" type="CharacterBody2D" unique_id=745263233 node_paths=PackedStringArray("controller", "playercam") groups=["Player"]]
 z_index = 1
 collision_layer = 2
 motion_mode = 1
 floor_stop_on_slope = false
 script = ExtResource("1_kgdmu")
 is_player = true
-weapon = NodePath("Shotgun")
+starting_items = Array[int]([9])
 controller = NodePath("PlayerController")
 playercam = NodePath("PlayerCamera2D")
 
@@ -69,9 +68,6 @@ texture = SubResource("CanvasTexture_1jxqw")
 
 [node name="PlayerController" type="Node2D" parent="." unique_id=1165073739]
 script = ExtResource("4_5st0m")
-
-[node name="Shotgun" parent="." unique_id=430989293 instance=ExtResource("5_kgdmu")]
-SFX = 3
 
 [node name="XPMagnet" type="Area2D" parent="." unique_id=1608804995]
 

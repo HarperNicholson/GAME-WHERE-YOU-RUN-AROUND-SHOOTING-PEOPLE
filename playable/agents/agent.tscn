@@ -25,14 +25,14 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0j8jp"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="Agent" type="CharacterBody2D" unique_id=745263233 node_paths=PackedStringArray("weapon", "controller", "playercam") groups=["Player"]]
+[node name="Agent" type="CharacterBody2D" unique_id=745263233 node_paths=PackedStringArray("controller", "playercam") groups=["Player"]]
 z_index = 1
 collision_layer = 2
 motion_mode = 1
 floor_stop_on_slope = false
 script = ExtResource("1_hqtel")
 is_player = true
-weapon = NodePath("Gun")
+starting_items = Array[int]([8])
 controller = NodePath("PlayerController")
 playercam = NodePath("PlayerCamera2D")
 

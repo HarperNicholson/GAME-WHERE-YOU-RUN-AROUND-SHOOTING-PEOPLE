@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://cofcafyhfgdil"]
+
+[ext_resource type="Script" uid="uid://cgnm72sv20b36" path="res://upgrades/gun_item.gd" id="1_wh1v4"]
+[ext_resource type="Theme" uid="uid://byosmhxx70y8p" path="res://new_theme.tres" id="2_pmw13"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_wh1v4"]
+
+[node name="GunItem" type="Control" unique_id=1637849664]
+layout_mode = 3
+anchors_preset = 0
+focus_mode = 2
+script = ExtResource("1_wh1v4")
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="Panel" parent="." unique_id=448079541]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Node2D" type="Node2D" parent="Panel" unique_id=751718191]
+position = Vector2(10, 27.000002)
+scale = Vector2(6.8822217, 6.8822217)
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/Node2D" unique_id=1166850621]
+self_modulate = Color(0.13319641, 0.13319641, 0.13319638, 1)
+position = Vector2(0.122176774, -0.2548325)
+rotation = 0.64914346
+scale = Vector2(1, 2.251114)
+texture = SubResource("CanvasTexture_wh1v4")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Panel/Node2D" unique_id=620026602]
+self_modulate = Color(0.13319641, 0.13319641, 0.13319638, 1)
+position = Vector2(1.8749999, -1)
+scale = Vector2(3.75, 1)
+texture = SubResource("CanvasTexture_wh1v4")
+
+[node name="Label" type="Label" parent="Panel" unique_id=1587723781]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2_pmw13")
+horizontal_alignment = 2
+vertical_alignment = 2
+metadata/_edit_lock_ = true

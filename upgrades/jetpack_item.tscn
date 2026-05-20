@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://c5u6lbn8ij6yi"]
 
-[ext_resource type="Script" uid="uid://bk2fuxhwb5738" path="res://upgrades/jetpack_icon.gd" id="1_u4m2i"]
-[ext_resource type="Theme" uid="uid://byosmhxx70y8p" path="res://new_theme.tres" id="2_bhk3b"]
-[ext_resource type="Script" uid="uid://b5sy8fw64qjjb" path="res://evolutions/jetpack.gd" id="2_logew"]
+[ext_resource type="Script" uid="uid://bk2fuxhwb5738" path="res://upgrades/jetpack_item.gd" id="1_q7v04"]
+[ext_resource type="Script" uid="uid://b5sy8fw64qjjb" path="res://evolutions/jetpack.gd" id="2_a6vj8"]
+[ext_resource type="Theme" uid="uid://byosmhxx70y8p" path="res://new_theme.tres" id="3_yapns"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_64lnt"]
 
@@ -18,11 +18,11 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 0.88030297, 0, 1, 1, 0.18333334, 0, 1, 
 offsets = PackedFloat32Array(0.7507082)
 colors = PackedColorArray(1, 0.9692308, 0.9692308, 1)
 
-[node name="JetpackIcon" type="Control" unique_id=1637849664]
+[node name="JetpackItem" type="Control" unique_id=1637849664]
 layout_mode = 3
 anchors_preset = 0
 focus_mode = 2
-script = ExtResource("1_u4m2i")
+script = ExtResource("1_q7v04")
 metadata/_edit_lock_ = true
 
 [node name="Panel" type="Panel" parent="." unique_id=448079541]
@@ -44,7 +44,7 @@ metadata/_edit_lock_ = true
 z_index = 1
 position = Vector2(20, 9)
 scale = Vector2(3, 3)
-script = ExtResource("2_logew")
+script = ExtResource("2_a6vj8")
 
 [node name="Sprite2D4" type="Sprite2D" parent="Panel/Jetpack" unique_id=1846732617]
 self_modulate = Color(0.3403393, 0.34033933, 0.3403393, 1)
@@ -117,7 +117,7 @@ offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
-theme = ExtResource("2_bhk3b")
+theme = ExtResource("3_yapns")
 horizontal_alignment = 2
 vertical_alignment = 2
 metadata/_edit_lock_ = true

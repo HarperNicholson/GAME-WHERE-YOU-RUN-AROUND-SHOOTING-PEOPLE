@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://bsgmnj5c1o4kr"]
+
+[ext_resource type="Script" uid="uid://ygt7jpq3j6ck" path="res://upgrades/shotgun_item.gd" id="1_cx1ue"]
+[ext_resource type="Theme" uid="uid://byosmhxx70y8p" path="res://new_theme.tres" id="2_x2sap"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_cx1ue"]
+
+[node name="ShotgunItem" type="Control" unique_id=1637849664]
+layout_mode = 3
+anchors_preset = 0
+focus_mode = 2
+script = ExtResource("1_cx1ue")
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="Panel" parent="." unique_id=448079541]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Node2D" type="Node2D" parent="Panel" unique_id=751718191]
+position = Vector2(17, 22.999998)
+scale = Vector2(3.949839, 3.949839)
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/Node2D" unique_id=238075742]
+self_modulate = Color(0.28009677, 0.1307203, 0, 1)
+position = Vector2(-2.7274034, 7.4505806e-08)
+rotation = 0.64914346
+scale = Vector2(1.286485, 2.5150805)
+texture = SubResource("CanvasTexture_cx1ue")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Panel/Node2D" unique_id=173558204]
+self_modulate = Color(0.13319641, 0.13319641, 0.13319638, 1)
+position = Vector2(1.2872965, -0.73395497)
+scale = Vector2(8.043471, 1.5320901)
+texture = SubResource("CanvasTexture_cx1ue")
+
+[node name="Label" type="Label" parent="Panel" unique_id=1587723781]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2_x2sap")
+horizontal_alignment = 2
+vertical_alignment = 2
+metadata/_edit_lock_ = true
