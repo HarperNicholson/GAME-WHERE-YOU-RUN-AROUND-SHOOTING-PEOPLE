@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b8w5pgk0e78k0" path="res://player_camera_2d.tscn" id="2_u30r3"]
 [ext_resource type="PackedScene" uid="uid://ctnxymgw58y7u" path="res://civilian_body.tscn" id="3_4x7rj"]
 [ext_resource type="Script" uid="uid://diwjwmjc66ghv" path="res://player_controller.gd" id="4_te7xs"]
+[ext_resource type="PackedScene" uid="uid://od7rjelqalet" path="res://drone.tscn" id="6_4x7rj"]
 [ext_resource type="PackedScene" uid="uid://db8xc3vmn7lh8" path="res://playable/agents/survivors_ui.tscn" id="6_lgodf"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_q2tsy"]
@@ -86,3 +87,9 @@ value = 50.47
 show_percentage = false
 
 [node name="SurvivorsUI" parent="." unique_id=935884309 instance=ExtResource("6_lgodf")]
+
+[node name="Drone" parent="." unique_id=1644812299 instance=ExtResource("6_4x7rj")]
+position = Vector2(12, -10)
+
+[node name="Drone2" parent="." unique_id=701351658 instance=ExtResource("6_4x7rj")]
+position = Vector2(-11, -10)
