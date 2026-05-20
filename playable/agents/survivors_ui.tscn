@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dtlgrjbthlk85" path="res://survivorsUI.gd" id="1_3nh1f"]
 [ext_resource type="Script" uid="uid://c26h5hax6usk0" path="res://level_options.gd" id="2_lgh0a"]
 [ext_resource type="Script" uid="uid://db2t2p057r52k" path="res://item_stacker.gd" id="2_wful3"]
+[ext_resource type="PackedScene" uid="uid://b7snommu75xav" path="res://debug_menu.tscn" id="2_xeklm"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wwd38"]
 
@@ -49,6 +50,12 @@ grow_vertical = 2
 script = ExtResource("1_3nh1f")
 
 [node name="BaseLayer" type="CanvasLayer" parent="." unique_id=444460457]
+
+[node name="DebugMenu" parent="BaseLayer" unique_id=2026935832 instance=ExtResource("2_xeklm")]
+offset_left = 982.0
+offset_top = 114.0
+offset_right = 982.0
+offset_bottom = 114.0
 
 [node name="XPMeter" type="ProgressBar" parent="BaseLayer" unique_id=644689042]
 offset_right = 288.0
@@ -187,7 +194,6 @@ action_mode = 0
 [node name="BonusLoot" type="CanvasLayer" parent="." unique_id=879837510]
 layer = 11
 
-[connection signal="child_entered_tree" from="BaseLayer/Items" to="BaseLayer/Items" method="_on_child_entered_tree"]
 [connection signal="pressed" from="LevelUpLayer/LevelUpButtons/Control/0" to="LevelUpLayer" method="selected" flags=18]
 [connection signal="pressed" from="LevelUpLayer/LevelUpButtons/Control2/1" to="LevelUpLayer" method="selected" flags=18]
 [connection signal="pressed" from="LevelUpLayer/LevelUpButtons/Control3/2" to="LevelUpLayer" method="selected" flags=18]

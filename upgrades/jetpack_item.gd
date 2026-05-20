@@ -6,5 +6,8 @@ extends Item
 func given_to_player():
 	get_tree().get_first_node_in_group("Player").speed += 15.0 #should be 200.0 as jetpack acts as final movespeed up
 	
+	for i in 10:
+		Global.player.give_item(Global.ITEMS.MOVESPEED_UP)
+	
 	#give player jetpack physical item
 	get_tree().get_first_node_in_group("Player").find_child("CivilianBody").add_child(load("res://evolutions/jetpack.tscn").instantiate())

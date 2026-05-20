@@ -7,6 +7,7 @@ var xp_required : float = 5.0
 var level : int = 1
 
 func _ready() -> void:
+	$BaseLayer/DebugMenu.visible = Global.debug
 	$LevelUpLayer.hide()
 	$BonusLoot.hide()
 	$LevelUpLayer.call_deferred("refresh")

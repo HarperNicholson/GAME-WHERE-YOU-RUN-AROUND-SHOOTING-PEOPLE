@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://b7snommu75xav"]
+
+[ext_resource type="Script" uid="uid://3ejns15hlva2" path="res://debug_menu.gd" id="1_u3ugm"]
+
+[node name="DebugMenu" type="Control" unique_id=2026935832]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_u3ugm")
+
+[node name="Panel" type="Panel" parent="." unique_id=1183719268]
+layout_mode = 0
+offset_left = -137.0
+offset_top = -40.0
+offset_right = 129.0
+offset_bottom = 96.0
+
+[node name="GiveButton" type="Button" parent="Panel" unique_id=666085914]
+layout_mode = 0
+offset_left = 215.0
+offset_top = 7.0
+offset_right = 255.0
+offset_bottom = 38.0
+focus_mode = 0
+text = "give"
+
+[node name="OptionButton" type="OptionButton" parent="Panel" unique_id=432385453]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 7.0
+offset_right = 210.0
+offset_bottom = 38.0
+focus_mode = 0
+
+[node name="AddXPButton" type="Button" parent="Panel" unique_id=610891627]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 46.0
+offset_right = 255.0
+offset_bottom = 77.0
+focus_mode = 0
+text = "add __ XP"
+
+[node name="LevelUpButton" type="Button" parent="Panel" unique_id=724949508]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 84.0
+offset_right = 255.0
+offset_bottom = 115.0
+focus_mode = 0
+text = "Level Up"
+
+[node name="XPSlider" type="HSlider" parent="Panel" unique_id=1556115209]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 46.0
+offset_right = 136.0
+offset_bottom = 77.0
+focus_mode = 0
+
+[connection signal="pressed" from="Panel/GiveButton" to="." method="_on_give_button_pressed"]
+[connection signal="pressed" from="Panel/AddXPButton" to="." method="_on_add_xp_button_pressed"]
+[connection signal="pressed" from="Panel/LevelUpButton" to="." method="_on_level_up_button_pressed"]
+[connection signal="value_changed" from="Panel/XPSlider" to="." method="_on_xp_slider_value_changed"]

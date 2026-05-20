@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://b8w5pgk0e78k0" path="res://player_camera_2d.tscn" id="2_k20p8"]
 [ext_resource type="PackedScene" uid="uid://ctnxymgw58y7u" path="res://civilian_body.tscn" id="3_qhsgw"]
 [ext_resource type="Script" uid="uid://diwjwmjc66ghv" path="res://player_controller.gd" id="4_56ntj"]
-[ext_resource type="PackedScene" uid="uid://fatpaf6ch1e3" path="res://evolutions/jetpack.tscn" id="6_mv3a4"]
 [ext_resource type="PackedScene" uid="uid://db8xc3vmn7lh8" path="res://playable/agents/survivors_ui.tscn" id="6_s226k"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_q2tsy"]
@@ -35,7 +34,7 @@ is_player = true
 starting_items = Array[int]([6])
 controller = NodePath("PlayerController")
 playercam = NodePath("PlayerCamera2D")
-speed = 185.0
+speed = 200.0
 
 [node name="PlayerCamera2D" parent="." unique_id=1503368257 instance=ExtResource("2_k20p8")]
 
@@ -47,8 +46,6 @@ texture = SubResource("CanvasTexture_q2tsy")
 
 [node name="CivilianBody" parent="." unique_id=1593687168 instance=ExtResource("3_qhsgw")]
 type = 1
-
-[node name="Jetpack" parent="CivilianBody" unique_id=1301511203 instance=ExtResource("6_mv3a4")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=81884564]
 shape = SubResource("CircleShape2D_q2tsy")

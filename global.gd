@@ -2,6 +2,9 @@ extends Node
 
 var weapon_crate_scene : PackedScene = preload("res://weapon_crate.tscn")
 
+#######
+var debug : bool = true #DISABLE THIS ON BUILD
+#######
 
 var paused : bool = false
 var levelup_options : int = 3
@@ -76,13 +79,12 @@ func get_available_items() -> Array:
 	
 	var player_item_nodes = player.find_child("SurvivorsUI").find_child("Items").get_children()
 	
-	#for item_node in player_item_nodes:
-		#var item_id_and_copies : Array = []
-		#item_id_and_copies.append(item_node.item_id)
-		#item_id_and_copies.append(item_node.copies)
-		#player_items.append(item_id_and_copies)
+	print(".")
 	
 	var player_level_nines : Array = []
+	
+	var owned_weapons : Array = []
+	var owned_passives : Array = []
 	
 	var player_passives : int = 0
 	var player_weapons : int = 0
@@ -91,24 +93,30 @@ func get_available_items() -> Array:
 		var item_id = item_node.item_id
 		var item_copies = item_node.copies
 		
+		print(item_id)
 		
 		
-		if item_id in PASSIVES_POOL: player_passives += 1
-		if item_id in WEAPONS_POOL: player_weapons += 1
+		if item_id in PASSIVES_POOL:
+			player_passives += 1
+			owned_passives.append(item_id)
+		
+		if item_id in WEAPONS_POOL:
+			player_weapons += 1
+			owned_weapons.append(item_id)
+		
 		
 		if player_weapons >= 6:
 			for weapon in WEAPONS_POOL:
-				if result.has(weapon):
+				if !owned_weapons.has(weapon) and result.has(weapon):
 					result.remove_at(result.find(weapon))
-			#remove all weapons from result
+		
 		
 		if player_passives >= 6:
 			for passive in PASSIVES_POOL:
-				if result.has(passive):
+				if !owned_passives.has(passive) and result.has(passive):
 					result.remove_at(result.find(passive))
-			#remove all passives from result
 		
-		if item_copies == 9: 
+		if item_copies >= 9: 
 			#mark as ingredient ready
 			player_level_nines.append(item_id)
 			if result.has(item_id):
@@ -125,10 +133,12 @@ func get_available_items() -> Array:
 				break
 		
 		if player_has_evo:
-			result.remove_at(result.find(evo))
+			if result.has(evo):
+				result.remove_at(result.find(evo))
 		
 		elif player_level_nines.has(evolutions[evo]["weapon"]) \
-		and player_level_nines.has(evolutions[evo]["passive"]):
+		or player_level_nines.has(evolutions[evo]["passive"]):
+			print("EVOLUTION AVAILABLE:", evo)
 			continue
 		
 		elif result.has(evo):

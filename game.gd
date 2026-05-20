@@ -42,10 +42,9 @@ func _physics_process(delta: float) -> void:
 
 func spawn_player():
 	#global_position = world_size / 2
-	#Global.player = playerinstance or wahtever
+	#instantiate and set player = instance etc
 	#but for now
-	Global.player = $GameObjects/RocketAgent
-	pass
+	Global.player = get_tree().get_first_node_in_group("Player")
 
 func spawn_object(object_instance):
 	$GameObjects.add_child(object_instance)

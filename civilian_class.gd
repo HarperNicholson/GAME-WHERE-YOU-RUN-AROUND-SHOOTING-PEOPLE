@@ -63,11 +63,28 @@ func update_body_size():
 	$EntityShadow.position.y *= 1.0 + size_mod
 	weapon_holding_radius *= 1.0 + size_mod
 
-func give_item(item : Global.ITEMS):
-	var item_instance = Global.item_scenes[item].instantiate()
-	item_instance.item_id = item
-	$SurvivorsUI/BaseLayer/Items.add_child(item_instance)
-	item_instance.given_to_player()
+func get_existing_item_node(item_id : Global.ITEMS, itemnodes : Array) -> Node:
+	for item in itemnodes:
+		if item.item_id == item_id:
+			return item
+	
+	return null
+
+func give_item(new_item_id : Global.ITEMS):
+	var itemnodes = $SurvivorsUI/BaseLayer/Items.get_children()
+
+	var existing_item = get_existing_item_node(new_item_id, itemnodes)
+
+	if existing_item == null:
+		var item_instance = Global.item_scenes[new_item_id].instantiate()
+		item_instance.item_id = new_item_id
+		$SurvivorsUI/BaseLayer/Items.add_child(item_instance)
+		item_instance.given_to_player()
+	else:
+		existing_item.copies += 1
+		existing_item.given_to_player()
+	
+	$SurvivorsUI/BaseLayer/Items._sort_children()
 
 func hit(dmg : float):
 	#EffectManager.play_sound_effect("hit")

@@ -1,5 +1,10 @@
 setup full steam integration + steam input (deck compat) + aspect ratios / UI layout stuff
 
+
+drones
+
+
+
 agents - arsenal and dark conspiracy
 aliens - turn the enemy against itself? or maybe high defense
 

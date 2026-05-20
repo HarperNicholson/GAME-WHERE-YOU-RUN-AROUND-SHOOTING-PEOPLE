@@ -35,7 +35,9 @@ func refresh():
 		$LevelUpOptions.add_child(option)
 	
 	
-	
+	if available_items.size() <= 0:
+		levelups = 0
+		hide()
 	
 	
 	$"LevelUpButtons/Control/0".grab_focus()
@@ -49,5 +51,5 @@ func selected(button):
 	if levelups <= 0:
 		Global.paused = false
 		hide()
-
+	
 	refresh()
