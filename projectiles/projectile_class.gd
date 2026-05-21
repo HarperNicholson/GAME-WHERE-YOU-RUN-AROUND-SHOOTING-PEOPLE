@@ -20,6 +20,7 @@ var ricochets : int = 0
 
 var last_hit
 
+@warning_ignore("unused_private_class_variable")
 var _owner
 
 func _ready():

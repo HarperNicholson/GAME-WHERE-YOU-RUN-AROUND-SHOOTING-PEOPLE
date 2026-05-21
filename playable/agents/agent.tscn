@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://ctnxymgw58y7u" path="res://civilian_body.tscn" id="2_sweqy"]
 [ext_resource type="Script" uid="uid://diwjwmjc66ghv" path="res://player_controller.gd" id="4_1jxqw"]
 [ext_resource type="PackedScene" uid="uid://db8xc3vmn7lh8" path="res://playable/agents/survivors_ui.tscn" id="6_io01h"]
-[ext_resource type="PackedScene" uid="uid://djnb5nyt76vje" path="res://weapons/gun.tscn" id="7_dw050"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q2tsy"]
 radius = 3.0
@@ -69,8 +68,6 @@ texture = SubResource("CanvasTexture_1jxqw")
 
 [node name="PlayerController" type="Node2D" parent="." unique_id=1165073739]
 script = ExtResource("4_1jxqw")
-
-[node name="Gun" parent="." unique_id=1918060664 instance=ExtResource("7_dw050")]
 
 [node name="XPMagnet" type="Area2D" parent="." unique_id=87494511]
 

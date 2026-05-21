@@ -5,13 +5,14 @@
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_64lnt"]
 
-[node name="Shotgun" type="Node2D" unique_id=430989293]
+[node name="Shotgun" type="Node2D" unique_id=430989293 groups=["Weapon"]]
 script = ExtResource("1_64lnt")
 recoil = 0.8
 projectile_scene = ExtResource("2_byptj")
 fire_rate = 1.0
 spread_degrees = 11.0
 amount_of_projectiles = 5
+SFX = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=923867841]
 self_modulate = Color(0.28009677, 0.1307203, 0, 1)

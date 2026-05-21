@@ -1,6 +1,9 @@
 #class_name Gun ??
 extends Node2D
 
+var is_drone_weapon
+var drone : CharacterBody2D
+var weapon_id #internal only
 
 @export var burst_count := 1
 @export var burst_delay := 0.15
@@ -60,10 +63,13 @@ func apply_recoil():
 	if recoil == 0.0:
 		return
 	
-	if owner.is_player:
-		owner.playercam.add_trauma(recoil)
-	
-	if "velocity" in owner:
-		owner.add_impulse(Vector2.LEFT.rotated(global_rotation) * recoil * 100.0)
-	
-	owner.add_weapon_holding_radius_recoil(recoil)
+	if !is_drone_weapon:
+		if owner.is_player:
+			owner.playercam.add_trauma(recoil)
+		
+		if "velocity" in owner:
+			owner.add_impulse(Vector2.LEFT.rotated(global_rotation) * recoil * 100.0)
+		
+		owner.add_weapon_holding_radius_recoil(recoil)
+	else:
+		drone.add_impulse(Vector2.LEFT.rotated(global_rotation) * recoil * 100.0)

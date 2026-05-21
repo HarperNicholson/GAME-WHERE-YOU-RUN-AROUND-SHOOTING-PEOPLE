@@ -1,24 +1,27 @@
-[gd_scene format=3 uid="uid://od7rjelqalet"]
+[gd_scene format=3 uid="uid://c66tauiptcamh"]
 
 [ext_resource type="Script" uid="uid://bba5isy5nqbwh" path="res://drone.gd" id="1_d5du7"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_d5du7"]
 
-[node name="Drone" type="Node2D" unique_id=1644812299]
+[node name="Drone" type="CharacterBody2D" unique_id=156353925]
 scale = Vector2(1.5, 1.5)
+collision_layer = 0
+collision_mask = 0
+motion_mode = 1
 script = ExtResource("1_d5du7")
 
 [node name="rotor4" type="Sprite2D" parent="." unique_id=1605452400]
 self_modulate = Color(0.18000475, 0.18000492, 0.18000486, 1)
 position = Vector2(-2.0231457, -0.90347844)
-rotation = 0.11413225
+rotation = 0.114132255
 scale = Vector2(0.59941363, -3.145242)
 texture = SubResource("CanvasTexture_d5du7")
 
 [node name="rotor3" type="Sprite2D" parent="." unique_id=1240262578]
 self_modulate = Color(0.18000475, 0.18000492, 0.18000486, 1)
 position = Vector2(1.9768543, -0.90347844)
-rotation = 0.11413225
+rotation = 0.114132255
 scale = Vector2(0.59941363, -3.145242)
 texture = SubResource("CanvasTexture_d5du7")
 
@@ -39,14 +42,14 @@ texture = SubResource("CanvasTexture_d5du7")
 [node name="Sprite2D4" type="Sprite2D" parent="." unique_id=323521150]
 self_modulate = Color(0.36659405, 0.36659485, 0.36659452, 1)
 position = Vector2(1.1732688, -0.65564877)
-rotation = -3.6651917
+rotation = 2.6179936
 scale = Vector2(1.6123953, 0.6886249)
 texture = SubResource("CanvasTexture_d5du7")
 
 [node name="Sprite2D5" type="Sprite2D" parent="." unique_id=1944700481]
 self_modulate = Color(0.36659405, 0.36659485, 0.36659452, 1)
 position = Vector2(1.1732688, 0.84241176)
-rotation = 3.6651917
+rotation = -2.6179936
 scale = Vector2(1.6123953, 0.6886249)
 texture = SubResource("CanvasTexture_d5du7")
 
@@ -59,13 +62,15 @@ texture = SubResource("CanvasTexture_d5du7")
 [node name="rotor" type="Sprite2D" parent="." unique_id=515955479]
 self_modulate = Color(0.18000475, 0.18000492, 0.18000486, 1)
 position = Vector2(1.9768543, 1.0965215)
-rotation = 0.11413225
+rotation = 0.114132255
 scale = Vector2(0.59941363, -3.145242)
 texture = SubResource("CanvasTexture_d5du7")
 
 [node name="rotor2" type="Sprite2D" parent="." unique_id=1924945609]
 self_modulate = Color(0.18000475, 0.18000492, 0.18000486, 1)
 position = Vector2(-2.0231457, 1.0965215)
-rotation = 0.11413225
+rotation = 0.114132255
 scale = Vector2(0.59941363, -3.145242)
 texture = SubResource("CanvasTexture_d5du7")
+
+[node name="AimTarget" type="Node2D" parent="." unique_id=341948220]

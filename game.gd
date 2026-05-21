@@ -8,6 +8,8 @@ enum TEAM { NONE, AGENTS, ALIENS}
 
 var survival_time : float = 0.0
 
+
+
 func _ready() -> void:
 	
 	EffectManager.PersistentSolidsNode = $PersistentSolids/Node2D
@@ -47,4 +49,4 @@ func spawn_player():
 	Global.player = get_tree().get_first_node_in_group("Player")
 
 func spawn_object(object_instance):
-	$GameObjects.add_child(object_instance)
+	$GameObjects.call_deferred("add_child", object_instance)

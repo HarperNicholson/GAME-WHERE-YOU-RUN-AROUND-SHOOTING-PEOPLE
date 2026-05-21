@@ -51,6 +51,9 @@ var levelup_rerolls : int = 0
 var elite : bool = false #triple HP, double size, half speed or something
 var is_wave_elite : bool = false #ensures drop
 
+var drone_rotation := 0.0
+var drones : Array[CharacterBody2D] = []
+
 func _ready():
 	for item in starting_items:
 		give_item(item)
@@ -72,14 +75,35 @@ func get_existing_item_node(item_id : Global.ITEMS, itemnodes : Array) -> Node:
 
 func give_item(new_item_id : Global.ITEMS):
 	var itemnodes = $SurvivorsUI/BaseLayer/Items.get_children()
-
+	
 	var existing_item = get_existing_item_node(new_item_id, itemnodes)
-
+	
+	
 	if existing_item == null:
+		
 		var item_instance = Global.item_scenes[new_item_id].instantiate()
 		item_instance.item_id = new_item_id
 		$SurvivorsUI/BaseLayer/Items.add_child(item_instance)
 		item_instance.given_to_player()
+		
+		
+		if Global.WEAPONS_POOL.has(new_item_id):
+			print("new weapon")
+			
+			var new_weapon_node = null
+			
+			for child in get_children():
+				if child.is_in_group("Weapon"):
+					if child.get("weapon_id") == new_item_id:
+						new_weapon_node = child
+						break
+			
+			if new_weapon_node:
+				Global.add_drone(new_weapon_node)
+		
+		
+		
+		
 	else:
 		existing_item.copies += 1
 		existing_item.given_to_player()
@@ -87,7 +111,9 @@ func give_item(new_item_id : Global.ITEMS):
 	$SurvivorsUI/BaseLayer/Items._sort_children()
 
 func hit(dmg : float):
-	#EffectManager.play_sound_effect("hit")
+	if is_player:
+		EffectManager.play_sound_effect(EffectManager.SFX.HIT, global_position)
+	
 	EffectManager.spawn_blood_splat_particle_effect(global_position, randi_range(1,3))
 	
 	flash_color()
@@ -124,7 +150,7 @@ func kill():
 	if elite:
 		if is_wave_elite:
 			drop_chest()
-		elif randf() < 1.01:
+		elif randf() < 0.01:
 			drop_chest()
 	
 	get_tree().get_first_node_in_group("Player").award_xp(xp_reward * 0.1) #to give 10% of XP to player on kill
@@ -152,8 +178,9 @@ var weapon_holding_radius : float = 4.0
 
 var recoil_offset := Vector2.ZERO
 var aim_dir : Vector2 = Vector2.RIGHT
+
 func add_weapon_holding_radius_recoil(recoil: float):
-	aim_dir = controller.get_aim_direction()
+	aim_dir = controller.get_aim_direction_from_position(global_position)
 	if aim_dir == Vector2.ZERO:
 		return
 	
@@ -167,14 +194,15 @@ func add_weapon_holding_radius_recoil(recoil: float):
 	
 	# push backward + jitter
 	recoil_offset += (-dir + rand) * recoil * 6.0
-	
 
 
 func attacks(_delta):
 	if !visible_on_screen:
 		return
 	
-	var raw_aim_dir = controller.get_aim_direction()
+	var raw_aim_dir = controller.get_aim_direction_from_position(global_position)
+	
+	
 	
 	if raw_aim_dir.length() > aim_deadzone:
 		aim_dir = aim_dir.lerp(raw_aim_dir, _delta * 10.0)
@@ -196,7 +224,9 @@ func attacks(_delta):
 			weapon.scale.y = 1.0
 		elif aim_dir.x < -weapon_scale_flip_deadzone:
 			weapon.scale.y = -1.0
-		
+	
+	
+	
 	if controller.is_shooting():
 		weapon.try_fire()
 
@@ -235,12 +265,17 @@ func _physics_process(delta: float) -> void:
 		recoil_offset = Vector2.ZERO
 	
 	
+	#temp
+	if controller.tryna_quit():
+		get_tree().quit()
 	
 	movement(delta)
 	collisions(delta)
 	velocity = velocity.limit_length(max_velocity)
 	
 	calculate_shadow()
+	
+	solve_drones(delta)
 	
 	move_and_slide()
 	
@@ -249,6 +284,33 @@ func _physics_process(delta: float) -> void:
 			item._item_process(delta)
 	
 	update_player_hp()
+
+func solve_drones(delta):
+	
+	if drones.is_empty():
+		return
+	
+	drone_rotation += delta * 0.2
+	
+	var radius := 16.0
+	var count := drones.size()
+	
+	for i in count:
+		
+		var drone = drones[i]
+		
+		var angle = (TAU / count) * i + drone_rotation
+		
+		var target_pos = global_position + Vector2.RIGHT.rotated(angle) * radius
+		
+		var to_target = target_pos - drone.global_position
+		
+		var desired_velocity = to_target * 4.0
+		
+		drone.velocity = drone.velocity.lerp(
+			desired_velocity,
+			delta * 4.0
+		)
 
 func regenerate_hp():
 	if !is_player:
@@ -307,7 +369,7 @@ func collisions(_delta):
 	add_impulse(push * 10.0) #can this be smoother and something else somehow.....
 	
 	if push != Vector2.ZERO:
-		velocity = lerp(velocity, velocity * (Vector2.ONE * 0.4 if !is_player else 0.85) / (1.0 + size_mod), _delta * 20.0)
+		velocity = lerp(velocity, velocity * (Vector2.ONE * (0.4 if !is_player else 0.85)) / (1.0 + size_mod), _delta * 20.0)
 
 func add_impulse(force: Vector2):
 	if is_player:
@@ -352,12 +414,14 @@ func flash_color(color_to_flash_to : Color = Color.RED):
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	return
 	
+	@warning_ignore("unreachable_code")
 	visible_on_screen = true
 	
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	return
+	@warning_ignore("unreachable_code")
 	visible_on_screen = false
 	
 

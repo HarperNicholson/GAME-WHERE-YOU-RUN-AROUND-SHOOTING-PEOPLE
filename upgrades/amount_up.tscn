@@ -11,6 +11,7 @@
 layout_mode = 3
 anchors_preset = 0
 focus_mode = 2
+theme = ExtResource("2_wq5xg")
 script = ExtResource("1_sqif3")
 metadata/_edit_lock_ = true
 
@@ -27,6 +28,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_wq5xg")
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D2" type="Sprite2D" parent="Panel" unique_id=353781151]

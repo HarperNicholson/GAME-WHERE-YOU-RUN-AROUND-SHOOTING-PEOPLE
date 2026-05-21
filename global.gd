@@ -1,6 +1,7 @@
 extends Node
 
 var weapon_crate_scene : PackedScene = preload("res://weapon_crate.tscn")
+var drone_scene : PackedScene = preload("res://drone.tscn")
 
 #######
 var debug : bool = true #DISABLE THIS ON BUILD
@@ -14,7 +15,7 @@ var player_position : Vector2 = Vector2.ZERO
 
 var difficulty : float = 0.0
 
-var enemy_team : TEAM = TEAM.AGENTS
+var enemy_team : TEAM = TEAM.ALIENS
 
 enum TEAM { NONE, AGENTS, ALIENS}
 
@@ -73,6 +74,13 @@ var item_scenes := {
 	#ITEMS.ITEMNAME: preload(),
 	#ITEMS.RUBBER_BULLETS: preload("res://upgrades/rubber_bullets.tscn"),
 }
+
+func add_drone(bound_weapon_node):
+	bound_weapon_node.is_drone_weapon = true
+	var drone_instance = drone_scene.instantiate()
+	drone_instance.weapon = bound_weapon_node
+	player.drones.append(drone_instance)
+	get_tree().get_current_scene().find_child("GameObjects").add_child(drone_instance)
 
 func get_available_items() -> Array:
 	var result : Array = ITEMS.values()

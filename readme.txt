@@ -1,12 +1,9 @@
 setup full steam integration + steam input (deck compat) + aspect ratios / UI layout stuff
 
 
-drones
-
-
-
-agents - arsenal and dark conspiracy
-aliens - turn the enemy against itself? or maybe high defense
+drone tilt animate + sfx
+rly need to fix sprite layers + effect layers
+LIGHTEN PANEL to make items pop. or give opacity or outline
 
 rocket trail emission is being cut off too soon. change emitting instead of existence
 pretty it up too. the grey is ugly
@@ -15,7 +12,12 @@ pretty it up too. the grey is ugly
 quick pitch trailer
 gamemode concept screenshots (trailer only)
 
-jetpack evolution - item pool conditions
+
+
+agents - arsenal and dark conspiracy
+aliens - turn the enemy against itself? or maybe high defense
+
+
 
 
 incremental digging mode
@@ -24,6 +26,9 @@ survival 2d mode
 
 lateralus man
 
+smg
+sniper
+heart attack gun
 flamethrower agent
 laser net auto weapon
 mines auto weapon
@@ -164,7 +169,7 @@ controller aim? not necessary in current state
 
 reduced physics tick rate for offscreen
 need better separation on horde, because get_colliding_bodies() or whatever is expensive the more dense it is
-
+actual shader color flash to enemies instead of just red modulate on hit
 limb shadows
 shell casing particle effect -- will require higher resolution on background textures. which means scaling up all physical objects
 muzzle flash/particle effect

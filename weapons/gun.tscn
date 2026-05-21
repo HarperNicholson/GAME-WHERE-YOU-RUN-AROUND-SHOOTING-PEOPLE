@@ -5,7 +5,7 @@
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_tsf64"]
 
-[node name="Gun" type="Node2D" unique_id=430989293]
+[node name="Gun" type="Node2D" unique_id=430989293 groups=["Weapon"]]
 script = ExtResource("1_vk1bi")
 projectile_scene = ExtResource("2_dk5gl")
 

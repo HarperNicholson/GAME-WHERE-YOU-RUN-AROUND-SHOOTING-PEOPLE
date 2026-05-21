@@ -14,6 +14,7 @@ func given_to_player():
 			return
 	
 	var weapon_instance = load("res://weapons/rocket_launcher.tscn").instantiate()
+	weapon_instance.weapon_id = item_id
 	player.add_child(weapon_instance)
 	
 	if player.weapon == null:
