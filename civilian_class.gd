@@ -114,7 +114,7 @@ func hit(dmg : float):
 	if is_player:
 		EffectManager.play_sound_effect(EffectManager.SFX.HIT, global_position)
 	
-	EffectManager.spawn_blood_splat_particle_effect(global_position, randi_range(1,3))
+	EffectManager.spawn_blood_splat_particle_effect(global_position, randi_range(3,6))
 	
 	flash_color()
 	
@@ -156,7 +156,11 @@ func kill():
 	get_tree().get_first_node_in_group("Player").award_xp(xp_reward * 0.1) #to give 10% of XP to player on kill
 	
 	$CivilianBody.die()
-	queue_free()
+	
+	if !is_player:
+		queue_free()
+		return
+	Global.paused = true
 
 func drop_chest():
 	print("WHABAM LOOT")
@@ -266,8 +270,9 @@ func _physics_process(delta: float) -> void:
 	
 	
 	#temp
-	if controller.tryna_quit():
-		get_tree().quit()
+	if is_player:
+		if controller.tryna_quit():
+			get_tree().quit()
 	
 	movement(delta)
 	collisions(delta)
@@ -329,6 +334,7 @@ func movement(delta):
 		var input_dir = controller.get_movement_direction_as_vector()
 		velocity = input_dir * speed
 
+var contact_damage_tick : int = 0
 func collisions(_delta):
 	if !visible_on_screen:
 		return
@@ -343,19 +349,27 @@ func collisions(_delta):
 		if other == self:
 			continue
 		
-		if other.is_in_group("Pickup"):
-			other.pickup()
+		if is_player:
+			if other.is_in_group("Pickup"):
+				other.pickup()
+			
+			if other.is_in_group("Enemies"):
+				contact_damage_tick += 1
+				if contact_damage_tick >= 5:
+					contact_damage_tick = 0
+					hit(0.2)
+		
 		
 		#spinning sawblade lol
 		#if is_player:
 			#if other.is_player == false:
 				#other.kill()
-
+		
 		var dir : Vector2 = global_position - other.global_position
 		var dist : float = dir.length()
 		if dist == 0:
 			continue
-
+		
 		var radius := 20.0 # match Area size
 		var strength := 1.0 - (dist / radius)
 		if strength > 0.0:

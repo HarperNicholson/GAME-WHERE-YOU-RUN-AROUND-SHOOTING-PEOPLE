@@ -1,12 +1,21 @@
 setup full steam integration + steam input (deck compat) + aspect ratios / UI layout stuff
 
 
-drone tilt animate + sfx
-rly need to fix sprite layers + effect layers
-LIGHTEN PANEL to make items pop. or give opacity or outline
+flamethrower agent
+sniper
+heart attack gun
+laser net auto weapon
+mines auto weapon
+mk ultra perk / agent
+dagger auto weapon - slash in facing direction
+frag grenade weapon
 
-rocket trail emission is being cut off too soon. change emitting instead of existence
-pretty it up too. the grey is ugly
+enbemy dmg shader
+
+bg tiles
+drone sfx
+
+
 
 5 screenshots
 quick pitch trailer
@@ -14,27 +23,18 @@ gamemode concept screenshots (trailer only)
 
 
 
+xp color mod from difficulty
+define wave elites / difficulty spikes / timed rewards
+enchanting table shader for wave elites
+
 agents - arsenal and dark conspiracy
 aliens - turn the enemy against itself? or maybe high defense
 
+pitch scaling for rapid XP ups
 
 
 
-incremental digging mode
-survival 2d mode
 
-
-lateralus man
-
-smg
-sniper
-heart attack gun
-flamethrower agent
-laser net auto weapon
-mines auto weapon
-mk ultra perk / agent
-dagger auto weapon - slash in facing direction
-frag grenade weapon
 
 zombies weapon crate
 -pickups
@@ -50,26 +50,12 @@ but multiple portal gun caps on super speshial crates
 you use element 115 to upgrade your shit
 and the tubes are full of element 115
 
-MVP: 
-multi-class upgrade (give secondary weapon/drone)
+MVP:
 character select menu, 
 music, 
-backgrounds
-store page approval)
 
 
 
-world border wrapover
-
-xp color mod from difficulty
-define wave elites / difficulty spikes / timed rewards
-enchanting table shader for wave elites
- 
-
-
-
-
-full loop prototype + store page start by 14th
 
 2 songs
 
@@ -85,7 +71,6 @@ permanent character upgrades (meta progression)
 upgrade the game (meta progression)
 
 
-looooots of feewdback when you level up
 
 
 rubber bullets class (bouncy): -75% damage, 2x +2 ricochet
@@ -102,10 +87,18 @@ boids?
 
 
 
-
-
+reduce particle numbers. try to get aggressive with particle freeing/shortened lifetime
 
 ----------------------------NON ESSENTIAL FOR SURVIVORS MODE:
+
+lateralus man
+looooots of feewdback when you level up
+world border wrapover
+rly need to fix sprite layers + effect layers (ELABORATE?)
+make items pop - give opacity or outline shader to panel
+fuck it. scale it all up 2x?
+incremental digging mode
+survival 2d mode
 limb dismembering on shoot...
 dmg numbers
 
@@ -173,3 +166,9 @@ actual shader color flash to enemies instead of just red modulate on hit
 limb shadows
 shell casing particle effect -- will require higher resolution on background textures. which means scaling up all physical objects
 muzzle flash/particle effect
+
+Stick it progression
+
+Humanoid game rename
+
+Burning man, flammable Freddy clone

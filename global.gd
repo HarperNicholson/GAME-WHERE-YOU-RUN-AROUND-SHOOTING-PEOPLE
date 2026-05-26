@@ -4,7 +4,7 @@ var weapon_crate_scene : PackedScene = preload("res://weapon_crate.tscn")
 var drone_scene : PackedScene = preload("res://drone.tscn")
 
 #######
-var debug : bool = true #DISABLE THIS ON BUILD
+var debug : bool = false #DISABLE THIS ON BUILD
 #######
 
 var paused : bool = false
@@ -30,6 +30,7 @@ var WEAPONS_POOL := [
 	ITEMS.ROCKET_LAUNCHER,
 	ITEMS.GUN,
 	ITEMS.SHOTGUN,
+	ITEMS.SMG,
 ]
 
 var PASSIVES_POOL := [
@@ -56,6 +57,7 @@ enum ITEMS {
 	ROCKET_LAUNCHER,
 	GUN,
 	SHOTGUN,
+	SMG,
 	} #, RUBBER_BULLETS
 
 var item_scenes := {
@@ -69,6 +71,7 @@ var item_scenes := {
 	ITEMS.ROCKET_LAUNCHER: preload("res://upgrades/rocket_launcher_item.tscn"),
 	ITEMS.GUN: preload("res://upgrades/gun_item.tscn"),
 	ITEMS.SHOTGUN: preload("res://upgrades/shotgun_item.tscn"),
+	ITEMS.SMG: preload("res://upgrades/smg_item.tscn"),
 	#ITEMS.ITEMNAME: preload(),
 	#ITEMS.ITEMNAME: preload(),
 	#ITEMS.ITEMNAME: preload(),

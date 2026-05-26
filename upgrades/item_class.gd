@@ -12,7 +12,7 @@ func _ready() -> void:
 func apply_theme_recursive(node: Node) -> void:
 	if node is Control:
 		node.theme = theme
-
+	
 	for child in node.get_children():
 		apply_theme_recursive(child)
 

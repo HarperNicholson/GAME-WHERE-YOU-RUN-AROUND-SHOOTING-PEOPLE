@@ -44,13 +44,13 @@ extends Node2D
 	#TempEffectsNode.add_child(explosion_particle_effect_instance)
 var AudioPool : Node2D
 
-var TempAirEffectsNode : Node2D
-var TempFlatEffectsNode : Node2D
-var TempSolidEffectsNode : Node2D
+var TempTopTopEffectsNode : Node2D
+var TempBottomEffectsNode : Node2D
+var TempTopEffectsNode : Node2D
 
-var PersistentSolidsNode : Node2D
-var PersistentShadowsNode : Node2D
-var PersistentFlatEffectsNode : Node2D
+var PersistentEffectsTopNode : Node2D
+var PersistentEffectsMiddleNode : Node2D
+var PersistentEffectsBottomNode : Node2D
 
 
 var MapNode : Node2D
@@ -119,7 +119,7 @@ func spawn_xp_sparkle(_global_position : Vector2, _rotation : float, amount : in
 	instance.modulate= color
 	instance.rotation = _rotation
 	
-	TempAirEffectsNode.add_child(instance)
+	TempTopTopEffectsNode.add_child(instance)
 	
 	await instance.finished
 	instance.queue_free()
@@ -132,7 +132,7 @@ func spawn_explosion_particle_effect(_global_position : Vector2):
 	instance.global_position = _global_position
 	#instance.amount = amount# * particle_amount_mult
 	
-	TempAirEffectsNode.add_child(instance)
+	TempTopTopEffectsNode.add_child(instance)
 	
 	await instance.finished
 	instance.queue_free()
@@ -145,7 +145,7 @@ func spawn_explosion_flat_decal(_global_position : Vector2):
 	instance.global_position = _global_position
 	#instance.amount = amount# * particle_amount_mult
 	
-	PersistentSolidsNode.add_child(instance)
+	PersistentEffectsTopNode.add_child(instance)
 	
 	await instance.finished
 	instance.queue_free()
@@ -158,14 +158,14 @@ func spawn_blood_splat_particle_effect(_global_position : Vector2, amount : int 
 	instance.global_position = _global_position
 	instance.amount = amount# * particle_amount_mult
 	
-	TempFlatEffectsNode.add_child(instance)
+	TempBottomEffectsNode.add_child(instance)
 	
 	await get_tree().create_timer(0.33).timeout
 	var newinst = instance.duplicate()
 	instance.queue_free()
 	newinst.seed = instance_seed
 	newinst.preprocess = 0.33
-	PersistentSolidsNode.add_child(newinst)
+	PersistentEffectsTopNode.add_child(newinst)
 	await get_tree().process_frame
 	newinst.queue_free()
 
@@ -177,7 +177,7 @@ func spawn_blood_pool_particle_effect(_global_position : Vector2):
 	instance.global_position = _global_position
 	instance.finished.connect(instance.queue_free)
 	
-	PersistentFlatEffectsNode.add_child(instance)
+	PersistentEffectsBottomNode.add_child(instance)
 
 func set_limb_physics(limb, inherited_velocity):
 	
@@ -201,7 +201,7 @@ func spawn_limb(from: Sprite2D, body_velocity, _size_mod : float, limb_children 
 	
 	set_limb_physics(limb, body_velocity)
 	
-	TempSolidEffectsNode.add_child(limb)
+	TempTopEffectsNode.add_child(limb)
 	
 	for child in limb_children:
 		limb.add_child(child.duplicate())

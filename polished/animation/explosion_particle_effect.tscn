@@ -14,7 +14,7 @@ colors = PackedColorArray(0.47788018, 0.47788012, 0.47788012, 1, 1, 1, 1, 1, 1.6
 
 [node name="ExplosionParticleEffect" type="CPUParticles2D" unique_id=925296037]
 emitting = false
-amount = 32
+amount = 12
 lifetime = 0.4
 one_shot = true
 explosiveness = 0.99

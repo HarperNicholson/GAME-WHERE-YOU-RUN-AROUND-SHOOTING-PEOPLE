@@ -12,28 +12,28 @@ var survival_time : float = 0.0
 
 func _ready() -> void:
 	
-	EffectManager.PersistentSolidsNode = $PersistentSolids/Node2D
-	EffectManager.PersistentShadowsNode = $PersistentShadows/Node2D
-	EffectManager.PersistentFlatEffectsNode = $PersistentFlatEffects/Node2D
+	EffectManager.PersistentEffectsTopNode = $PersistentEffectsTop/Node2D
+	EffectManager.PersistentEffectsMiddleNode = $PersistentEffectsMiddle/Node2D
+	EffectManager.PersistentEffectsBottomNode = $PersistentEffectsBottom/Node2D
 	
-	EffectManager.TempFlatEffectsNode = $TempFlatEffects
-	EffectManager.TempSolidEffectsNode = $TempSolidEffects
-	EffectManager.TempAirEffectsNode = $TempAirEffects
+	EffectManager.TempBottomEffectsNode = $TempBottomEffects
+	EffectManager.TempTopEffectsNode = $TempTopEffects
+	EffectManager.TempTopTopEffectsNode = $TempTopTopEffects
 	
 	EffectManager.AudioPool = $AudioPool
 	
 	EffectManager._initialize_audio_pool()
 	
-	$PersistentSolids.size = world_size
-	$PersistentShadows.size = world_size
-	$PersistentFlatEffects.size = world_size
+	$PersistentEffectsTop.size = world_size
+	$PersistentEffectsMiddle.size = world_size
+	$PersistentEffectsBottom.size = world_size
 	
 	@warning_ignore("integer_division")
-	$PersistentSolidsTexture.position = world_size / 2
+	$PersistentEffectsTopTexture.position = world_size / 2
 	@warning_ignore("integer_division")
-	$PersistentShadowsTexture.position = world_size / 2
+	$PersistentEffectsMiddleTexture.position = world_size / 2
 	@warning_ignore("integer_division")
-	$PersistentFlatEffectsTexture.position = world_size / 2
+	$PersistentEffectsBottomTexture.position = world_size / 2
 	
 	spawn_player()
 

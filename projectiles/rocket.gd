@@ -33,6 +33,10 @@ func _on_body_entered(body):
 		
 		
 		if ricochets <= 0:
+			$CPUParticles2D.emitting = false
+			$Sprite2D.hide()
+			$CollisionShape2D.set_deferred("disabled", true)
+			await get_tree().create_timer($CPUParticles2D.lifetime).timeout
 			queue_free()
 		
 		ricochets -= 1
@@ -42,7 +46,6 @@ func _on_body_entered(body):
 
 func explode():
 	has_hit = true
-	$CPUParticles2D.emitting = false
 	
 	
 	var explosion = explosion_scene.instantiate()

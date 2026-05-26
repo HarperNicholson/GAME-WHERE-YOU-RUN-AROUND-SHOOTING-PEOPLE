@@ -1,11 +1,14 @@
 extends CharacterBody2D
 
 @onready var rotors := [
-	$rotor,
-	$rotor2,
-	$rotor3,
-	$rotor4,
+	$Body/Rotors/rotor,
+	$Body/Rotors/rotor2,
+	$Body/Rotors/rotor3,
+	$Body/Rotors/rotor4,
 ]
+
+var max_tilt_as_radians : float = 1.0
+var max_speed_before_full_tilt : float = 200.0
 
 var rotor_rotation := 0.0
 @export var rotor_speed := 20.0
@@ -19,6 +22,8 @@ func _ready() -> void:
 	PlayerControllerNode = Global.player.find_child("PlayerController")
 	weapon.is_drone_weapon = true
 	weapon.drone = self
+	$Body/Line.start_node = $Body
+	$Body/Line.end_node = weapon
 
 func _physics_process(delta: float) -> void:
 	if Global.paused:
@@ -26,7 +31,11 @@ func _physics_process(delta: float) -> void:
 	solve_weapon(delta)
 	animate_rotors(delta)
 	velocity = velocity.limit_length(290.0)
+	animate_tilt(delta)
+	$Body/Line.queue_redraw()
 	move_and_slide()
+
+
 
 
 var aim_dir : Vector2 = Vector2.RIGHT
@@ -65,6 +74,17 @@ func animate_rotors(delta):
 	
 	for rotor in rotors:
 		rotor.rotation = rotor_rotation
+
+var tilt_from_velocity : float = 0.0
+var drag_offset : float = 0.0
+func animate_tilt(delta):
+	var factor = clamp(velocity.length() / max_speed_before_full_tilt, 0.0, 1.0)
+	
+	var target_drag = clamp(velocity.x * 0.05, -max_tilt_as_radians, max_tilt_as_radians)
+	drag_offset = lerp(drag_offset, target_drag, delta * 10.0)
+	tilt_from_velocity = lerp(0.0, drag_offset, factor)
+	
+	$Body.rotation = tilt_from_velocity
 
 func add_impulse(force: Vector2):
 	velocity += force

@@ -1,5 +1,5 @@
 extends Item
 
 func given_to_player():
-	if copies <= 10:
-		Global.player.speed += 15.0
+	if copies <= 9:
+		Global.player.speed += 17.0

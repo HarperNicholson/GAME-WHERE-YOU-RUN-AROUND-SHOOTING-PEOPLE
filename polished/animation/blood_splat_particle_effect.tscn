@@ -15,9 +15,8 @@ colors = PackedColorArray(1, 1, 1, 1, 0.52150047, 0.5215001, 0.5215003, 0.548463
 colors = PackedColorArray(0.41376296, 0.41376293, 0.41376293, 1, 1, 1, 1, 1)
 
 [node name="CPUBloodSplatParticleEffect" type="CPUParticles2D" unique_id=2013842467]
-z_index = -1
 emitting = false
-amount = 24
+amount = 12
 texture = SubResource("CanvasTexture_bpuxh")
 lifetime = 10.0
 explosiveness = 1.0
@@ -29,8 +28,8 @@ initial_velocity_max = 250.0
 damping_min = 75.0
 damping_max = 100.0
 damping_curve = SubResource("Curve_bpuxh")
-scale_amount_min = 2.0
-scale_amount_max = 4.0
+scale_amount_min = 0.5
+scale_amount_max = 2.0
 color = Color(1, 0, 0, 1)
 color_ramp = SubResource("Gradient_xlaia")
 color_initial_ramp = SubResource("Gradient_yyorw")

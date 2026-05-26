@@ -14,7 +14,7 @@ var landed := false
 # --- Shadow ---
 var shadow : Sprite2D
 
-var lifetime : float = 30.0
+var lifetime : float = 1.0
 var elapsed_lifetime : float = 0.0
 
 func _ready():
@@ -35,8 +35,6 @@ func _process(delta):
 	if elapsed_lifetime >= lifetime:
 		elapsed_lifetime = 0.0
 		var tween = get_tree().create_tween()
-		tween.parallel().tween_property(self, "modulate:a", 0.0, 1.0)
-		#tween.parallel().tween_property(shadow, "modulate:a", 0.0, 1.0)
 		tween.tween_callback(func(): self.queue_free())
 	
 	if landed:
@@ -92,5 +90,5 @@ func land():
 	EffectManager.spawn_blood_pool_particle_effect(global_position)
 	
 	var gp = global_position
-	self.reparent(EffectManager.PersistentSolidsNode)
+	self.reparent(EffectManager.PersistentEffectsTopNode)
 	self.global_position = gp

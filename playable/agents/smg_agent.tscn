@@ -1,10 +1,10 @@
-[gd_scene format=3 uid="uid://coiy78d6ix35h"]
+[gd_scene format=3 uid="uid://pn0tedjfbqiw"]
 
-[ext_resource type="Script" uid="uid://cx8hrv34rb561" path="res://civilian_class.gd" id="1_hqtel"]
-[ext_resource type="PackedScene" uid="uid://b8w5pgk0e78k0" path="res://player_camera_2d.tscn" id="2_0j8jp"]
-[ext_resource type="PackedScene" uid="uid://ctnxymgw58y7u" path="res://civilian_body.tscn" id="2_sweqy"]
-[ext_resource type="Script" uid="uid://diwjwmjc66ghv" path="res://player_controller.gd" id="4_1jxqw"]
-[ext_resource type="PackedScene" uid="uid://db8xc3vmn7lh8" path="res://playable/agents/survivors_ui.tscn" id="6_io01h"]
+[ext_resource type="Script" uid="uid://cx8hrv34rb561" path="res://civilian_class.gd" id="1_uweas"]
+[ext_resource type="PackedScene" uid="uid://b8w5pgk0e78k0" path="res://player_camera_2d.tscn" id="2_rw0bw"]
+[ext_resource type="PackedScene" uid="uid://ctnxymgw58y7u" path="res://civilian_body.tscn" id="3_imlol"]
+[ext_resource type="Script" uid="uid://diwjwmjc66ghv" path="res://player_controller.gd" id="4_4xe11"]
+[ext_resource type="PackedScene" uid="uid://db8xc3vmn7lh8" path="res://playable/agents/survivors_ui.tscn" id="5_a3k6p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q2tsy"]
 radius = 3.0
@@ -24,19 +24,19 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0j8jp"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="Agent" type="CharacterBody2D" unique_id=745263233 node_paths=PackedStringArray("controller", "playercam") groups=["Player"]]
+[node name="SMGAgent" type="CharacterBody2D" unique_id=745263233 node_paths=PackedStringArray("controller", "playercam") groups=["Player"]]
 z_index = 1
 collision_layer = 2
 collision_mask = 5
 motion_mode = 1
 floor_stop_on_slope = false
-script = ExtResource("1_hqtel")
+script = ExtResource("1_uweas")
 is_player = true
-starting_items = Array[int]([8])
+starting_items = Array[int]([10])
 controller = NodePath("PlayerController")
 playercam = NodePath("PlayerCamera2D")
 
-[node name="PlayerCamera2D" parent="." unique_id=1503368257 instance=ExtResource("2_0j8jp")]
+[node name="PlayerCamera2D" parent="." unique_id=1503368257 instance=ExtResource("2_rw0bw")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=81884564]
 shape = SubResource("CircleShape2D_q2tsy")
@@ -48,7 +48,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1636962079]
 shape = SubResource("CircleShape2D_6ru8d")
 
-[node name="CivilianBody" parent="." unique_id=1593687168 instance=ExtResource("2_sweqy")]
+[node name="CivilianBody" parent="." unique_id=1593687168 instance=ExtResource("3_imlol")]
 type = 1
 
 [node name="EntityShadow" type="Sprite2D" parent="." unique_id=145087866]
@@ -68,7 +68,7 @@ visible = false
 texture = SubResource("CanvasTexture_1jxqw")
 
 [node name="PlayerController" type="Node2D" parent="." unique_id=1165073739]
-script = ExtResource("4_1jxqw")
+script = ExtResource("4_4xe11")
 
 [node name="XPMagnet" type="Area2D" parent="." unique_id=87494511]
 
@@ -86,4 +86,4 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_0j8jp")
 value = 50.47
 show_percentage = false
 
-[node name="SurvivorsUI" parent="." unique_id=935884309 instance=ExtResource("6_io01h")]
+[node name="SurvivorsUI" parent="." unique_id=935884309 instance=ExtResource("5_a3k6p")]

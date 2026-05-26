@@ -10,6 +10,9 @@ var max_enemies : int = 120
 var recycle_timer : float = 0.0
 
 func _process(delta: float) -> void:
+	if Global.paused:
+		return
+	
 	recycle_timer += delta
 	
 	if recycle_timer >= 0.5:
