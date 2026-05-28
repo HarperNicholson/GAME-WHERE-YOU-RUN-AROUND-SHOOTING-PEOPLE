@@ -1,5 +1,6 @@
 setup full steam integration + steam input (deck compat) + aspect ratios / UI layout stuff
 
+hp collision is fuqd.
 
 flamethrower agent
 sniper
